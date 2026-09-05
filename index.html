@@ -124,8 +124,8 @@ header.site {
 /* ---------- scene graphic ---------- */
 .scene-holder { position: relative; }
 .hero-scene { width: 100%; }
-/* two recoloured Lottie scenes, one per theme, swapped like every other
-   themed asset on the page (see .scene-day-only / .scene-night-only below) */
+/* two Lottie scenes, one per theme -- coding by day, a gaming setup by night --
+   swapped like every other themed asset (see .scene-day-only / .scene-night-only) */
 .hero-lottie { width: 100%; aspect-ratio: 1330 / 920; }
 .hero-lottie svg { display: block; }
 html[data-theme="light"] .scene-night-only { display: none; }
@@ -286,7 +286,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </div>
       </div>
       <div class="scene-holder reveal">
-        <div class="hero-scene" role="img" aria-label="A looping illustrated scene: someone at a desk coding on a laptop, with coffee, a desk lamp and plants, as chat messages arrive one by one">
+        <div class="hero-scene" role="img" aria-label="A looping illustrated scene: someone at a desk working on a laptop, with a desk lamp and plants, as chat messages arrive one by one">
           <div class="hero-lottie scene-day-only" id="heroLottieLight" aria-hidden="true"></div>
           <div class="hero-lottie scene-night-only" id="heroLottieDark" aria-hidden="true"></div>
         </div>
@@ -879,9 +879,9 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     revealEls.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  // hero animation: two recoloured Lottie scenes (light / dark). Only the active
-  // theme's player is ever built, and it's lazy-initialised when it scrolls into
-  // view (it's a heavier asset than a still, same reasoning as the old sprite).
+  // hero animation: two Lottie scenes (light = coding, dark = a gaming setup).
+  // Only the active theme's player is ever built, and it's lazy-initialised when
+  // it scrolls into view (heavier asset than a still, same as the old sprite).
   var heroLight = document.getElementById('heroLottieLight');
   var heroDark = document.getElementById('heroLottieDark');
   if (heroLight && heroDark && window.lottie) {
@@ -900,7 +900,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         renderer: 'svg',
         loop: !reduceMotion,
         autoplay: !reduceMotion,
-        path: theme === 'dark' ? 'assets/hero/coding-dark.json' : 'assets/hero/coding.json'
+        path: theme === 'dark' ? 'assets/hero/coding-gaming.json' : 'assets/hero/coding.json'
       });
       if (reduceMotion) {
         anim.addEventListener('DOMLoaded', function () { anim.goToAndStop(POSTER_FRAME, true); });

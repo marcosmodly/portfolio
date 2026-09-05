@@ -1,52 +1,41 @@
-"""Regenerate coding-dark.json from coding.json.
+"""prep coding-gaming.json for use as the dark-theme hero.
+- fix the Bodymovin export bug where the 'mensaje' chat-bubble layers ship
+  with ip == op (lottie-web then never draws them): ip 0 / op 600 / st 0
+- lift the handful of near-black shapes so they don't vanish on a dark page
+  (lamp base, wrist band, hand crease, laptop base edge, plant veins, the
+  pure-black chat bubble, and the backdrop blob's dark ends)
+- the RGB laptop-screen gradient and the cyan lamp are left alone: they're the
+  point of the 'gaming' variant and already read fine on dark.
+Idempotent: safe to re-run on the committed file or a fresh raw export."""
+import json, sys
 
-The hero illustration ships as a light/dark pair (swapped in index.html the
-same way every other themed asset is). coding-dark.json is a pure recolour of
-coding.json for legibility on a dark page background -- not a redesign. Every
-colour in the comp is static ("a":0), so this just walks the shape tree and
-remaps solid fills / strokes / gradient-stop arrays by exact value.
-
-Run from this directory after editing coding.json:
-    python recolor-dark.py
-"""
-import json
-import sys
-
-SRC = sys.argv[1] if len(sys.argv) > 1 else 'coding.json'
-DST = sys.argv[2] if len(sys.argv) > 2 else 'coding-dark.json'
+SRC = sys.argv[1] if len(sys.argv) > 1 else 'coding-gaming.json'
+DST = sys.argv[2] if len(sys.argv) > 2 else SRC
 
 
 def key(*c):
     return tuple(round(x, 3) for x in c)
 
 
-# solid fills / strokes: near-black + low-contrast bits lifted, lamp + screen
-# glow warmed for a "late night" read
 SOLID = {
-    key(0.149, 0.196, 0.220): (0.60, 0.64, 0.71),   # lamp pole
     key(0.192, 0.165, 0.157): (0.80, 0.73, 0.66),   # wrist band
     key(0.267, 0.220, 0.208): (0.56, 0.47, 0.42),   # hand crease detail
     key(0.098, 0.161, 0.380): (0.40, 0.50, 0.86),   # laptop base edge
-    key(0.180, 0.192, 0.573): (0.56, 0.60, 0.95),   # lamp screws
     key(0.412, 0.000, 0.349): (0.74, 0.47, 0.70),   # plant stem / veins
-    key(0.000, 0.631, 0.933): (1.00, 0.74, 0.38),   # lamp shade -> warm amber
-    key(0.000, 0.000, 0.780): (1.00, 0.56, 0.24),   # lamp cast shadow (op 20)
-    key(0.894, 0.922, 0.969): (1.00, 0.93, 0.83),   # screen dot / cup highlights -> warm white
 }
 
-# gradients: matched on the full ordered stop list
 GRAD = {
     (key(0, 0, 0), key(0, 0, 0), key(0, 0, 0)):
-        [(0.99, 0.91, 0.83), (0.98, 0.88, 0.80), (0.97, 0.85, 0.78)],   # black chat bubble -> warm off-white
+        [(0.99, 0.91, 0.83), (0.98, 0.88, 0.80), (0.97, 0.85, 0.78)],   # black chat bubble
     (key(0.400, 0.400, 0.400), key(0.255, 0.255, 0.255), key(0.110, 0.110, 0.110)):
         [(0.67, 0.63, 0.59), (0.56, 0.52, 0.49), (0.45, 0.42, 0.40)],   # lamp base grey -> warm grey
     (key(0.078, 0.141, 0.867), key(0.663, 0.741, 0.969), key(0.114, 0.039, 0.467)):
-        [(0.20, 0.33, 0.92), (0.71, 0.79, 0.99), (0.36, 0.28, 0.68)],   # backdrop blob: lift both dark ends
+        [(0.20, 0.33, 0.92), (0.71, 0.79, 0.99), (0.36, 0.28, 0.68)],   # backdrop blob
     (key(0.412, 0.337, 0.671), key(0.527, 0.498, 0.753), key(0.643, 0.659, 0.835)):
-        [(0.52, 0.46, 0.77), (0.63, 0.61, 0.83), (0.75, 0.76, 0.91)],   # plant leaves: a touch brighter
+        [(0.52, 0.46, 0.77), (0.63, 0.61, 0.83), (0.75, 0.76, 0.91)],   # plant leaves
 }
 
-changed = {'fl': 0, 'st': 0, 'gf': 0}
+changed = {'fl': 0, 'st': 0, 'gf': 0, 'msg': 0}
 warnings = []
 
 
@@ -93,11 +82,17 @@ def walk(items):
 
 data = json.load(open(SRC))
 for layer in data['layers']:
-    if layer.get('ty') == 4:
-        walk(layer.get('shapes', []))
+    if layer.get('ty') != 4:
+        continue
+    if 'mensaje' in layer.get('nm', ''):
+        if layer.get('ip') == layer.get('op') or layer.get('hidden') is not None:
+            layer['ip'], layer['op'], layer['st'] = 0, 600, 0
+            layer.pop('hidden', None)
+            changed['msg'] += 1
+    walk(layer.get('shapes', []))
 
 json.dump(data, open(DST, 'w'), separators=(',', ':'))
-print('remapped:', changed)
+print('changed:', changed)
 for w in warnings:
     print('WARNING:', w)
 if not warnings:
