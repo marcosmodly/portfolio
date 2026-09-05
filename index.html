@@ -124,10 +124,17 @@ header.site {
 /* ---------- scene graphic ---------- */
 .scene-holder { position: relative; }
 .hero-scene {
-  width: 100%; aspect-ratio: 480 / 380; border-radius: 18px;
-  overflow: hidden; background: var(--surface-2);
+  width: 100%; border-radius: 18px;
+  padding: clamp(10px, 2.4vw, 22px);
+  /* fixed light surface, independent of the site theme: the illustration sits
+     on a dark backdrop blob and includes a near-black chat bubble, both of
+     which lose contrast on a dark page. one asset, so we frame it instead. */
+  background: #f7f3ea;
+  border: 1px solid rgba(20, 18, 14, 0.08);
+  box-shadow: 0 18px 40px -18px rgba(20, 18, 14, 0.35);
 }
-.hero-frame { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.hero-lottie { width: 100%; aspect-ratio: 1330 / 920; }
+.hero-lottie svg { display: block; }
 html[data-theme="light"] .scene-night-only { display: none; }
 html[data-theme="dark"] .scene-day-only { display: none; }
 
@@ -286,9 +293,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </div>
       </div>
       <div class="scene-holder reveal">
-        <div class="hero-scene" role="img" aria-label="A looping illustrated scene: a coding session by day, a late-night gaming session building to a victory celebration by night">
-          <img class="hero-frame scene-day-only" src="assets/hero/day/day-01.webp" alt="" loading="lazy" decoding="async">
-          <img class="hero-frame scene-night-only" src="assets/hero/night/night-01.webp" alt="" loading="lazy" decoding="async">
+        <div class="hero-scene">
+          <div class="hero-lottie" id="heroLottie" role="img" aria-label="A looping illustrated scene: someone at a desk coding on a laptop, with coffee, a desk lamp and plants, as chat messages arrive one by one"></div>
         </div>
       </div>
     </div>
@@ -841,13 +847,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <p>King Joshua Marcos · built as a single static HTML file, no framework, no build step.</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <script>
 (function () {
   var root = document.documentElement;
   var toggle = document.getElementById('themeToggle');
   var iconSun = document.getElementById('iconSun');
   var iconMoon = document.getElementById('iconMoon');
-  var showCurrentFrame = function () {};
 
   function syncIcon() {
     var theme = root.getAttribute('data-theme');
@@ -861,7 +867,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
     syncIcon();
-    showCurrentFrame();
   });
 
   // scroll reveal
@@ -880,90 +885,44 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     revealEls.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  // hero sprite animation: a 12-frame looping illustration, one set per theme
-  var heroScene = document.querySelector('.hero-scene');
-  var dayImg = document.querySelector('.hero-frame.scene-day-only');
-  var nightImg = document.querySelector('.hero-frame.scene-night-only');
-
-  if (heroScene && dayImg && nightImg) {
-    var FRAME_COUNT = 12;
-    var FRAME_MS = 800;
-    var dayFrames = [];
-    var nightFrames = [];
-    for (var i = 1; i <= FRAME_COUNT; i++) {
-      var n = (i < 10 ? '0' : '') + i;
-      dayFrames.push('assets/hero/day/day-' + n + '.webp');
-      nightFrames.push('assets/hero/night/night-' + n + '.webp');
-    }
-
+  // hero animation: a vector Lottie scene, lazy-initialised when it scrolls into
+  // view (it's a heavier asset than a still, same reasoning as the old sprite).
+  var heroLottie = document.getElementById('heroLottie');
+  if (heroLottie && window.lottie) {
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var frameIndex = 0;
-    var loopTimer = null;
-    var ready = { light: false, dark: false };
+    var POSTER_FRAME = 140; // three chat bubbles up, character mid-type: reads as "in progress"
+    var heroAnim = null;
 
-    function preload(urls) {
-      return Promise.all(urls.map(function (src) {
-        return new Promise(function (resolve) {
-          var im = new Image();
-          im.onload = im.onerror = function () { resolve(); };
-          im.src = src;
-        });
-      }));
-    }
-
-    function updateFrame(theme) {
-      if (!ready[theme]) return;
-      var img = theme === 'dark' ? nightImg : dayImg;
-      var frames = theme === 'dark' ? nightFrames : dayFrames;
-      img.src = frames[frameIndex];
-    }
-
-    showCurrentFrame = function () {
-      updateFrame('light');
-      updateFrame('dark');
-    };
-
-    function tick() {
-      frameIndex = (frameIndex + 1) % FRAME_COUNT;
-      showCurrentFrame();
-    }
-
-    function startLoop() {
-      if (reduceMotion || loopTimer) return;
-      loopTimer = setInterval(tick, FRAME_MS);
-    }
-
-    function preloadTheme(theme) {
-      var frames = theme === 'dark' ? nightFrames : dayFrames;
-      return preload(frames).then(function () {
-        ready[theme] = true;
-        updateFrame(theme);
+    function initHeroAnim() {
+      if (heroAnim) return;
+      heroAnim = window.lottie.loadAnimation({
+        container: heroLottie,
+        renderer: 'svg',
+        loop: !reduceMotion,
+        autoplay: !reduceMotion,
+        path: 'assets/hero/coding.json'
       });
+      if (reduceMotion) {
+        heroAnim.addEventListener('DOMLoaded', function () {
+          heroAnim.goToAndStop(POSTER_FRAME, true);
+        });
+      }
     }
 
-    if (!reduceMotion) {
-      var beginActive = function () {
-        var active = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        var idle = active === 'dark' ? 'light' : 'dark';
-        preloadTheme(active).then(function () {
-          startLoop();
-          preloadTheme(idle);
+    if (reduceMotion) {
+      initHeroAnim(); // no autoplay, just paint one representative frame
+    } else if ('IntersectionObserver' in window) {
+      var lottieIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            initHeroAnim();
+            lottieIO.disconnect();
+          }
         });
-      };
-
-      if ('IntersectionObserver' in window) {
-        var sceneIO = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              beginActive();
-              sceneIO.disconnect();
-            }
-          });
-        }, { threshold: 0.2 });
-        sceneIO.observe(heroScene);
-      } else {
-        beginActive();
-      }
+      }, { threshold: 0.2 });
+      lottieIO.observe(heroLottie);
+    } else {
+      initHeroAnim();
     }
   }
 })();
