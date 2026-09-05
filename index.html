@@ -123,16 +123,9 @@ header.site {
 
 /* ---------- scene graphic ---------- */
 .scene-holder { position: relative; }
-.hero-scene {
-  width: 100%; border-radius: 18px;
-  padding: clamp(10px, 2.4vw, 22px);
-  /* fixed light surface, independent of the site theme: the illustration sits
-     on a dark backdrop blob and includes a near-black chat bubble, both of
-     which lose contrast on a dark page. one asset, so we frame it instead. */
-  background: #f7f3ea;
-  border: 1px solid rgba(20, 18, 14, 0.08);
-  box-shadow: 0 18px 40px -18px rgba(20, 18, 14, 0.35);
-}
+.hero-scene { width: 100%; }
+/* two recoloured Lottie scenes, one per theme, swapped like every other
+   themed asset on the page (see .scene-day-only / .scene-night-only below) */
 .hero-lottie { width: 100%; aspect-ratio: 1330 / 920; }
 .hero-lottie svg { display: block; }
 html[data-theme="light"] .scene-night-only { display: none; }
@@ -293,8 +286,9 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </div>
       </div>
       <div class="scene-holder reveal">
-        <div class="hero-scene">
-          <div class="hero-lottie" id="heroLottie" role="img" aria-label="A looping illustrated scene: someone at a desk coding on a laptop, with coffee, a desk lamp and plants, as chat messages arrive one by one"></div>
+        <div class="hero-scene" role="img" aria-label="A looping illustrated scene: someone at a desk coding on a laptop, with coffee, a desk lamp and plants, as chat messages arrive one by one">
+          <div class="hero-lottie scene-day-only" id="heroLottieLight" aria-hidden="true"></div>
+          <div class="hero-lottie scene-night-only" id="heroLottieDark" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -885,44 +879,67 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     revealEls.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  // hero animation: a vector Lottie scene, lazy-initialised when it scrolls into
+  // hero animation: two recoloured Lottie scenes (light / dark). Only the active
+  // theme's player is ever built, and it's lazy-initialised when it scrolls into
   // view (it's a heavier asset than a still, same reasoning as the old sprite).
-  var heroLottie = document.getElementById('heroLottie');
-  if (heroLottie && window.lottie) {
+  var heroLight = document.getElementById('heroLottieLight');
+  var heroDark = document.getElementById('heroLottieDark');
+  if (heroLight && heroDark && window.lottie) {
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var POSTER_FRAME = 140; // three chat bubbles up, character mid-type: reads as "in progress"
-    var heroAnim = null;
+    var heroStarted = false;
+    var heroCurrent = null; // { theme, anim }
 
-    function initHeroAnim() {
-      if (heroAnim) return;
-      heroAnim = window.lottie.loadAnimation({
-        container: heroLottie,
+    function heroTheme() {
+      return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    }
+
+    function buildHeroAnim(theme) {
+      var anim = window.lottie.loadAnimation({
+        container: theme === 'dark' ? heroDark : heroLight,
         renderer: 'svg',
         loop: !reduceMotion,
         autoplay: !reduceMotion,
-        path: 'assets/hero/coding.json'
+        path: theme === 'dark' ? 'assets/hero/coding-dark.json' : 'assets/hero/coding.json'
       });
       if (reduceMotion) {
-        heroAnim.addEventListener('DOMLoaded', function () {
-          heroAnim.goToAndStop(POSTER_FRAME, true);
-        });
+        anim.addEventListener('DOMLoaded', function () { anim.goToAndStop(POSTER_FRAME, true); });
       }
+      return anim;
     }
 
+    // build the matching player, tearing down the other so nothing animates
+    // off-screen; called on first view and again whenever the theme flips
+    function syncHeroAnim() {
+      if (!heroStarted) return;
+      var theme = heroTheme();
+      if (heroCurrent && heroCurrent.theme === theme) return;
+      if (heroCurrent) { heroCurrent.anim.destroy(); }
+      heroCurrent = { theme: theme, anim: buildHeroAnim(theme) };
+    }
+
+    function startHero() {
+      if (heroStarted) return;
+      heroStarted = true;
+      syncHeroAnim();
+    }
+
+    toggle.addEventListener('click', syncHeroAnim);
+
     if (reduceMotion) {
-      initHeroAnim(); // no autoplay, just paint one representative frame
+      startHero(); // no autoplay, just paint one representative frame
     } else if ('IntersectionObserver' in window) {
       var lottieIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            initHeroAnim();
+            startHero();
             lottieIO.disconnect();
           }
         });
       }, { threshold: 0.2 });
-      lottieIO.observe(heroLottie);
+      lottieIO.observe(heroLight.parentNode);
     } else {
-      initHeroAnim();
+      startHero();
     }
   }
 })();
