@@ -123,12 +123,13 @@ header.site {
 
 /* ---------- scene graphic ---------- */
 .scene-holder { position: relative; }
-.scene-holder svg { width: 100%; height: auto; display: block; }
-.scene-glow-day, .scene-glow-night { transition: opacity 0.4s ease; }
+.hero-scene {
+  width: 100%; aspect-ratio: 480 / 380; border-radius: 18px;
+  overflow: hidden; background: var(--surface-2);
+}
+.hero-frame { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 html[data-theme="light"] .scene-night-only { display: none; }
 html[data-theme="dark"] .scene-day-only { display: none; }
-.monitor-line { opacity: 0; transform: translateY(4px); transition: opacity 0.35s ease, transform 0.35s ease; }
-.monitor-line.active { opacity: 1; transform: translateY(0); }
 
 /* ---------- reveal on scroll ---------- */
 .reveal {
@@ -285,129 +286,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </div>
       </div>
       <div class="scene-holder reveal">
-        <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An illustrated desk scene that changes between day and night depending on the site theme">
-          <defs>
-            <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#bfe3f5"/>
-              <stop offset="100%" stop-color="#eef8fb"/>
-            </linearGradient>
-            <linearGradient id="skyNight" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0c1225"/>
-              <stop offset="100%" stop-color="#1c2440"/>
-            </linearGradient>
-            <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffcf8c" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#ffcf8c" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="screenDay" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#eaf2f5"/>
-              <stop offset="100%" stop-color="#d8e6ea"/>
-            </linearGradient>
-            <linearGradient id="screenNight" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#151922"/>
-              <stop offset="100%" stop-color="#0c0f15"/>
-            </linearGradient>
-          </defs>
-
-          <rect x="0" y="0" width="480" height="380" rx="18" fill="var(--surface-2)"/>
-
-          <!-- window -->
-          <g>
-            <rect x="30" y="30" width="180" height="120" rx="8" fill="url(#skyDay)" class="scene-day-only"/>
-            <rect x="30" y="30" width="180" height="120" rx="8" fill="url(#skyNight)" class="scene-night-only"/>
-
-            <!-- day contents -->
-            <g class="scene-day-only">
-              <circle cx="160" cy="58" r="14" fill="#ffd873"/>
-              <rect x="40" y="110" width="18" height="40" fill="#9fb3c8"/>
-              <rect x="64" y="90" width="16" height="60" fill="#8fa4bb"/>
-              <rect x="86" y="120" width="20" height="30" fill="#a7bacf"/>
-              <rect x="112" y="100" width="14" height="50" fill="#95a9c0"/>
-            </g>
-
-            <!-- night contents -->
-            <g class="scene-night-only">
-              <circle cx="65" cy="52" r="2" fill="#f5f0e6"/>
-              <circle cx="90" cy="70" r="1.4" fill="#f5f0e6"/>
-              <circle cx="120" cy="48" r="1.6" fill="#f5f0e6"/>
-              <circle cx="145" cy="66" r="1.2" fill="#f5f0e6"/>
-              <circle cx="175" cy="55" r="1.8" fill="#f5f0e6"/>
-              <path d="M162 50a12 12 0 1 0 0 24 10 10 0 0 1 0-24z" fill="#e9e2cf"/>
-            </g>
-            <rect x="30" y="30" width="180" height="120" rx="8" fill="none" stroke="var(--border)" stroke-width="3"/>
-            <line x1="120" y1="30" x2="120" y2="150" stroke="var(--border)" stroke-width="3"/>
-            <line x1="30" y1="90" x2="210" y2="90" stroke="var(--border)" stroke-width="3"/>
-          </g>
-
-          <!-- desk -->
-          <rect x="20" y="270" width="440" height="14" rx="4" fill="var(--border)"/>
-          <rect x="34" y="284" width="16" height="70" fill="var(--border)" opacity="0.6"/>
-          <rect x="430" y="284" width="16" height="70" fill="var(--border)" opacity="0.6"/>
-
-          <!-- monitor -->
-          <g>
-            <rect x="150" y="150" width="200" height="120" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="3"/>
-            <rect x="240" y="270" width="20" height="18" fill="var(--border)"/>
-            <rect x="216" y="286" width="68" height="8" rx="3" fill="var(--border)"/>
-            <rect x="164" y="164" width="172" height="92" rx="4" fill="url(#screenDay)" class="scene-day-only"/>
-            <rect x="164" y="164" width="172" height="92" rx="4" fill="url(#screenNight)" class="scene-night-only"/>
-
-            <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5">
-              <g class="monitor-line" data-snip="hero">
-                <text x="174" y="182" fill="var(--accent)">$ tsc --noEmit</text>
-                <text x="174" y="196" fill="var(--text-dim)">✓ 0 errors</text>
-                <text x="174" y="214" fill="var(--text-dim)">// compiles clean.</text>
-                <text x="174" y="228" fill="var(--text-dim)">// proves nothing about</text>
-                <text x="174" y="242" fill="var(--text-dim)">// whether it actually works.</text>
-              </g>
-              <g class="monitor-line" data-snip="about">
-                <text x="174" y="182" fill="var(--accent)">tests/puzzle_model.gd</text>
-                <text x="174" y="200" fill="var(--text-dim)">bfs(start) -&gt; solved</text>
-                <text x="174" y="214" fill="var(--text-dim)">every room proved</text>
-                <text x="174" y="228" fill="var(--text-dim)">solvable before</text>
-                <text x="174" y="242" fill="var(--text-dim)">it ships.</text>
-              </g>
-              <g class="monitor-line" data-snip="work">
-                <text x="174" y="178" fill="var(--text-dim)">if (existingPersonId</text>
-                <text x="174" y="192" fill="var(--text-dim)">    === null) {</text>
-                <text x="174" y="206" fill="var(--accent)">  db.tx.profiles[id]</text>
-                <text x="174" y="220" fill="var(--accent)">    .create({ ... })</text>
-                <text x="174" y="238" fill="var(--text-dim)">// re-created on repeat</text>
-              </g>
-              <g class="monitor-line" data-snip="case-studies">
-                <text x="174" y="182" fill="var(--accent)">$ gh repo edit \</text>
-                <text x="174" y="196" fill="var(--text-dim)">  --description "..."</text>
-                <text x="174" y="214" fill="var(--text-dim)">reads the code first,</text>
-                <text x="174" y="228" fill="var(--text-dim)">then writes the</text>
-                <text x="174" y="242" fill="var(--text-dim)">description.</text>
-              </g>
-              <g class="monitor-line" data-snip="contact">
-                <text x="174" y="182" fill="var(--accent)">$ git commit</text>
-                <text x="174" y="200" fill="var(--text-dim)">say what you checked</text>
-                <text x="174" y="214" fill="var(--text-dim)">and how.</text>
-              </g>
-            </g>
-          </g>
-
-          <!-- lamp -->
-          <g>
-            <circle cx="405" cy="205" r="46" fill="url(#lampGlow)" class="scene-night-only"/>
-            <rect x="400" y="200" width="10" height="70" fill="var(--border)"/>
-            <path d="M375 200 L435 200 L420 175 L390 175 Z" fill="#8a8578" class="scene-day-only"/>
-            <path d="M375 200 L435 200 L420 175 L390 175 Z" fill="#ffcf8c" class="scene-night-only"/>
-            <rect x="380" y="270" width="50" height="8" rx="3" fill="var(--border)"/>
-          </g>
-
-          <!-- plant -->
-          <g>
-            <path d="M70 260 C60 235 70 215 78 205 C86 218 92 240 82 260 Z" fill="#6f9d6a"/>
-            <path d="M78 262 C90 240 105 228 118 224 C114 240 100 256 84 264 Z" fill="#7fae78"/>
-            <rect x="62" y="258" width="34" height="26" rx="4" fill="#b5764a"/>
-          </g>
-
-          <!-- mug -->
-          <rect x="290" y="252" width="22" height="18" rx="3" fill="var(--accent)" opacity="0.85"/>
-        </svg>
+        <div class="hero-scene" role="img" aria-label="A looping illustrated scene: a coding session by day, a late-night gaming session building to a victory celebration by night">
+          <img class="hero-frame scene-day-only" src="assets/hero/day/day-01.webp" alt="" loading="lazy" decoding="async">
+          <img class="hero-frame scene-night-only" src="assets/hero/night/night-01.webp" alt="" loading="lazy" decoding="async">
+        </div>
       </div>
     </div>
   </section>
@@ -965,6 +847,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   var toggle = document.getElementById('themeToggle');
   var iconSun = document.getElementById('iconSun');
   var iconMoon = document.getElementById('iconMoon');
+  var showCurrentFrame = function () {};
 
   function syncIcon() {
     var theme = root.getAttribute('data-theme');
@@ -978,6 +861,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
     syncIcon();
+    showCurrentFrame();
   });
 
   // scroll reveal
@@ -996,40 +880,91 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     revealEls.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  // hero monitor scroll-scrub: which code snippet is "on screen" tracks
-  // which page section is on screen.
-  var snippetSections = [
-    { id: 'top', snip: 'hero' },
-    { id: 'about', snip: 'about' },
-    { id: 'skills', snip: 'about' },
-    { id: 'tools', snip: 'about' },
-    { id: 'work', snip: 'work' },
-    { id: 'case-studies', snip: 'case-studies' },
-    { id: 'contact', snip: 'contact' }
-  ];
-  var monitorLines = document.querySelectorAll('.monitor-line');
-  function setSnippet(name) {
-    monitorLines.forEach(function (g) {
-      g.classList.toggle('active', g.getAttribute('data-snip') === name);
-    });
-  }
-  setSnippet('hero');
+  // hero sprite animation: a 12-frame looping illustration, one set per theme
+  var heroScene = document.querySelector('.hero-scene');
+  var dayImg = document.querySelector('.hero-frame.scene-day-only');
+  var nightImg = document.querySelector('.hero-frame.scene-night-only');
 
-  if ('IntersectionObserver' in window) {
-    var sectionEls = snippetSections
-      .map(function (s) { return { el: document.getElementById(s.id), snip: s.snip }; })
-      .filter(function (s) { return s.el; });
+  if (heroScene && dayImg && nightImg) {
+    var FRAME_COUNT = 12;
+    var FRAME_MS = 800;
+    var dayFrames = [];
+    var nightFrames = [];
+    for (var i = 1; i <= FRAME_COUNT; i++) {
+      var n = (i < 10 ? '0' : '') + i;
+      dayFrames.push('assets/hero/day/day-' + n + '.webp');
+      nightFrames.push('assets/hero/night/night-' + n + '.webp');
+    }
 
-    var sectionIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var match = sectionEls.filter(function (s) { return s.el === entry.target; })[0];
-          if (match) setSnippet(match.snip);
-        }
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var frameIndex = 0;
+    var loopTimer = null;
+    var ready = { light: false, dark: false };
+
+    function preload(urls) {
+      return Promise.all(urls.map(function (src) {
+        return new Promise(function (resolve) {
+          var im = new Image();
+          im.onload = im.onerror = function () { resolve(); };
+          im.src = src;
+        });
+      }));
+    }
+
+    function updateFrame(theme) {
+      if (!ready[theme]) return;
+      var img = theme === 'dark' ? nightImg : dayImg;
+      var frames = theme === 'dark' ? nightFrames : dayFrames;
+      img.src = frames[frameIndex];
+    }
+
+    showCurrentFrame = function () {
+      updateFrame('light');
+      updateFrame('dark');
+    };
+
+    function tick() {
+      frameIndex = (frameIndex + 1) % FRAME_COUNT;
+      showCurrentFrame();
+    }
+
+    function startLoop() {
+      if (reduceMotion || loopTimer) return;
+      loopTimer = setInterval(tick, FRAME_MS);
+    }
+
+    function preloadTheme(theme) {
+      var frames = theme === 'dark' ? nightFrames : dayFrames;
+      return preload(frames).then(function () {
+        ready[theme] = true;
+        updateFrame(theme);
       });
-    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+    }
 
-    sectionEls.forEach(function (s) { sectionIO.observe(s.el); });
+    if (!reduceMotion) {
+      var beginActive = function () {
+        var active = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        var idle = active === 'dark' ? 'light' : 'dark';
+        preloadTheme(active).then(function () {
+          startLoop();
+          preloadTheme(idle);
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        var sceneIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              beginActive();
+              sceneIO.disconnect();
+            }
+          });
+        }, { threshold: 0.2 });
+        sceneIO.observe(heroScene);
+      } else {
+        beginActive();
+      }
+    }
   }
 })();
 </script>
