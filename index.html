@@ -750,6 +750,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 
         <figure class="cs-figure reveal">
           <picture>
+            <source srcset="assets/case-studies/modly-dash-overview.avif" type="image/avif">
+            <img src="assets/case-studies/modly-dash-overview.webp" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="The merchant dashboard Overview for the demo store: header 'No shopper activity yet this week', the widget marked 'Installed', an onboarding checklist reading '2 of 4 complete' with 'Upload products' and 'Install the widget snippet' ticked from real state, and stat tiles showing 39 products synced, 50 AI sessions, 26.0% conversion rate.">
+          </picture>
+          <figcaption>The dashboard on the demo account: real counts, and an onboarding checklist that now reflects actual <code>widget_opened</code> events instead of the hardcoded ticks it used to show. It says "no shopper activity yet" because there genuinely isn't any.</figcaption>
+        </figure>
+
+        <figure class="cs-figure reveal">
+          <picture>
             <source srcset="assets/case-studies/modly-room-analysis.avif" type="image/avif">
             <img src="assets/case-studies/modly-room-analysis.webp" width="1200" height="675" loading="lazy" decoding="async"
                  alt="The Room Planner's analysis panel after processing the sample room: a green 'Success' badge, 'Observed style cues: Modern', 'Color cues: Walnut, Beige, Cream', and 'Layout notes: Open area around the dining table and near the windows', above the start of the matching catalog products list.">
@@ -757,6 +766,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <figcaption>What the demo reads back from a room before it recommends anything: style, colour and open-floor cues, all traced to the uploaded photo and the store's catalog rather than invented.</figcaption>
         </figure>
         <p>Engineering outcomes, all verifiable: settings split into four tabs with one save scope each, deep-linkable via <code>?tab=</code>, per-tab dirty tracking, <code>beforeunload</code> guards, the silent data loss path no longer exists. Six per-page auth guards replaced with a single <code>src/middleware.ts</code> using <code>withAuth</code> at the edge, the 500 on logged-out routes is gone. Onboarding checklist derives from real <code>widget_opened</code> events. Analytics scoped to a real date range. A full accessibility pass: skip link, focus traps, <code>aria-current</code>, dialog semantics, 44px touch targets, contrast measured from rendered pixels. Every overlay portals to <code>document.body</code> with an SSR-safe mount guard.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/modly-dash-settings.avif" type="image/avif">
+            <img src="assets/case-studies/modly-dash-settings.webp" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="The rebuilt settings page: four tabs across the top (Widget, Store, Account, Security), the Widget Branding form below with a live preview of the chat widget, and a single 'Save widget settings' button in the bottom-right whose label names exactly what it saves.">
+          </picture>
+          <figcaption>The settings page that used to have three save buttons of invisible scope, now four tabs with one save each. The button says what it saves; the tab you are on is the scope. The path that showed "Saved" and discarded the change is gone.</figcaption>
+        </figure>
         <p><b>Performance, measured against production:</b> the demo catalog route — the live demo's data source — answers in <b>434&nbsp;ms p50 / 508&nbsp;ms p95</b> over 60 requests; the widget-config route, hit with an unknown store so it runs the full handler and the InstantDB lookup but returns not-found, comes back in <b>456 / 527&nbsp;ms</b>. Both are over the public internet, so network is part of the figure. Lighthouse 12.8.2, run locally against the live site, scores desktop performance <b>74</b>, held there by a largest-contentful-paint of about <b>5.5&nbsp;s</b> — the metric to bring down.</p>
         <p><b>Commercially, honestly: zero customers.</b> Around 35 furniture retailers contacted by cold email, each on a three-touch sequence, plus a live demo running on a public URL. One inbound conversation from a manufacturer in Nagpur. No signed pilot yet. That gap is the real state of it, and pretending otherwise would undercut everything above.</p>
         <p class="closing-line">The compiler was the only reviewer I had, and it couldn't see any of the things that were actually wrong. What I built in the second half of this project wasn't features, it was a way to find out I was wrong before a merchant did.</p>
@@ -788,6 +806,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <h3>02 / Mechanism: twenty seconds in, one message out</h3>
         <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio, text is stored, voice never is. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
         <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send at most one, hard cap of three messages per person per rolling seven days, over-nudging is the failure mode that kills this category. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/holdfast-anne.avif" type="image/avif">
+            <img src="assets/case-studies/holdfast-anne.webp" width="1074" height="564" loading="lazy" decoding="async"
+                 alt="A chat thread: a 5-second voice note sent to the bot, then two reminder messages back. The first, hours later: 'Anne: tired for work. Anne: you said you'd check on her.' The second, that afternoon: 'Anne: you said you'd check on her. Still worth doing?'">
+          </picture>
+          <figcaption>The whole interface. A voice note in, and later that day the one reminder it produced, then the single follow-up nudge when nothing came back. "tired for work" is the extraction reading the transcript a little too literally.</figcaption>
+        </figure>
         <p>Measured over a dozen captures, that pipeline runs in about <b>2.6&nbsp;s at the median</b> and <b>4.2&nbsp;s at worst</b> from voice note to scheduled reminder (the final database write not counted): transcription <b>~1.1&nbsp;s</b>, extraction <b>~1.5&nbsp;s</b>, and the in-code date resolver <b>~1&nbsp;µs</b>, which is the entire reason the arithmetic lives in TypeScript and not the prompt. The transcription figure is a synthesized clip rather than a real voice note, so it reflects upload and model time on clean audio, not a phone recording in a noisy room. Each capture is roughly <b>1,200 tokens</b> through gpt-4o-mini, about <b>1,120</b> of them the fixed system prompt, so extraction costs on the order of <b>$0.0002</b> and the whole capture stays under a tenth of a cent at list price.</p>
       </div>
 
@@ -808,6 +835,16 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
             <p>"Marco: you said you'd send over the recruiter's number. Still worth doing?"</p>
           </div>
         </div>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/holdfast-marco.avif" type="image/avif">
+            <img src="assets/case-studies/holdfast-marco.webp" width="1074" height="745" loading="lazy" decoding="async"
+                 alt="The same capture in the chat thread: a 16-second voice note in, then the reminder listing the facts it pulled out (mom out of hospital, final interview on the 28th, nervous) and the commitment (send him the recruiter's number), then a follow-up. Two rough edges are visible: a stray 'okay., He's' where two sentences ran together, and 'you said you'd I'd send him' where the template doubled a pronoun.">
+          </picture>
+          <figcaption>That trace as it actually landed in the thread. The clean version above is the record; this is the message a real person received, doubled pronoun and run-on punctuation included.</figcaption>
+        </figure>
+
         <p style="margin-top:20px">Note what's not in the record: Marco said nothing about what he'd do, so nothing was stored as a commitment for him. The interview date resolved without the model doing arithmetic. The reminder names Marco because the message template knows the person even though the stored text doesn't.</p>
       </div>
 
