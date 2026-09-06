@@ -277,11 +277,31 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .trace-steps { display: grid; gap: 16px; max-width: 78ch; }
 .trace-step { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; }
 .trace-step .trace-label { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; }
-.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 16px 0; }
-@media (max-width: 640px) { .before-after { grid-template-columns: 1fr; } }
+/* ---------- case-study screenshots: one treatment, both themes ---------- */
+/* every screenshot is a capture of a real screen; the frame keeps light-UI
+   captures from floating as glowing rectangles on the dark theme */
+.cs-figure { margin: 26px 0; max-width: 78ch; }
+.cs-figure img,
+.before-after img {
+  display: block; width: 100%; height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), var(--shadow);
+  background: var(--surface-2);
+}
+html[data-theme="dark"] .cs-figure img,
+html[data-theme="dark"] .before-after img { border-color: #3b3a42; }
+.cs-figure figcaption,
+.before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
+.cs-figure figure { margin: 0; }
+.cs-figure.cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 26px 0; }
+@media (max-width: 640px) {
+  .before-after,
+  .cs-figure.cs-pair { grid-template-columns: 1fr; }
+}
 .before-after figure { margin: 0; }
-.before-after img { border-radius: 10px; border: 1px solid var(--border); display: block; max-width: 100%; height: auto; }
-.before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 6px; text-align: center; }
+.before-after figcaption { text-align: center; }
 .closing-line { font-family: var(--serif); font-size: 1.2rem; font-style: italic; max-width: 60ch; margin-top: 24px; }
 
 /* contact */
@@ -643,6 +663,34 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p>Furniture is one of the worst things to sell online. A shopper can't tell whether a sectional clears their living room, and the retailer eats the return. On made-to-order and custom-upholstery pieces it's worse than a return: there's no restock, and lead times of four to twelve weeks mean a wrong guess is months gone.</p>
         <p>The qualifying signal came out of prospect research: retailers who'd already written a "how to measure your space" guide, or mailed out physical fabric swatch kits, or sold a paid virtual design consultation. Those retailers had already told the world this problem was costing them money, and were paying humans to solve it one shopper at a time.</p>
         <p>ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room, see the piece placed in it at the correct scale, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers at $299 and $599 a month.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/modly-chat-fit.avif" type="image/avif">
+            <img src="assets/case-studies/modly-chat-fit.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The ModlyAI widget embedded on a demo product page for a walnut dining set. The shopper asked whether it fits a 3.5 m dining room; the assistant answers with the piece's real dimensions (96 by 42 inches, about 2.4 by 1.1 m), says it fits with roughly 1.1 m of walking space around it, and shows a catalog product card underneath with an 80% match and a Customize button.">
+          </picture>
+          <figcaption>The live demo, answering a fit question from the fictional catalog on the page. This is the whole pitch in one screen: a shopper's own measurement question, answered on the product page with the real spec, before they leave.</figcaption>
+        </figure>
+
+        <div class="cs-figure cs-pair reveal">
+          <figure>
+            <picture>
+              <source srcset="assets/case-studies/modly-room-before.avif" type="image/avif">
+              <img src="assets/case-studies/modly-room-before.webp" width="1200" height="675" loading="lazy" decoding="async"
+                   alt="The widget's Room Planner tab with a sample dining room photo loaded into the Room preview panel, labelled 'Photo loaded'. No products have been placed yet.">
+            </picture>
+            <figcaption>Room Planner: the shopper's room photo, loaded.</figcaption>
+          </figure>
+          <figure>
+            <picture>
+              <source srcset="assets/case-studies/modly-placement.avif" type="image/avif">
+              <img src="assets/case-studies/modly-placement.webp" width="1200" height="675" loading="lazy" decoding="async"
+                   alt="Three catalog matches returned for the room, each with a match percentage, price and real dimensions in metres. Each card carries a Placement notes block: a position in metres from the southwest corner, distance to each of the four walls, and a location like 'Against north wall', with a sentence explaining the fit.">
+            </picture>
+            <figcaption>The same room, matched against the catalog: each suggestion comes back with a position in metres, clearances to all four walls, and why it fits. Correct-scale placement is the hard part of the product, so the output is spatial, not a carousel.</figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="cs-section reveal">
@@ -661,6 +709,16 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="stat"><b>660 KB → 144 KB</b>widget build, raw then brotli'd</div>
         </div>
         <p>That 660&nbsp;KB is the raw bundle; Vercel serves it Brotli-compressed at <b>144&nbsp;KB</b> over the wire, and a stronger Brotli pass gets it to <b>114&nbsp;KB</b> (<code>gzip -9</code> lands at 141&nbsp;KB). It ships <code>no-cache</code> today, so a storefront re-fetches it on every page view. On a host page the widget's launcher button paints in about <b>1.1&nbsp;s</b>, almost all of it downloading and parsing that bundle from the CDN, with the config call and React mount another 50-100&nbsp;ms on top.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/modly-customizer.avif" type="image/avif">
+            <img src="assets/case-studies/modly-customizer.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The widget's Customizer tab: a product selector, colour options (Walnut included, Black +$60, Cream +$45), material options (Solid Wood included, Bouclé +$180, Brass +$250), and a free-text box for describing what the shopper wants, with quick-add chips like 'Pet-friendly fabric' and 'Matches grey walls'.">
+          </picture>
+          <figcaption>The Customizer, where a made-to-order piece gets its finish and size set before the quote request goes to the retailer with the exact spec attached. Every option is priced from the merchant's own catalog data.</figcaption>
+        </figure>
+
         <h4>The InstantDB decision, told honestly</h4>
         <p>InstantDB was picked for iteration speed. In August 2026 the InstantDB team announced they were joining OpenAI: signups closed, cloud apps shut down 31 August 2027, backups retained to August 2028. Rather than panic-migrate, I measured the actual coupling: 52 files use the server-side admin SDK, 78 queries and 41 transactions; 2 files use the realtime React SDK, with exactly 2 live subscriptions (a notification badge and a trial banner); the embeddable widget has no direct dependency at all, it goes through the API.</p>
         <p>So the product was using a realtime sync database as a plain server-side store. The expensive part of leaving a sync database, reimplementing optimistic updates and subscriptions on the client, didn't apply. What remained was a mechanical rewrite of server-side query call sites. Self-hosting also exists as a zero-code-change fallback, which caps the downside. Decision: don't migrate now, migrate at the third paying merchant or February 2027, whichever comes first, because the cost curve tracks number of live merchants, not the calendar.</p>
@@ -684,6 +742,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>The result</h3>
         <p><b>Shipped and live.</b> modlyai.tech is in production on Vercel. The widget installs as a single script tag on Shopify, WooCommerce, or a CSV catalog.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/modly-room-analysis.avif" type="image/avif">
+            <img src="assets/case-studies/modly-room-analysis.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The Room Planner's analysis panel after processing the sample room: a green 'Success' badge, 'Observed style cues: Modern', 'Color cues: Walnut, Beige, Cream', and 'Layout notes: Open area around the dining table and near the windows', above the start of the matching catalog products list.">
+          </picture>
+          <figcaption>What the demo reads back from a room before it recommends anything: style, colour and open-floor cues, all traced to the uploaded photo and the store's catalog rather than invented.</figcaption>
+        </figure>
         <p>Engineering outcomes, all verifiable: settings split into four tabs with one save scope each, deep-linkable via <code>?tab=</code>, per-tab dirty tracking, <code>beforeunload</code> guards, the silent data loss path no longer exists. Six per-page auth guards replaced with a single <code>src/middleware.ts</code> using <code>withAuth</code> at the edge, the 500 on logged-out routes is gone. Onboarding checklist derives from real <code>widget_opened</code> events. Analytics scoped to a real date range. A full accessibility pass: skip link, focus traps, <code>aria-current</code>, dialog semantics, 44px touch targets, contrast measured from rendered pixels. Every overlay portals to <code>document.body</code> with an SSR-safe mount guard.</p>
         <p><b>Performance, measured against production:</b> the demo catalog route — the live demo's data source — answers in <b>434&nbsp;ms p50 / 508&nbsp;ms p95</b> over 60 requests; the widget-config route, hit with an unknown store so it runs the full handler and the InstantDB lookup but returns not-found, comes back in <b>456 / 527&nbsp;ms</b>. Both are over the public internet, so network is part of the figure. Lighthouse 12.8.2, run locally against the live site, scores desktop performance <b>74</b>, held there by a largest-contentful-paint of about <b>5.5&nbsp;s</b> — the metric to bring down.</p>
         <p><b>Commercially, honestly: zero customers.</b> Around 35 furniture retailers contacted by cold email, each on a three-touch sequence, plus a live demo running on a public URL. One inbound conversation from a manufacturer in Nagpur. No signed pilot yet. That gap is the real state of it, and pretending otherwise would undercut everything above.</p>
@@ -795,6 +862,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>The problem</h3>
         <p>A repo with no description, no topics, no license, and a README that still says "This project was bootstrapped with create-next-app" reads as abandoned, even when the code behind it is solid. Nobody does this on purpose, it's just the stuff that's easy to forget once the thing works. Anyone vetting a developer, a recruiter, a client, another dev checking your work, starts on GitHub, and a sparse profile costs you before they've read a line of code.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/gh-repo-bare.avif" type="image/avif">
+            <img src="assets/case-studies/gh-repo-bare.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The GitHub page for marcosmodly/grandmas-lighthouse. The About sidebar reads 'No description, website, or topics provided.', there is no license shown, and no topic tags, even though the file list shows an active project with 24 commits.">
+          </picture>
+          <figcaption>One of my own repos the audit flags: real project, 24&nbsp;commits, and an About box that says "No description, website, or topics provided." This is the state that reads as abandoned.</figcaption>
+        </figure>
       </div>
 
       <div class="cs-section reveal">
@@ -815,6 +891,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>Published as its own repo</h3>
         <p><a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github-repo-hygiene-skill</a>, MIT licensed, real README, topics set, the works, which is a little bit the joke: the tool that fixes exactly this problem doesn't have this problem itself.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/gh-repo-done.avif" type="image/avif">
+            <img src="assets/case-studies/gh-repo-done.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The GitHub page for marcosmodly/github-repo-hygiene-skill. The About sidebar carries a full description, six topic tags (claude, claude-code, claude-skill, cli, developer-tools, github-automation), an MIT licence, and a written-out README, none of the gaps the skill looks for.">
+          </picture>
+          <figcaption>The skill's own repo: description, topics, licence, a real README. Nothing here for the audit to say &mdash; which is the point of running it.</figcaption>
+        </figure>
       </div>
     </div>
   </article>
@@ -837,6 +922,27 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section cs-hardest reveal">
         <h3>The centerpiece: rooms aren't playtested, they're proved</h3>
         <p>The rooms aren't playtested for solvability, they're proved, in a headless test that runs on every change (<code>tests/puzzle_model.gd</code>). It reimplements the room rules on plain data: border walls, fixed furniture, one-tile pushes with no pulling, gates that latch open when the right object rests on the right cell. Each arrangement packs into a single integer (coordinates are 0-7, three bits each, player in bits 0-5, each pushable in the next six, each gate one bit above), so a state becomes a dictionary key with no allocation, which is what makes a millions-of-nodes search fast enough to run constantly. Breadth-first search, solved states absorbing, the first solved state found is also the shortest solution, which doubles as the room's difficulty measure. Across the five shipped rooms that shortest solution runs from <b>7 moves</b> (Entryway) to <b>49</b> (Her Study), with the Kitchen at 36 and the Lamp Room at 34, and the search touches between <b>329 and 639,681 distinct arrangements</b> per room, median <b>52,369</b>.</p>
+        <p class="dim" style="margin-bottom:8px">What that check prints for the Entryway, the smallest room:</p>
+        <pre>$ godot --headless --path . --script res://tests/verify_entryway.gd
+
+[ENTRYWAY]
+  object count           : 2
+  optimal solve length   : 7 moves
+  re-handling required   : no &mdash; every object is handled in one pass
+  reachable arrangements : 1783
+  deepest arrangement    : 28 moves from start
+  dead ends (fairness)   : 1062 of 1780 non-solved  (718 still solvable)
+  safe explore window    : 6 move(s) &mdash; shallowest dead end that far in
+  shortest path into it  : SSEEEE
+  ok   a solution exists from the start state
+  ok   replaying that solution lands every object home
+  ok   reset restores a solvable state (reset returns to the start)
+  ok   undo buffer (256) covers the deepest arrangement (28)
+  ok   no placement strands the room: all 4 reachable placements stay
+       solvable from the start layout &mdash; undo always recovers
+  ok   the open exit is reachable from the player in every solved state
+ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
+        <p class="dim" style="margin-top:8px">Real output from the headless run; the other four rooms print the same shape with bigger numbers.</p>
         <p>It asserts two things and deliberately not a third: a solution exists from the start; undo and reset always land somewhere solvable (the hard one, every set of committed objects the player can reach must itself leave the room solvable from the start layout with those pre-placed, the analyzer enumerates those placements and checks each); <b>not</b> dead ends, wedging an object that isn't yet home is fair, undo takes it back, the player loses time, not the room. They're counted and reported, never failed on. The raw dead-end count is useless as a design signal because it explodes combinatorially the moment one crate is wedged, so <code>first_dead_end</code>, moves from the start to the shallowest dead end, is a fairness reading instead: how far a player explores before a wrong move costs them a rewind.</p>
         <h4>Honest limits</h4>
         <p>The search caps at 2,000,000 distinct arrangements. As the rooms are tuned today the biggest is the Lamp Room at <b>639,681</b> arrangements explored, comfortably inside the cap, but a denser 5-6 object room with an 80-move solution would blow past it, and the report is built for that: solved states sit shallow so solvability, the shortest solution, and per-object metrics stay exact; <code>max_depth</code> and dead-end counts degrade to lower bounds, and the report says so and downgrades the undo-buffer check to a warning rather than printing a number it can't stand behind. The undo history holds 256 moves, set above the deepest arrangement measured (<b>145</b>, in the Lamp Room). The whole five-room proof runs headless in about <b>35 seconds</b>, five engine boots and all.</p>
@@ -845,6 +951,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>Color as an engineering problem, not an art one</h3>
         <p>Grey means unfinished, color means done, so if an object can't be told from its floor the puzzle is unreadable, a palette authority file (<code>palette.gd</code>) enforces minimum luma gaps using Rec. 601 weighting: a floor and any pushable object on it must sit at least <b>0.24</b> apart in luma, with tighter gaps for furniture against walls and gates against floors. Two findings came from measuring rather than looking: Godot's <code>modulate</code> multiplies, so it can only ever darken, a grayscale floor at 0.515 tinted with a 0.773-luma warm lands at 0.398, below both inputs, and all 14 objects were failing the legibility gate on all six floors, fixed by lifting the grayscale plates so the product landed where the ladder expected. And objects looked wrong when floors were tiled, measuring found the tile border pixels reading 103 against an interior of 144, each tile shipped with its own drop shadow, printing a grid of dark seams the palette system couldn't see, the tiles had to be de-framed before the value ladder meant anything. With that tuning done, the shipped palette now clears every one of the <b>95 floor-object pairings</b> the gate checks (19 objects across 5 rooms), the tightest by just <b>0.04</b> luma.</p>
+
+        <figure class="cs-figure reveal">
+          <picture>
+            <source srcset="assets/case-studies/glh-kitchen-midsolve.avif" type="image/avif">
+            <img src="assets/case-studies/glh-kitchen-midsolve.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The Kitchen room part-solved: the chair and the tin canister sit on their home tiles in full colour while the kettle, the two cabinets, the cup and the side table are still grey, with two empty target markers waiting. Both states are on screen at once, which is what the luma gate has to keep legible.">
+          </picture>
+          <figcaption>The Kitchen mid-solve: two objects home and back in colour, the rest still grey on the same floor. This is the exact frame the palette gate exists for &mdash; every grey object still has to read against the boards, and every restored one against its neighbours.</figcaption>
+        </figure>
       </div>
 
       <div class="cs-section reveal">
@@ -852,11 +967,19 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p>Five rooms chaining door to door (Entryway, Half-Landing, Kitchen, Her Study, Lamp Room), a closing cinematic, a title screen that reflects a finished save, a pause menu, sound synthesized in code with no audio files. 26 headless verification suites. Web build (threaded, for browser audio) at <b>14&nbsp;MB</b> zipped, <b>40&nbsp;MB</b> unpacked with the Godot wasm runtime accounting for 33 of it, and a Windows build at <b>35&nbsp;MB</b> zipped.</p>
         <div class="before-after">
           <figure>
-            <img src="assets/grandmas-lighthouse/02_entryway_greyscale.png" alt="The entryway room in its unrestored, greyscale state" loading="lazy" width="1877" height="1047">
+            <picture>
+              <source srcset="assets/case-studies/glh-entryway-grey.avif" type="image/avif">
+              <img src="assets/case-studies/glh-entryway-grey.webp" width="1200" height="675" loading="lazy" decoding="async"
+                   alt="The Entryway room as the player finds it: every object and the floor drained to grey, with pale outlined squares marking the target tiles each object has to reach.">
+            </picture>
             <figcaption>Unrestored</figcaption>
           </figure>
           <figure>
-            <img src="assets/grandmas-lighthouse/03_entryway_restored.png" alt="The same entryway room after color has been restored" loading="lazy" width="1881" height="1052">
+            <picture>
+              <source srcset="assets/case-studies/glh-entryway-restored.avif" type="image/avif">
+              <img src="assets/case-studies/glh-entryway-restored.webp" width="1200" height="675" loading="lazy" decoding="async"
+                   alt="The same Entryway room once solved: every object home and back in full colour, the target markers gone, the exit door lit and open.">
+            </picture>
             <figcaption>Restored</figcaption>
           </figure>
         </div>
