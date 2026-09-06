@@ -886,6 +886,20 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>I ran it across my own account</h3>
         <p>Dogfooding is the honest test, so I ran it across <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">my own GitHub</a>, all <b>16 public repos</b>. The first pass flagged <b>10 issues</b> across 6 repos, but 2 of those were the audit marking my profile README repo (<code>marcosmodly/marcosmodly</code>) for having no topics and no license, which is exactly how a profile repo is meant to look. That's a bug in the tool, not my profile, so I added a rule that recognises the profile repo and skips those two checks for it, then re-ran. The real result: <b>11 clean</b>, <b>5 with a genuine gap</b>, <b>8 issues</b>, all metadata: <b>4 repos with no license</b>, <b>2 missing topics</b>, <b>2 with no description</b>. Nothing was missing a README or still carrying scaffold text, so two of the five checks found zero. Of the 8, the skill can set <b>2</b> itself, the missing topics, inferred from each repo's own code, and holds <b>6</b> back for me to approve, the descriptions and the license choices, because a tool guessing either of those on your public profile is worse than the gap it's filling. The full sweep, two GitHub API calls per repo, runs in about <b>40 seconds</b>.</p>
+        <p class="dim" style="margin-bottom:8px">The scan is read-only and prints one JSON object per repo. The five that came back with something to fix:</p>
+        <pre>$ ./audit_repos.sh marcosmodly
+
+{"repo": "marcosmodly/grandmas-lighthouse", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set", "no license"], "clean": false}
+{"repo": "marcosmodly/portfolio", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": "MIT", "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set"], "clean": false}
+{"repo": "marcosmodly/holdfast", "is_fork": false, "is_profile_repo": false, "description": "Voice-first memory for the people you care about...", "topic_count": 6, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+{"repo": "marcosmodly/modlyai", "is_fork": false, "is_profile_repo": false, "description": "AI-powered furniture recommendation and customization platform...", "topic_count": 7, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+{"repo": "marcosmodly/second-brain-ai", "is_fork": false, "is_profile_repo": false, "description": "A personal knowledge base for developers...", "topic_count": 10, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+
+# ...11 more lines, all "clean": true, including marcosmodly/marcosmodly
+#    ("is_profile_repo": true -> topics and license checks skipped)
+16 repos audited: 11 clean, 5 with a gap, 8 issues
+   4 x no license   2 x no description set   2 x no topics set</pre>
+        <p class="dim" style="margin-top:8px">Real output. Descriptions truncated here for width; the script prints them in full.</p>
       </div>
 
       <div class="cs-section reveal">
