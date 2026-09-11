@@ -59,9 +59,11 @@
   --text-dim: #64604f;
   --border: #e3ddd0;
   --accent: #b8531f;
+  --accent-strong: #8f4419;
   --accent-soft: #f1ddce;
-  --code-bg: #1c1a16;
+  --code-bg: #15151a;
   --code-text: #e8e2d4;
+  --border-figure: var(--border);
   --shadow: 0 1px 2px rgba(28,26,22,0.04), 0 8px 24px rgba(28,26,22,0.06);
   --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -79,9 +81,9 @@ html[data-theme="dark"] {
   --text-dim: #9d988b;
   --border: #302f36;
   --accent: #e8823f;
+  --accent-strong: var(--accent);
   --accent-soft: #3a2c22;
-  --code-bg: #0f0f13;
-  --code-text: #d8d2c4;
+  --border-figure: #3b3a42;
   --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 30px rgba(0,0,0,0.35);
 }
 
@@ -509,7 +511,7 @@ section.tight { padding: 56px 0; }
 .card.is-case { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
 .case-flag {
   font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 5px;
+  color: var(--accent-strong); background: var(--accent-soft); padding: 3px 8px; border-radius: 5px;
   align-self: flex-start;
 }
 
@@ -524,6 +526,12 @@ section.tight { padding: 56px 0; }
 .cs-index-card:hover { transform: translateY(-4px); border-color: var(--accent); }
 .cs-index-card h3 { font-size: 1.05rem; margin-bottom: 0; font-family: var(--sans); }
 .cs-index-card p { font-size: 0.88rem; color: var(--text-dim); margin: 0; }
+.cs-index-card .cs-index-stat { color: var(--text); font-weight: 600; }
+.cs-index-card .tag-row { margin-top: 2px; }
+.cs-index-card .cs-index-read {
+  font-family: var(--mono); font-size: 0.78rem; color: var(--accent);
+  margin-top: auto; padding-top: 6px;
+}
 .case-study {
   padding: 64px 0; border-top: 1px solid var(--border);
 }
@@ -545,6 +553,7 @@ code, pre { font-family: var(--mono); }
 p code, li code { background: var(--surface-2); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
 pre {
   background: var(--code-bg); color: var(--code-text); border-radius: 10px;
+  border: 1px solid var(--border-figure);
   padding: 18px 20px; overflow-x: auto; font-size: 0.85rem; line-height: 1.55; max-width: 78ch;
 }
 .stat-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
@@ -564,12 +573,10 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .before-after img {
   display: block; width: 100%; height: auto;
   border-radius: 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-figure);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), var(--shadow);
   background: var(--surface-2);
 }
-html[data-theme="dark"] .cs-figure img,
-html[data-theme="dark"] .before-after img { border-color: #3b3a42; }
 .cs-figure figcaption,
 .before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
 .cs-figure figure { margin: 0; }
@@ -595,9 +602,20 @@ html[data-theme="dark"] .before-after img { border-color: #3b3a42; }
 footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
 
 /* one rule, every link that reads like a nav/action item gets a real 44px tap target */
-.card-links a, .contact-links a {
+.card-links a, .contact-links a, .cs-links-row a {
   min-height: 44px; display: inline-flex; align-items: center;
 }
+
+.cs-links-row {
+  display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+  margin: 0 0 18px;
+}
+.cs-links-row a {
+  text-decoration: none; color: var(--accent); font-size: 0.92rem;
+  border-bottom: 1px solid transparent;
+}
+.cs-links-row a:hover { border-bottom-color: var(--accent); }
+.cs-links-row .cs-links-note { color: var(--text-dim); font-size: 0.88rem; }
 </style>
 </head>
 <body>
@@ -707,7 +725,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <div class="about-photo-circle" aria-hidden="true"></div>
         <picture>
           <source srcset="assets/hero/about-headshot.avif" type="image/avif">
-          <img class="about-headshot-img" src="assets/hero/about-headshot.webp" width="1200" height="1200" alt="King Joshua Marcos" decoding="async">
+          <img class="about-headshot-img" src="assets/hero/about-headshot.webp" width="1200" height="1200" alt="King Joshua Marcos" loading="lazy" decoding="async">
         </picture>
       </div>
       <div>
@@ -1010,19 +1028,31 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-index-grid reveal stagger">
         <a class="cs-index-card" href="#cs-modlyai" style="--i:0">
           <h3>ModlyAI</h3>
-          <p>121 commits, 46,710 lines of TS/TSX, zero customers so far.</p>
+          <p>Embeddable widget that puts a piece of furniture in a shopper's own room photo, at the correct scale, plus a merchant dashboard.</p>
+          <p class="cs-index-stat">0 customers so far.</p>
+          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">InstantDB</span><span class="tag">Paddle</span></div>
+          <span class="cs-index-read">Read the case study &darr;</span>
         </a>
         <a class="cs-index-card" href="#cs-holdfast" style="--i:1">
           <h3>Holdfast</h3>
-          <p>36/36 extraction accuracy, 5 reminders delivered, then I stopped using it after two days.</p>
+          <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on.</p>
+          <p class="cs-index-stat">0 reminders acted on.</p>
+          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
+          <span class="cs-index-read">Read the case study &darr;</span>
         </a>
         <a class="cs-index-card" href="#cs-hygiene" style="--i:2">
           <h3>github-repo-hygiene-skill</h3>
-          <p>16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
+          <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or scaffold-text README.</p>
+          <p class="cs-index-stat">16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
+          <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
+          <span class="cs-index-read">Read the case study &darr;</span>
         </a>
         <a class="cs-index-card" href="#cs-lighthouse" style="--i:3">
           <h3>Grandma's Lighthouse</h3>
-          <p>5 rooms, 26 headless verification suites &mdash; rooms are proved solvable, not playtested.</p>
+          <p>A cozy color-restoration Sokoban puzzle game where rooms are proved solvable, not playtested.</p>
+          <p class="cs-index-stat">5 rooms, 26 headless verification suites.</p>
+          <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
+          <span class="cs-index-read">Read the case study &darr;</span>
         </a>
       </div>
     </div>
@@ -1034,6 +1064,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="reveal">
         <div class="kicker">Case study 01 / For hiring managers and technical recruiters</div>
         <h2>ModlyAI</h2>
+        <div class="cs-links-row">
+          <a href="https://modlyai.tech" target="_blank" rel="noopener">Live site &nearr;</a>
+          <a href="https://github.com/marcosmodly/modlyai" target="_blank" rel="noopener">Source &nearr;</a>
+        </div>
         <p class="role-line">Sole engineer, designer, and founder · Jan–Aug 2026 · <a href="https://modlyai.tech" target="_blank" rel="noopener">modlyai.tech</a></p>
       </div>
 
@@ -1162,6 +1196,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="reveal">
         <div class="kicker">Case study 02</div>
         <h2>Holdfast</h2>
+        <div class="cs-links-row">
+          <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site &nearr;</a>
+          <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">Source &nearr;</a>
+        </div>
         <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a></p>
         <p class="dim" style="max-width:60ch">Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.</p>
       </div>
@@ -1272,6 +1310,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="reveal">
         <div class="kicker">Case study 03</div>
         <h2>github-repo-hygiene-skill</h2>
+        <div class="cs-links-row">
+          <span class="cs-links-note">No live demo &mdash; ships as a Claude Code skill, not a hosted site.</span>
+          <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">Source &nearr;</a>
+        </div>
         <p class="role-line">Solo · Ships as a Claude Code skill · <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github.com/marcosmodly/github-repo-hygiene-skill</a></p>
       </div>
 
@@ -1340,6 +1382,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="reveal">
         <div class="kicker">Case study 04</div>
         <h2>Grandma's Lighthouse</h2>
+        <div class="cs-links-row">
+          <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it &nearr;</a>
+          <a href="https://github.com/marcosmodly/grandmas-lighthouse" target="_blank" rel="noopener">Source &nearr;</a>
+        </div>
         <p class="role-line">Solo, design, code, integration, release · Godot 4.3, GDScript · Shipped, playable in browser + Windows · <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">modsy.itch.io/grandmas-lighthouse</a></p>
       </div>
 
