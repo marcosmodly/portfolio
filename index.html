@@ -69,10 +69,6 @@
   --display: "Montserrat", var(--sans);
   --vanta-bg-light: #faf8f3;
   --vanta-bg-dark: #15151a;
-  /* fixed, non-theme-flipping warm off-white used only for the hero letter-flip
-     overlay -- it's countering the photo's own tones, not the page bg, so it
-     stays constant rather than switching with light/dark like --text does */
-  --cream: #f2ede0;
 }
 
 html[data-theme="dark"] {
@@ -259,75 +255,48 @@ header.site {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: radial-gradient(ellipse 65% 55% at 50% 42%, var(--bg) 0%, color-mix(in srgb, var(--bg) 45%, transparent) 55%, transparent 78%);
 }
+/* Photo sits behind the type (a person standing in front of a painted wall):
+   bottom-anchored to the hero's own edge and considerably larger than the
+   text block, so it runs off the bottom and .hero's own overflow:hidden
+   crops it -- that crop is the only thing hiding the shirt's hard lower
+   edge, there is no fade or mask anywhere on it. It's absolutely positioned
+   against .hero itself (not against the text), so its size and position
+   don't depend on the text block at all. */
+.hero-photo-slot {
+  position: absolute; z-index: 1;
+  left: 50%; bottom: -40px; transform: translateX(-50%);
+  width: clamp(460px, 46vw, 680px); aspect-ratio: 864 / 1000;
+  pointer-events: none;
+}
 .hero-stack {
-  position: relative; z-index: 1; width: 100%;
+  position: relative; z-index: 2; width: 100%;
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .eyebrow {
   font-family: var(--display); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 14px; display: inline-block;
 }
-/* the overlap zone: photo and display type share one grid cell, type on top.
-   --photo-w/--photo-h describe the photo's actual rendered box and are reused
-   verbatim by the letter-flip mask below, so the two can't drift apart. */
-.hero-type-photo {
-  position: relative; display: grid; place-items: center; width: 100%;
-  margin-top: 32px;
-  --photo-w: clamp(260px, 30vw, 420px);
-  --photo-h: calc(var(--photo-w) * 1000 / 864);
+/* extra breathing room above the display type on desktop only -- this is
+   where his head actually sits, between the eyebrow and "FULL STACK" */
+@media (min-width: 641px) {
+  .eyebrow { margin-bottom: 190px; }
 }
-.hero-type-photo > * { grid-area: 1 / 1; }
-.hero-photo-slot {
-  position: relative; z-index: 1;
-  width: var(--photo-w); height: var(--photo-h);
-  pointer-events: none;
-}
-/* soft grounding shadow so he doesn't sit flat on top of the Vanta net */
-.hero-photo-slot::before {
-  content: ""; position: absolute; z-index: -1;
-  left: 10%; right: 10%; bottom: 6%; height: 30%;
-  background: radial-gradient(ellipse closest-side, color-mix(in srgb, var(--text) 30%, transparent), transparent 75%);
-}
-/* the shirt is a mid-brown -- close enough in lightness to both themes' type
-   colour that a halo alone can't save legibility where the words cross the
-   body, so the photo itself gets knocked back a touch behind the type, and
-   fades out through its lower third rather than ending on a hard line */
-.hero-h1 { z-index: 2; align-self: center; margin: 0; position: relative; }
+.hero-h1 { margin: 0; }
 .hero-role {
   display: block;
   font-family: var(--display); font-weight: 700; text-transform: uppercase;
-  font-size: clamp(3.4rem, 9.5vw, 6.9rem); letter-spacing: 0.005em; line-height: 0.96;
+  font-size: clamp(4rem, 11vw, 8.4rem); letter-spacing: 0.005em; line-height: 0.94;
   color: var(--text);
-  /* soft halo in the page's own bg colour, layered a few times to read as a
-     denser edge rather than a diffuse glow, so the letterforms stay crisp
-     over the vanta mesh; the photo crossing gets the mask flip below instead */
+  /* solid fill only -- legibility against the Vanta mesh (not the photo,
+     which just physically occludes whatever it covers) comes from a halo
+     in the page's own bg colour, layered a few times to read as a denser
+     edge rather than a diffuse glow */
   text-shadow:
     0 0 2px var(--bg), 0 0 2px var(--bg), 0 0 2px var(--bg),
     0 0 8px var(--bg), 0 0 8px var(--bg),
     0 0 20px var(--bg);
 }
 .hero-role span { display: block; }
-/* magazine-cover letter flip: an aria-hidden duplicate of the same heading,
-   filled cream and masked by the headshot's own alpha (intersected with the
-   same bottom fade the photo uses, so the cream cuts out exactly where the
-   photo itself fades), sitting above the dark original in z-order. Where the
-   mask is transparent (no photo, or faded out) this copy simply doesn't
-   paint, and the dark original underneath shows through instead. */
-.hero-role--over {
-  position: absolute; inset: 0;
-  color: var(--cream);
-  text-shadow: none;
-  -webkit-mask-image: url("assets/hero/headshot.webp"), linear-gradient(to bottom, #000 55%, transparent 100%);
-          mask-image: url("assets/hero/headshot.webp"), linear-gradient(to bottom, #000 55%, transparent 100%);
-  -webkit-mask-size: var(--photo-w) var(--photo-h), var(--photo-w) var(--photo-h);
-          mask-size: var(--photo-w) var(--photo-h), var(--photo-w) var(--photo-h);
-  -webkit-mask-position: center center, center center;
-          mask-position: center center, center center;
-  -webkit-mask-repeat: no-repeat, no-repeat;
-          mask-repeat: no-repeat, no-repeat;
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-}
 .hero-line {
   display: block;
   font-family: var(--serif); font-weight: 600;
@@ -349,13 +318,22 @@ header.site {
 }
 .btn-text:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* mobile: no overlap -- type above, photo below, stacked in normal flow */
+/* mobile: no overlap -- type above, photo below, both still bottom-anchored
+   and cropped by their own frame rather than by a fade */
 @media (max-width: 640px) {
-  .hero-type-photo { display: flex; flex-direction: column; align-items: center; }
-  .hero-role { text-shadow: none; }
-  .hero-role--over { display: none; } /* nothing to flip against once there's no overlap */
-  .hero-photo-slot { width: min(60%, 240px); height: auto; aspect-ratio: 864 / 1000; margin-top: 20px; }
-  .hero-photo-slot::before { display: none; }
+  .hero { flex-direction: column; justify-content: center; }
+  .hero-stack { order: -1; }
+  .hero-role { font-size: clamp(2.4rem, 13vw, 4rem); }
+  .eyebrow { margin-bottom: 14px; }
+  .hero-photo-slot {
+    position: relative; left: auto; bottom: auto; transform: none;
+    width: 100%; max-width: none; aspect-ratio: auto; height: 46vh;
+    margin-top: 24px; overflow: hidden;
+  }
+  .hero-photo-slot .headshot-img {
+    position: absolute; left: 50%; bottom: -8%; transform: translateX(-50%);
+    width: 82%; height: auto; aspect-ratio: 1 / 1;
+  }
 }
 
 /* ---------- receipts band: first thing after the hero ---------- */
@@ -370,37 +348,31 @@ header.site {
 .hero-receipts-note { display: block; font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
 
 /* ---------- hero photo / traveling headshot ----------
-   The bottom-third fade and the slight darkening apply unconditionally --
-   hero, mid-travel (fixed position), and About all use the same rendered
-   look, so nothing flashes between treatments as the node moves. The fade
-   multiplies against the cutout's own alpha rather than replacing it (that's
-   just how CSS masking composites with a source that already has its own
-   transparency), so the letter-flip mask in the hero and the circle fade in
-   About both read the same faded edge automatically. */
+   Full opacity everywhere, no filter, no mask, no fade -- the crop itself
+   (this frame's overflow:hidden, or object-fit:cover's own cropping in
+   About) is what hides the source cutout's hard lower edge. Applies
+   unconditionally across hero, mid-travel (fixed position), and About so
+   nothing changes look as the node moves. */
 #headshotHeroSlot { position: absolute; inset: 0; pointer-events: none; }
 .headshot-img {
   display: block; width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 12%;
+  object-fit: cover; object-position: 50% 8%;
   border-radius: 18px;
-  filter: brightness(0.72) saturate(0.9);
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
 /* a plain object-fit:cover circle-clip on a transparent cutout just clips
    him -- hair breaking the top edge, shirt cut by the curve, sleeves poking
    out the sides -- because there's nothing filling the circle behind him.
-   Fix: a filled tint circle sits behind (.about-photo-circle), and the
-   cutout is sized down to sit inside it with headroom so the bottom fade
-   above dissolves the shirt into the circle's own colour well before its edge. */
+   Fix: a filled tint circle sits behind (.about-photo-circle); the cutout
+   sits inset with headroom at the top, and its own box is proportioned
+   squarer than the source photo so object-fit:cover's ordinary cropping
+   (not a fade) trims the excess off the bottom, below the visible frame. */
 .about-photo-circle {
   position: absolute; inset: 0; border-radius: 50%;
   background: var(--accent-soft);
 }
 .headshot-img.is-about {
   position: absolute; left: 50%; top: 9%;
-  width: 66%; aspect-ratio: 864 / 1000; height: auto;
+  width: 66%; aspect-ratio: 1 / 1; height: auto;
   transform: translateX(-50%);
   object-position: 50% 0%;
 }
@@ -692,22 +664,19 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <section class="hero" id="heroSection">
     <div class="hero-vanta" id="vantaHero" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-photo-slot">
+      <div id="headshotHeroSlot" class="reveal">
+        <picture>
+          <source srcset="assets/hero/headshot.avif" type="image/avif">
+          <img id="headshotHeroImg" class="headshot-img" src="assets/hero/headshot.webp" width="864" height="1000" alt="King Joshua Marcos" decoding="async" fetchpriority="high">
+        </picture>
+      </div>
+    </div>
     <div class="wrap-wide hero-stack">
       <span class="eyebrow reveal">Full stack developer, solo</span>
-      <div class="hero-type-photo">
-        <h1 class="hero-h1 reveal">
-          <span class="hero-role"><span>Full Stack</span><span>Developer</span></span>
-          <span class="hero-role hero-role--over" aria-hidden="true"><span>Full Stack</span><span>Developer</span></span>
-        </h1>
-        <div class="hero-photo-slot reveal">
-          <div id="headshotHeroSlot">
-            <picture>
-              <source srcset="assets/hero/headshot.avif" type="image/avif">
-              <img id="headshotHeroImg" class="headshot-img" src="assets/hero/headshot.webp" width="864" height="1000" alt="King Joshua Marcos" decoding="async" fetchpriority="high">
-            </picture>
-          </div>
-        </div>
-      </div>
+      <h1 class="hero-h1 reveal">
+        <span class="hero-role"><span>Full Stack</span><span>Developer</span></span>
+      </h1>
       <p class="hero-line reveal">I build things by myself, then go looking for what I got wrong.</p>
       <div class="hero-links reveal">
         <a href="#case-studies" class="btn btn-primary">Case Studies</a>
@@ -1570,7 +1539,7 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
     // slot, or the image snaps to a different size the instant it settles
     var ABOUT_IMG_WIDTH_FRAC = 0.66;
     var ABOUT_IMG_TOP_FRAC = 0.09;
-    var ABOUT_IMG_ASPECT = 864 / 1000;
+    var ABOUT_IMG_ASPECT = 1; // matches .headshot-img.is-about's own aspect-ratio
 
     function measure() {
       var hr = heroSlot.getBoundingClientRect();
