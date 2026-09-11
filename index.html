@@ -128,13 +128,31 @@ p { margin: 0 0 1em; color: var(--text); }
 .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
-/* ---------- header ---------- */
+/* ---------- header ----------
+   Transparent at rest so the Vanta net runs behind it unbroken over the
+   hero; picks up a solid, blurred background once scrolled past the hero
+   (.is-scrolled, toggled by an IntersectionObserver on #navSentinel) so it
+   stays readable over case-study copy and images further down the page. */
 header.site {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
 }
+header.site.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom-color: var(--border);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  header.site.is-scrolled {
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  header.site.is-scrolled { background: var(--bg); }
+}
+@media (prefers-reduced-motion: reduce) { header.site { transition: none; } }
 .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1180px; margin: 0 auto; }
 .nav-name { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; text-decoration: none; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
@@ -161,6 +179,31 @@ header.site {
 .nav-icon-link:hover { border-color: var(--accent); transform: translateY(-2px); }
 .nav-icon-link svg { width: 17px; height: 17px; }
 .nav-links-mobile-hide { display: flex; align-items: center; gap: 28px; }
+.nav-dropdown-wrap { position: relative; display: flex; align-items: center; }
+.nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 4px; }
+.nav-dropdown-trigger svg { width: 10px; height: 10px; transition: transform 0.2s ease; }
+.nav-dropdown-wrap:hover .nav-dropdown-trigger svg,
+.nav-dropdown-wrap:focus-within .nav-dropdown-trigger svg { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  list-style: none; margin: 0; padding: 8px; position: absolute; top: 100%; left: 50%;
+  transform: translate(-50%, 4px); min-width: 190px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.nav-dropdown-wrap:hover .nav-dropdown-menu,
+.nav-dropdown-wrap:focus-within .nav-dropdown-menu {
+  opacity: 1; pointer-events: auto; transform: translate(-50%, 8px);
+}
+.nav-dropdown-menu li { margin: 0; }
+.nav-dropdown-menu a {
+  display: block; padding: 8px 10px; border-radius: 6px; font-size: 0.86rem;
+  color: var(--text); text-decoration: none; white-space: nowrap;
+}
+.nav-dropdown-menu a::after { display: none; }
+.nav-dropdown-menu a:hover { background: var(--surface-2); color: var(--text); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-trigger svg, .nav-dropdown-menu { transition: none; }
+}
 .nav-burger {
   display: none; border: 1px solid var(--border); background: var(--surface); color: var(--text);
   width: 44px; height: 44px; border-radius: 8px; cursor: pointer;
@@ -210,26 +253,10 @@ header.site {
 }
 @media (prefers-reduced-motion: reduce) { .reading-progress { transition: none; } }
 
-.section-rail { display: none; }
-/* .wrap-wide caps content at 1180px and centers it, so the rail (fixed at
-   left:20px, ~130px wide) only clears the body copy once the viewport is
-   wide enough for that auto-margin to exceed the rail's own width */
-@media (min-width: 1500px) {
-  .section-rail {
-    display: block; position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
-    z-index: 40; font-family: var(--mono); font-size: 0.78rem;
-  }
-  .section-rail ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--border); }
-  .section-rail li { margin: 0; }
-  .section-rail a {
-    display: block; padding: 6px 0 6px 14px; color: var(--text-dim); text-decoration: none;
-    border-left: 2px solid transparent; margin-left: -1px; transition: color 0.2s ease, border-color 0.2s ease;
-  }
-  .section-rail .sub a { padding-left: 26px; font-size: 0.72rem; }
-  .section-rail a:hover { color: var(--text); }
-  .section-rail a.is-current { color: var(--accent); border-left-color: var(--accent); }
-  @media (prefers-reduced-motion: reduce) { .section-rail a { transition: none; } }
-}
+/* section-rail removed: the sticky nav (see header.site) is now the
+   permanent navigation anchor down the whole page, so a second, redundant
+   position indicator isn't needed. Work carries a dropdown to the four
+   case studies the rail used to list as sub-items. */
 
 /* ---------- hero ---------- */
 /* Poster layout: eyebrow, display type (with the headshot layered behind
@@ -268,6 +295,10 @@ header.site {
 }
 .hero-headshot-img {
   display: block; height: clamp(620px, 92vh, 980px); width: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+}
+html[data-theme="dark"] .hero-headshot-img {
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
 }
 .hero-stack {
   position: relative; z-index: 2; width: 100%;
@@ -315,6 +346,14 @@ header.site {
   display: inline-flex; align-items: center; min-height: 44px;
 }
 .btn-text:hover { color: var(--accent); border-bottom-color: var(--accent); }
+/* .btn-text's default colour is --text-dim, tuned for sitting on the flat
+   --bg. In the hero it also sits over the headshot photo, and --text-dim's
+   dark-mode value doesn't separate enough from the photo/backdrop there --
+   boost it to --text at reduced opacity (~9.6:1 against the dark --bg,
+   comfortably over the 4.5:1 body-text minimum) instead of hardcoding a
+   colour outside the theme-token system. */
+html[data-theme="dark"] .btn-text { color: color-mix(in srgb, var(--text) 80%, transparent); }
+html[data-theme="dark"] .btn-text:hover { color: var(--accent); }
 
 /* mobile: no overlap -- type above, photo below, still bottom-anchored and
    cropped by its own frame */
@@ -354,6 +393,10 @@ header.site {
   position: absolute; inset: 0;
   display: block; width: 100%; height: 100%;
   border-radius: 50%;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+}
+html[data-theme="dark"] .about-headshot-img {
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
 }
 
 /* ---------- reveal on scroll ---------- */
@@ -584,7 +627,18 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <nav class="nav-links-mobile-hide" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#stack">Stacks</a>
-        <a href="#work">Work</a>
+        <div class="nav-dropdown-wrap">
+          <a href="#work" class="nav-dropdown-trigger" aria-haspopup="true">
+            Work
+            <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1.5l5 5 5-5"/></svg>
+          </a>
+          <ul class="nav-dropdown-menu" aria-label="Case studies">
+            <li><a href="#cs-modlyai">ModlyAI</a></li>
+            <li><a href="#cs-holdfast">Holdfast</a></li>
+            <li><a href="#cs-hygiene">hygiene-skill</a></li>
+            <li><a href="#cs-lighthouse">Lighthouse</a></li>
+          </ul>
+        </div>
         <a href="#case-studies">Case Studies</a>
         <a href="#contact">Contact</a>
         <a class="nav-icon-link" href="https://github.com/marcosmodly" target="_blank" rel="noopener" aria-label="GitHub profile" title="GitHub">
@@ -623,20 +677,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
-<nav class="section-rail" aria-label="Page sections" id="sectionRail">
-  <ul>
-    <li><a href="#about" data-rail="about">About</a></li>
-    <li><a href="#stack" data-rail="stack">Stack</a></li>
-    <li><a href="#work" data-rail="work">Work</a></li>
-    <li><a href="#case-studies" data-rail="case-studies">Case Studies</a></li>
-    <li class="sub"><a href="#cs-modlyai" data-rail="cs-modlyai">ModlyAI</a></li>
-    <li class="sub"><a href="#cs-holdfast" data-rail="cs-holdfast">Holdfast</a></li>
-    <li class="sub"><a href="#cs-hygiene" data-rail="cs-hygiene">hygiene-skill</a></li>
-    <li class="sub"><a href="#cs-lighthouse" data-rail="cs-lighthouse">Lighthouse</a></li>
-    <li><a href="#contact" data-rail="contact">Contact</a></li>
-  </ul>
-</nav>
-
 <main id="top" tabindex="-1">
 
   <!-- ============ HERO ============ -->
@@ -662,6 +702,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
     </div>
   </section>
+
+  <div id="navSentinel" aria-hidden="true" style="height:0;"></div>
 
   <div class="receipts-band">
     <div class="wrap-wide">
@@ -1488,7 +1530,7 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
     mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
   }
 
-  // ---------- reading progress, back-to-top, section rail:
+  // ---------- reading progress, back-to-top:
   // one rAF-throttled scroll listener drives all scroll-position-dependent UI.
   // (No traveling headshot: hero and About now use two different source
   // images -- hero-headshot.webp is the full figure, about-headshot.webp is
@@ -1498,10 +1540,6 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
   // each section just renders its own static picture element instead.) ---------
   var progressBar = document.getElementById('readingProgress');
   var backToTop = document.getElementById('backToTop');
-  var railLinks = Array.prototype.slice.call(document.querySelectorAll('.section-rail a'));
-  var railTargets = railLinks.map(function (a) {
-    return { link: a, el: document.getElementById(a.getAttribute('data-rail')) };
-  }).filter(function (t) { return t.el; });
 
   var ticking = false;
   function onScroll() {
@@ -1524,17 +1562,15 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
     });
   }
 
-  if (railTargets.length && 'IntersectionObserver' in window) {
-    var railIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var match = railTargets.filter(function (t) { return t.el === entry.target; })[0];
-        if (!match) return;
-        railLinks.forEach(function (a) { a.classList.remove('is-current'); });
-        match.link.classList.add('is-current');
-      });
-    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
-    railTargets.forEach(function (t) { railIO.observe(t.el); });
+  // ---------- nav: solid background once scrolled past the hero ----------
+  var siteNav = document.querySelector('header.site');
+  var navSentinel = document.getElementById('navSentinel');
+  if (siteNav && navSentinel && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      siteNav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(navSentinel);
+  } else if (siteNav) {
+    siteNav.classList.add('is-scrolled');
   }
 
   // ---------- web stack: one-shot entry tilt ----------
@@ -1569,7 +1605,7 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
       var bgVar = theme === 'dark' ? '--vanta-bg-dark' : '--vanta-bg-light';
       var bg = css.getPropertyValue(bgVar).trim().replace('#', '');
       return theme === 'dark'
-        ? { color: 0x700823, backgroundColor: parseInt(bg, 16), points: 11.00, maxDistance: 30.00, spacing: 20.00 }
+        ? { color: 0x4A4550, backgroundColor: parseInt(bg, 16), points: 11.00, maxDistance: 30.00, spacing: 20.00 }
         : { color: 0x0, backgroundColor: parseInt(bg, 16), points: 11.00, maxDistance: 34.00, spacing: 18.00 };
     }
     function loadScript(src) {
