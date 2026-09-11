@@ -340,20 +340,6 @@ html[data-theme="dark"] .hero-headshot-img {
 }
 .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
 .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
-.btn-text {
-  font-size: 0.92rem; text-decoration: none; color: var(--text-dim);
-  border-bottom: 1px solid var(--border); padding-bottom: 2px;
-  display: inline-flex; align-items: center; min-height: 44px;
-}
-.btn-text:hover { color: var(--accent); border-bottom-color: var(--accent); }
-/* .btn-text's default colour is --text-dim, tuned for sitting on the flat
-   --bg. In the hero it also sits over the headshot photo, and --text-dim's
-   dark-mode value doesn't separate enough from the photo/backdrop there --
-   boost it to --text at reduced opacity (~9.6:1 against the dark --bg,
-   comfortably over the 4.5:1 body-text minimum) instead of hardcoding a
-   colour outside the theme-token system. */
-html[data-theme="dark"] .btn-text { color: color-mix(in srgb, var(--text) 80%, transparent); }
-html[data-theme="dark"] .btn-text:hover { color: var(--accent); }
 
 /* mobile: no overlap -- type above, photo below, still bottom-anchored and
    cropped by its own frame */
@@ -697,8 +683,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <p class="hero-line reveal">I build things by myself, then go looking for what I got wrong.</p>
       <div class="hero-links reveal">
         <a href="#case-studies" class="btn btn-primary">Case Studies</a>
-        <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn-text">Resume</a>
-        <a href="mailto:marcosking1221@gmail.com" class="btn-text">Email me</a>
+        <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn">Resume</a>
+        <a href="mailto:marcosking1221@gmail.com" class="btn">Email me</a>
       </div>
     </div>
   </section>
@@ -1563,12 +1549,18 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
   }
 
   // ---------- nav: solid background once scrolled past the hero ----------
+  // The sentinel sits right after the hero, but header.site is sticky and
+  // still takes up its own space in normal flow above the hero -- so on a
+  // viewport exactly 100vh tall, the sentinel starts already below the
+  // fold by the header's own height, and would read as "scrolled past"
+  // from the very first frame. Growing the root's bottom edge by that same
+  // height cancels the header's own footprint back out.
   var siteNav = document.querySelector('header.site');
   var navSentinel = document.getElementById('navSentinel');
   if (siteNav && navSentinel && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       siteNav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
-    }, { threshold: 0 }).observe(navSentinel);
+    }, { threshold: 0, rootMargin: '0px 0px ' + (siteNav.offsetHeight + 4) + 'px 0px' }).observe(navSentinel);
   } else if (siteNav) {
     siteNav.classList.add('is-scrolled');
   }
