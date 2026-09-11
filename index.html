@@ -192,6 +192,15 @@ header.site.is-scrolled {
 .nav-icon-link svg { width: 17px; height: 17px; }
 .nav-links-mobile-hide { display: flex; align-items: center; gap: 28px; }
 .nav-dropdown-wrap { position: relative; display: flex; align-items: center; }
+/* Invisible bridge over the gap between the trigger and the menu (the menu
+   sits top:100% plus a few px of translateY for the slide-in animation) --
+   without it, :hover on .nav-dropdown-wrap is lost mid-transit since the
+   wrap's own box is only as tall as the trigger text, and the mouse leaves
+   it before reaching the absolutely-positioned menu below. */
+.nav-dropdown-wrap::after {
+  content: ""; position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%); width: 190px; height: 12px;
+}
 .nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 4px; }
 .nav-dropdown-trigger svg { width: 10px; height: 10px; transition: transform 0.2s ease; }
 .nav-dropdown-wrap:hover .nav-dropdown-trigger svg,
