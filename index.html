@@ -287,15 +287,12 @@ header.site {
   display: block;
   font-family: var(--display); font-weight: 700; text-transform: uppercase;
   font-size: clamp(4rem, 11vw, 8.4rem); letter-spacing: 0.005em; line-height: 0.94;
-  color: var(--text);
-  /* solid fill only -- legibility against the Vanta mesh (not the photo,
-     which just physically occludes whatever it covers) comes from a halo
-     in the page's own bg colour, layered a few times to read as a denser
-     edge rather than a diffuse glow */
-  text-shadow:
-    0 0 2px var(--bg), 0 0 2px var(--bg), 0 0 2px var(--bg),
-    0 0 8px var(--bg), 0 0 8px var(--bg),
-    0 0 20px var(--bg);
+  /* outline only, no fill, no glow -- the interior is transparent, so the
+     mesh (or the photo, wherever it crosses) shows straight through each
+     letter, with just a thin line tracing the letterform on top */
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text);
+  text-stroke: 1.5px var(--text);
 }
 .hero-role span { display: block; }
 .hero-line {
