@@ -298,20 +298,30 @@ header.site.is-scrolled {
      the right (.hero-photo-slot). See .hero-grid.
 
    Vertical model (tablet/desktop, >=641px -- see the media query below):
-   .hero has no min-height/height at all, so its height comes purely from
-   its own content -- .hero-grid's row ends up exactly as tall as its
-   tallest column, the portrait in practice. The text column no longer
-   centers itself against that row either (an earlier version did; removed
-   -- it made the top offset vary with the portrait's own height, which
-   changes with viewport WIDTH as the grid resizes, not something that
-   should move the eyebrow around). Both columns now simply start at the
-   top of the row, level with each other, so the eyebrow's distance below
-   the nav is exactly .hero's padding-top and nothing else -- no viewport
-   dimension feeds into it at all. The portrait (row's tallest item)
-   touches the row's top and bottom edges -- which, since .hero has no
-   bottom padding, are the hero's own edges -- so it's grounded with no
-   separate alignment rule needed for it. No absolute positioning, no
-   negative offsets, no vh-driven image sizing anywhere in this file. */
+   .hero carries the same viewport-height floor as mobile now (min-height:
+   100svh - 70px), so on short/content-light viewports the row can't be
+   shorter than the portrait needs, but on tall viewports (1440x900 and up)
+   the hero fills the screen instead of collapsing to the portrait's own
+   height with the About section riding up above the fold. .hero-grid
+   stretches to fill that height by default (flex/grid stretch, both
+   unset), so the row grows to match. The text column no longer centers
+   itself against that row either (an earlier version did; removed -- it
+   made the top offset vary with the portrait's own height, which changes
+   with viewport WIDTH as the grid resizes, not something that should move
+   the eyebrow around). Both columns still start at the top of the row,
+   level with each other, so the eyebrow's distance below the nav is
+   exactly .hero's padding-top regardless of row height. The portrait
+   stays grounded to the row's bottom edge (.hero's own bottom edge, since
+   .hero has no bottom padding) via .hero-photo-slot's align-items:
+   flex-end -- so on a tall viewport the extra height opens up as visible
+   gap between the text block (flush top) and the portrait (flush bottom)
+   rather than stretching either one. That's an accepted trade of the
+   viewport floor, not a bug: it keeps the eyebrow's offset from the nav
+   fixed instead of re-centering text against a height that now varies
+   with viewport height too. No absolute positioning, no negative offsets,
+   no vh-driven image sizing anywhere in this file -- min-height is the
+   only viewport-height value used, and it's a floor (grow), never a fixed
+   height (clip). */
 .hero {
   position: relative;
   display: flex;
@@ -333,18 +343,24 @@ header.site.is-scrolled {
 @media (max-width: 640px) {
   .hero { min-height: calc(100vh - 70px); min-height: calc(100svh - 70px); }
 }
-/* Tablet/desktop: no min-height at all, so .hero's height comes purely
-   from its own content -- the portrait, being taller than the text, ends
-   up setting it, and .hero-grid's row is only ever as tall as the portrait
-   actually is. padding-top is the ONE offset controlling how far below the
-   nav that row starts, and it's the full answer: .hero-stack no longer
-   centers its text against the row's height either (that offset varied
-   with the portrait's own height, which itself varies with viewport WIDTH
-   as the grid columns resize -- not viewport height, but variable all the
-   same), so the text now starts flush with the top of the row, right at
-   padding-top, with nothing else able to shift it. */
+/* Tablet/desktop: same viewport-height floor as mobile (min-height, never
+   height, so a short viewport still lets the hero grow past it rather than
+   clip) -- without it the hero was only ever as tall as the portrait, its
+   tallest column, which on a normal desktop viewport left the hero shorter
+   than the screen and the About section visible above the fold. padding-top
+   is the other offset controlling how far below the nav the row starts,
+   and together they're the full answer: .hero-stack no longer centers its
+   text against the row's height (that offset varied with the portrait's
+   own height, which itself varies with viewport WIDTH as the grid columns
+   resize -- not viewport height, but variable all the same), so the text
+   still starts flush with the top of the row, right at padding-top,
+   regardless of how tall the floor makes the row. */
 @media (min-width: 641px) {
-  .hero { padding-top: 60px; }
+  .hero {
+    padding-top: 60px;
+    min-height: calc(100vh - 70px);
+    min-height: calc(100svh - 70px);
+  }
 }
 /* Vanta paints over this; the flat --bg colour is the reduced-motion/mobile/
    pre-load fallback, so the hero is always correct even if Vanta never
@@ -402,7 +418,15 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
        the top of its (portrait-height) cell, level with the portrait,
        rather than centered against it -- centering varied with the
        portrait's own height, which itself changes with viewport WIDTH as
-       the grid resizes, an extra source of drift this doesn't need. */
+       the grid resizes, an extra source of drift this doesn't need.
+       Tried justify-content: center after the min-height floor landed
+       (it does make the row's height track viewport HEIGHT instead, so
+       that particular width-driven drift no longer applied): measured
+       260px of void under the photo at 1920x1080 versus 521px flush-top,
+       but it also pulled the eyebrow's offset below the nav from a fixed
+       60px up to a 156px spread across 1366x768-1920x1080, over the
+       ~60px drift budget. Rejected on that basis -- don't retry without
+       also solving the eyebrow drift. */
   }
 }
 .eyebrow {
