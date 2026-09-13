@@ -401,13 +401,14 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
        always pinned to the hero's bottom and the void is purely
        heroHeight - stackContentHeight -- the photo growing doesn't
        touch it). Given the void is a wash either way, this ratio spends
-       the column space on a visibly bigger photo (67% of hero height,
-       hitting its own 600px clamp ceiling at 1920 wide) instead of
-       leaving it at 55%. The headline's own size below was cut hard to
-       match -- see the comment on .hero-role's desktop override for why
-       it's 3.5rem and not the ~20%-smaller size this ratio was first
-       tried with. */
-    grid-template-columns: minmax(0, 0.8fr) minmax(380px, 1.4fr);
+       the column space on a bigger photo (66% of hero height) instead
+       of leaving it at 55%. This is the moderate end of what the audit
+       tried -- a more aggressive 0.8fr/1.4fr split was tested too (got
+       the photo to 67%, hitting its own 600px clamp ceiling) but was
+       passed over here in favor of keeping the headline at only ~20%
+       smaller rather than the ~36% that split forced. See the comment
+       on .hero-role's desktop override for the headline's own sizing. */
+    grid-template-columns: minmax(0, 1.0fr) minmax(380px, 1.2fr);
     /* overrides the base rule's align-items:center (flex-specific, for
        mobile/tablet) -- stretch is what lets each column's cell span the
        grid's full height, which the left/right grounding below depends on. */
@@ -464,31 +465,26 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
 }
 .hero-role span { display: block; }
 /* Desktop-only override (must come after the base rule above to win the
-   cascade -- same specificity, later source order): caps at 3.5rem/56px,
-   not the flat value it looks like it should be able to use. A proportion
-   pass tried ~20% smaller (4.4rem) paired with this same wider photo
-   column and it overflowed by 90px -- at 4.4rem the headline needs ~482px
-   of column, and this ratio's column1 is only 391px. 3.5rem is the
-   measured fit at that column width, confirmed with zero overflow margin
-   at 1366, 1440, and 1920px wide (the shared 1180px container makes the
-   column, and so this fit, identical across that whole range). It's a
-   bigger cut than the ~20% first tried -- deliberate, not a rounding
-   choice: this ratio was chosen to let the photo reach its own 600px
-   clamp ceiling, and the headline had to give up the room that took.
-   Below 1024px this never applies (tablet keeps the base clamp above);
-   right at 1024px, though, .hero-grid's own container hasn't reached its
-   1180px cap yet (it's ~1009px there), which shrinks column1 well below
-   its 1366px+ width -- a flat 56px overflowed that narrower column by
-   59px. Hence the clamp instead of a flat value: it rides 4.3vw down to
-   fit the narrowing column from 1024px up, and its own 3.5rem ceiling
-   catches it at ~1310px and holds flat from there through 1920px+,
-   matching the flat value that was actually tested. Confirmed zero
-   overflow at every width swept from 1024 to 1920. The stroke below is
-   unchanged at 1.5px, which reads visibly heavier at this size (rough
-   cap-height ratio 2.7% here vs 1.7% at the old 88px) -- noticeable but
-   not yet clogging the counters; revisit if it looks off in person. */
+   cascade -- same specificity, later source order): caps at 4.4rem/70.4px,
+   ~20% smaller than the base clamp's 5.5rem/88px ceiling. Confirmed with
+   an 8px overflow margin at 1366, 1440, and 1920px wide (the shared
+   1180px container makes the column, and so this fit, identical across
+   that whole range). Below 1024px this never applies (tablet keeps the
+   base clamp above); right at 1024px, though, .hero-grid's own container
+   hasn't reached its 1180px cap yet (it's ~1009px there), which shrinks
+   column1 well below its 1366px+ width -- a flat 70.4px overflows that
+   narrower column (a sibling proportion-pass variant with a much
+   narrower column hit this exact problem at 90px of overflow). Hence the
+   clamp instead of a flat value: it rides 5.6vw down to fit the
+   narrowing column from 1024px up, and its own 4.4rem ceiling catches it
+   before the column reaches its own 1366px+ width, holding flat from
+   there through 1920px+ and matching the flat value that was actually
+   tested. Confirmed zero overflow at every width swept from 1024 to
+   1920. The stroke below is unchanged at 1.5px, which reads a little
+   heavier at this size than the original 88px (cap-height ratio 2.1% vs
+   1.7%) but not enough to look clogged. */
 @media (min-width: 1024px) {
-  .hero-role { font-size: clamp(2.7rem, 4.3vw, 3.5rem); }
+  .hero-role { font-size: clamp(3.4rem, 5.6vw, 4.4rem); }
 }
 .hero-line {
   display: block;
