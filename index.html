@@ -287,71 +287,143 @@ header.site.is-scrolled {
    case studies the rail used to list as sub-items. */
 
 /* ---------- hero ---------- */
-/* Poster layout: display type (with the headshot layered behind just that
-   type, per the sketch), the one serif line, one button row.
-   Everything else that used to live here (the long lede paragraph, the
-   receipts strip) has moved out -- see the .work-intro lede above the Work
-   section and the .receipts-band right after this one. */
+/* Single clear structure, three tiers:
+   - <=640px (mobile): stacked, centred, portrait cropped to a 46vh frame.
+   - 641-1023px (tablet): stacked, centred, portrait a plain width-scaled
+     image -- a 60/40 grid has no room to work with at these widths, so it
+     collapses to the same single-column flow as mobile rather than forcing
+     a cramped two-column layout.
+   - >=1024px (desktop): true two-column grid -- identity/message on the
+     left (.hero-stack), portrait grounded to the hero's own bottom edge on
+     the right (.hero-photo-slot). See .hero-grid.
+
+   Vertical model (tablet/desktop, >=641px -- see the media query below):
+   .hero has no min-height/height at all, so its height comes purely from
+   its own content -- .hero-grid's row ends up exactly as tall as its
+   tallest column, the portrait in practice. The text column no longer
+   centers itself against that row either (an earlier version did; removed
+   -- it made the top offset vary with the portrait's own height, which
+   changes with viewport WIDTH as the grid resizes, not something that
+   should move the eyebrow around). Both columns now simply start at the
+   top of the row, level with each other, so the eyebrow's distance below
+   the nav is exactly .hero's padding-top and nothing else -- no viewport
+   dimension feeds into it at all. The portrait (row's tallest item)
+   touches the row's top and bottom edges -- which, since .hero has no
+   bottom padding, are the hero's own edges -- so it's grounded with no
+   separate alignment rule needed for it. No absolute positioning, no
+   negative offsets, no vh-driven image sizing anywhere in this file. */
 .hero {
   position: relative;
-  height: 100vh;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-  padding: 100px 0 32px;
+  /* overrides the generic `section { padding: 88px 0; }` rule further down
+     -- .hero is a <section> too, so without this it silently inherits 88px
+     top+bottom padding. No min-height here at all any more: height/spacing
+     are declared explicitly per breakpoint below instead of "base value +
+     override", so there's no viewport-driven rule left to accidentally
+     inherit at any width. */
+  padding: 0;
   overflow: hidden;
   background: var(--bg);
 }
+/* Mobile keeps its own viewport-height floor (unchanged behaviour) --
+   scoped here explicitly rather than living in the shared base rule above,
+   which is what let a "dead" desktop copy of it survive unnoticed last
+   round even after being overridden. */
+@media (max-width: 640px) {
+  .hero { min-height: calc(100vh - 70px); min-height: calc(100svh - 70px); }
+}
+/* Tablet/desktop: no min-height at all, so .hero's height comes purely
+   from its own content -- the portrait, being taller than the text, ends
+   up setting it, and .hero-grid's row is only ever as tall as the portrait
+   actually is. padding-top is the ONE offset controlling how far below the
+   nav that row starts, and it's the full answer: .hero-stack no longer
+   centers its text against the row's height either (that offset varied
+   with the portrait's own height, which itself varies with viewport WIDTH
+   as the grid columns resize -- not viewport height, but variable all the
+   same), so the text now starts flush with the top of the row, right at
+   padding-top, with nothing else able to shift it. */
+@media (min-width: 641px) {
+  .hero { padding-top: 60px; }
+}
 /* Vanta paints over this; the flat --bg colour is the reduced-motion/mobile/
-   pre-load fallback, so the hero is always correct even if Vanta never arrives.
-   Knocked back to ~35% and paired with a radial scrim behind the type so the
-   network reads as texture behind the poster, not a pattern fighting it. */
-.hero-vanta { position: absolute; inset: 0; z-index: 0; background: var(--bg); opacity: 0.35; }
+   pre-load fallback, so the hero is always correct even if Vanta never
+   arrives. Untouched from before: still a faint technical-drawing texture
+   behind both columns, tuned brighter for dark mode since the same value
+   reads as barely-there against the much darker background. */
+.hero-vanta { position: absolute; inset: 0; z-index: 0; background: var(--bg); opacity: 0.19; }
+html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
 .hero-scrim {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse 65% 55% at 50% 42%, var(--bg) 0%, color-mix(in srgb, var(--bg) 45%, transparent) 55%, transparent 78%);
+  background: radial-gradient(ellipse 72% 64% at 50% 46%, var(--bg) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 55%, transparent 85%);
 }
-/* Photo sits behind the type (a person standing in front of a painted wall):
-   bottom-anchored to the hero's own edge, sized by height with width
-   following naturally (no object-fit, no crop of its own) -- .hero's
-   overflow:hidden is the only thing that trims it, at the bottom edge only. */
-.hero-photo-slot {
-  position: absolute; z-index: 1;
-  left: 0; right: 0; bottom: -56px;
-  display: flex; justify-content: center;
-  pointer-events: none;
-}
-.hero-headshot-img {
-  display: block; height: clamp(620px, 92vh, 980px); width: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
-}
-html[data-theme="dark"] .hero-headshot-img {
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
-}
-.hero-stack {
+
+/* Mobile/tablet default: a single stacked column, text then portrait,
+   centred, sized to its own content. Desktop overrides this to a real
+   two-column grid, stretched (default) to fill .hero's full height so the
+   columns below can ground themselves against its bottom edge. */
+.hero-grid {
   position: relative; z-index: 2; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+/* tablet only: centre the stacked content within the hero's height rather
+   than letting it pack flush under the nav (mobile keeps its own explicit
+   padding-top below instead -- this rule is scoped past it deliberately). */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .hero-grid { justify-content: center; }
+}
+@media (min-width: 1024px) {
+  .hero-grid {
+    display: grid;
+    /* Ratio tuned, not the naive 60/40 it looks like: "DEVELOPER" at the
+       headline's max size measures ~700px wide (checked with a canvas
+       text measurement), and both columns share the same 1180px container
+       the navbar uses. 1.4fr/0.9fr left the left column ~655px wide at
+       full size -- too narrow, so the headline silently overflowed its
+       column edge instead of wrapping (it can't wrap; it's one word). This
+       ratio, paired with the headline's own reduced cap below, is sized so
+       both columns actually fit their content within the shared container. */
+    grid-template-columns: minmax(0, 1.2fr) minmax(380px, 1fr);
+    /* overrides the base rule's align-items:center (flex-specific, for
+       mobile/tablet) -- stretch is what lets each column's cell span the
+       grid's full height, which the left/right grounding below depends on. */
+    align-items: stretch;
+    gap: 56px;
+  }
+}
+
+.hero-stack {
   display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+@media (min-width: 1024px) {
+  .hero-stack {
+    align-items: flex-start; text-align: left; max-width: 640px;
+    /* deliberately no justify-content override: the text sits flush with
+       the top of its (portrait-height) cell, level with the portrait,
+       rather than centered against it -- centering varied with the
+       portrait's own height, which itself changes with viewport WIDTH as
+       the grid resizes, an extra source of drift this doesn't need. */
+  }
 }
 .eyebrow {
   font-family: var(--display); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 14px; display: inline-block;
 }
-.hero-h1 { margin: 14px 0 0; }
-/* extra room above the display type on desktop only -- this is where his
-   head actually sits, filled by the photo rather than left empty. Used to
-   live on an .eyebrow label; the label's gone but the spacing is still
-   load-bearing for the photo composition, so it moved to the element it
-   actually positions. */
-@media (min-width: 641px) {
-  .hero-h1 { margin-top: 325px; }
-}
+.hero-h1 { margin: 20px 0 0; }
 .hero-role {
   display: block;
   font-family: var(--display); font-weight: 700; text-transform: uppercase;
-  font-size: clamp(4rem, 11vw, 8.4rem); letter-spacing: 0.005em; line-height: 0.94;
+  /* one formula covers tablet through desktop. The 5.5rem cap (not the
+     originally-tried 6.75rem) is a measured fit, not a guess: "DEVELOPER"
+     is one word, can't wrap, and at 6.75rem it measures ~700px wide --
+     wider than the left column ever gets inside the shared 1180px
+     container, so it silently overflowed the column edge. 5.5rem measures
+     ~570px, comfortably inside the column at every desktop width (see
+     .hero-grid). Mobile gets its own smaller size below. */
+  font-size: clamp(4rem, 6.5vw, 5.5rem); letter-spacing: 0.005em; line-height: 0.94;
   /* outline only, no fill, no glow -- the interior is transparent, so the
-     mesh (or the photo, wherever it crosses) shows straight through each
-     letter, with just a thin line tracing the letterform on top */
+     faint network texture behind it shows straight through each letter,
+     with just a thin line tracing the letterform on top */
   color: transparent;
   -webkit-text-stroke: 1.5px var(--text);
   text-stroke: 1.5px var(--text);
@@ -363,7 +435,20 @@ html[data-theme="dark"] .hero-headshot-img {
   font-size: clamp(1.1rem, 2.2vw, 1.4rem); line-height: 1.4;
   margin: 20px auto 0; max-width: 36ch;
 }
-.hero-links { display: flex; gap: 20px; margin-top: 22px; flex-wrap: wrap; align-items: center; justify-content: center; }
+.hero-desc {
+  display: block;
+  font-family: var(--sans); font-weight: 400;
+  font-size: clamp(0.9rem, 1.6vw, 1rem); line-height: 1.55;
+  margin: 8px auto 0; max-width: 42ch;
+  color: var(--text-dim);
+}
+.hero-links { display: flex; gap: 20px; margin-top: 24px; flex-wrap: wrap; align-items: center; justify-content: center; }
+@media (min-width: 1024px) {
+  /* left-aligned column: the auto-centred paragraph widths and the
+     centred button row both need to flush left instead. */
+  .hero-line, .hero-desc { margin-left: 0; margin-right: 0; }
+  .hero-links { justify-content: flex-start; }
+}
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 18px; border-radius: 8px; text-decoration: none;
@@ -380,16 +465,49 @@ html[data-theme="dark"] .hero-headshot-img {
 .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
 .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
 
-/* mobile: no overlap -- type above, photo below, still bottom-anchored and
-   cropped by its own frame */
+/* Portrait: grounded to the bottom of its column, not floating in the
+   middle of it. .hero-photo-slot stretches to fill the grid cell's full
+   height (desktop) or sizes to its own content (tablet/mobile, where
+   there's no extra height to fill anyway); align-items:flex-end then
+   anchors the image to whichever bottom edge that is -- the hero's own
+   bottom edge on desktop. The source image (hero-headshot.webp) is itself
+   already cropped tight at the torso with no transparent margin below it
+   (checked the alpha channel directly), so bottom-aligning the element is
+   bottom-aligning the person, not some empty canvas underneath them. */
+.hero-photo-slot {
+  display: flex; align-items: flex-end; justify-content: center;
+  pointer-events: none;
+}
+.hero-headshot-img {
+  display: block;
+  width: min(70%, 420px);
+  height: auto;
+  /* a soft contact shadow, not the heavier floating-card shadow this had
+     before -- a big soft blur under a grounded figure reads as it hovering
+     just above the ground rather than standing on it */
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.22));
+}
+html[data-theme="dark"] .hero-headshot-img {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+}
+/* one-shot fade-in on load, not a continuous animation: opacity only, runs
+   once, then the portrait is fully static -- no ongoing transform of any
+   kind (a prior version had a continuous translateY bob here; removed). */
+@keyframes hero-photo-in { from { opacity: 0; } to { opacity: 1; } }
+.hero-headshot-img { animation: hero-photo-in 0.7s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-headshot-img { animation: none; }
+}
+@media (min-width: 1024px) {
+  .hero-headshot-img { width: clamp(430px, 34vw, 600px); }
+}
+
+/* mobile: portrait cropped to a fixed-height frame rather than scaled by
+   width -- unchanged from before this round of changes. */
 @media (max-width: 640px) {
-  .hero { flex-direction: column; justify-content: center; padding-top: 100px; }
-  .hero-stack { order: -1; }
+  .hero { padding-top: 100px; }
   .hero-role { font-size: clamp(2.4rem, 13vw, 4rem); }
-  .hero-photo-slot {
-    position: relative; left: auto; right: auto; bottom: auto;
-    margin-top: 24px; height: 46vh; overflow: hidden;
-  }
+  .hero-photo-slot { height: 46vh; overflow: hidden; }
   .hero-headshot-img { height: 130%; width: auto; align-self: flex-start; }
 }
 
@@ -402,7 +520,7 @@ html[data-theme="dark"] .hero-headshot-img {
 .hero-receipts a { color: var(--text-dim); text-decoration: none; border-bottom: 1px dotted var(--text-dim); }
 .hero-receipts a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .hero-receipts .sep { margin: 0 8px; opacity: 0.5; }
-.hero-receipts-note { display: block; font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
+.hero-receipts-note { display: block; flex: 0 0 100%; font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
 
 /* ---------- about photo: solid circle behind, full-opacity photo on top ----------
    about-headshot.webp is already square with headroom baked in, so it's
@@ -435,6 +553,12 @@ html[data-theme="dark"] .about-headshot-img {
 }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 .stagger.in-view > * { transition-delay: calc(var(--i, 0) * 70ms); }
+
+/* hero entrance sequence: typography fades in staggered on load --
+   longhand after the shorthand above so it only overrides the delay. */
+.hero-stack > .reveal {
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
 
 /* reduced motion: no slide-in, no smooth scroll (IntersectionObserver still runs).
    !important since it must win over the higher-specificity .js-reveal .reveal above. */
@@ -729,21 +853,25 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <section class="hero" id="heroSection">
     <div class="hero-vanta" id="vantaHero" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="hero-photo-slot reveal">
-      <picture>
-        <source srcset="assets/hero/hero-headshot.avif" type="image/avif">
-        <img class="hero-headshot-img" src="assets/hero/hero-headshot.webp" width="1400" height="1581" alt="King Joshua Marcos" decoding="async" fetchpriority="high">
-      </picture>
-    </div>
-    <div class="wrap-wide hero-stack">
-      <h1 class="hero-h1 reveal">
-        <span class="hero-role"><span>Full Stack</span> <span>Developer</span></span>
-      </h1>
-      <p class="hero-line reveal">I build things by myself, then go looking for what I got wrong.</p>
-      <div class="hero-links reveal">
-        <a href="#case-studies" class="btn btn-primary">Case Studies</a>
-        <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn">Resume</a>
-        <a href="mailto:marcosking1221@gmail.com" class="btn">Email me</a>
+    <div class="wrap-wide hero-grid">
+      <div class="hero-stack">
+        <span class="eyebrow reveal" style="--i:0">Architecture &rarr; Software</span>
+        <h1 class="hero-h1 reveal" style="--i:1">
+          <span class="hero-role"><span>Full Stack</span> <span>Developer</span></span>
+        </h1>
+        <p class="hero-line reveal" style="--i:3">I build things by myself, then go looking for what I got wrong.</p>
+        <p class="hero-desc reveal" style="--i:3">I build SaaS products, AI systems, and practical digital tools from idea to deployment.</p>
+        <div class="hero-links reveal" style="--i:4">
+          <a href="#case-studies" class="btn btn-primary">Case Studies</a>
+          <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn">Resume</a>
+          <a href="mailto:marcosking1221@gmail.com" class="btn">Email me</a>
+        </div>
+      </div>
+      <div class="hero-photo-slot">
+        <picture>
+          <source srcset="assets/hero/hero-headshot.avif" type="image/avif">
+          <img class="hero-headshot-img" src="assets/hero/hero-headshot.webp" width="1400" height="1581" alt="King Joshua Marcos" decoding="async" fetchpriority="high">
+        </picture>
       </div>
     </div>
   </section>
@@ -1698,9 +1826,13 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
       var css = getComputedStyle(root);
       var bgVar = theme === 'dark' ? '--vanta-bg-dark' : '--vanta-bg-light';
       var bg = css.getPropertyValue(bgVar).trim().replace('#', '');
+      // Dark mode's line colour is lifted a good deal lighter than the old
+      // 0x4A4550 -- at this canvas's own low-ish alpha (see .hero-vanta),
+      // a colour that dark just disappeared against the near-black
+      // background. Still a restrained gray, not a bright/neon line.
       return theme === 'dark'
-        ? { color: 0x4A4550, backgroundColor: parseInt(bg, 16), points: 11.00, maxDistance: 30.00, spacing: 20.00 }
-        : { color: 0x0, backgroundColor: parseInt(bg, 16), points: 11.00, maxDistance: 34.00, spacing: 18.00 };
+        ? { color: 0x726c78, backgroundColor: parseInt(bg, 16), points: 8.00, maxDistance: 26.00, spacing: 24.00 }
+        : { color: 0x0, backgroundColor: parseInt(bg, 16), points: 8.00, maxDistance: 28.00, spacing: 22.00 };
     }
     function loadScript(src) {
       return new Promise(function (resolve, reject) {
