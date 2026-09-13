@@ -391,15 +391,23 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
 @media (min-width: 1024px) {
   .hero-grid {
     display: grid;
-    /* Ratio tuned, not the naive 60/40 it looks like: "DEVELOPER" at the
-       headline's max size measures ~700px wide (checked with a canvas
-       text measurement), and both columns share the same 1180px container
-       the navbar uses. 1.4fr/0.9fr left the left column ~655px wide at
-       full size -- too narrow, so the headline silently overflowed its
-       column edge instead of wrapping (it can't wrap; it's one word). This
-       ratio, paired with the headline's own reduced cap below, is sized so
-       both columns actually fit their content within the shared container. */
-    grid-template-columns: minmax(0, 1.2fr) minmax(380px, 1fr);
+    /* Ratio favors the photo over the headline column, on purpose: a
+       proportion pass measured the photo capped at 55% of hero height
+       under the previous 1.2fr/1fr split (column too narrow to use the
+       image's own clamp(430px, 34vw, 600px) ceiling), with ~520px of
+       empty space below the button row that no column ratio can close
+       (.hero-photo-slot and .hero-stack both stretch to the row's full
+       height regardless of their content, so the photo's bottom is
+       always pinned to the hero's bottom and the void is purely
+       heroHeight - stackContentHeight -- the photo growing doesn't
+       touch it). Given the void is a wash either way, this ratio spends
+       the column space on a visibly bigger photo (67% of hero height,
+       hitting its own 600px clamp ceiling at 1920 wide) instead of
+       leaving it at 55%. The headline's own size below was cut hard to
+       match -- see the comment on .hero-role's desktop override for why
+       it's 3.5rem and not the ~20%-smaller size this ratio was first
+       tried with. */
+    grid-template-columns: minmax(0, 0.8fr) minmax(380px, 1.4fr);
     /* overrides the base rule's align-items:center (flex-specific, for
        mobile/tablet) -- stretch is what lets each column's cell span the
        grid's full height, which the left/right grounding below depends on. */
@@ -437,13 +445,15 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
 .hero-role {
   display: block;
   font-family: var(--display); font-weight: 700; text-transform: uppercase;
-  /* one formula covers tablet through desktop. The 5.5rem cap (not the
-     originally-tried 6.75rem) is a measured fit, not a guess: "DEVELOPER"
-     is one word, can't wrap, and at 6.75rem it measures ~700px wide --
-     wider than the left column ever gets inside the shared 1180px
-     container, so it silently overflowed the column edge. 5.5rem measures
-     ~570px, comfortably inside the column at every desktop width (see
-     .hero-grid). Mobile gets its own smaller size below. */
+  /* This clamp is the tablet size now (641-1023px, where 6.5vw never
+     reaches the 5.5rem cap so it stays fluid) -- desktop overrides it
+     below with a flat value instead. It used to also cover desktop, on
+     the claim that 5.5rem/88px measured ~570px, "comfortably inside the
+     column" -- a later proportion-pass audit measured it overflowing
+     the (then 1.2fr) column by 9px at every desktop width tested
+     (1366-1920), so that claim was wrong; the desktop override below
+     both fixes that and goes further, for .hero-grid's wider photo
+     column. Mobile gets its own smaller size below. */
   font-size: clamp(4rem, 6.5vw, 5.5rem); letter-spacing: 0.005em; line-height: 0.94;
   /* outline only, no fill, no glow -- the interior is transparent, so the
      faint network texture behind it shows straight through each letter,
@@ -453,6 +463,33 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
   text-stroke: 1.5px var(--text);
 }
 .hero-role span { display: block; }
+/* Desktop-only override (must come after the base rule above to win the
+   cascade -- same specificity, later source order): caps at 3.5rem/56px,
+   not the flat value it looks like it should be able to use. A proportion
+   pass tried ~20% smaller (4.4rem) paired with this same wider photo
+   column and it overflowed by 90px -- at 4.4rem the headline needs ~482px
+   of column, and this ratio's column1 is only 391px. 3.5rem is the
+   measured fit at that column width, confirmed with zero overflow margin
+   at 1366, 1440, and 1920px wide (the shared 1180px container makes the
+   column, and so this fit, identical across that whole range). It's a
+   bigger cut than the ~20% first tried -- deliberate, not a rounding
+   choice: this ratio was chosen to let the photo reach its own 600px
+   clamp ceiling, and the headline had to give up the room that took.
+   Below 1024px this never applies (tablet keeps the base clamp above);
+   right at 1024px, though, .hero-grid's own container hasn't reached its
+   1180px cap yet (it's ~1009px there), which shrinks column1 well below
+   its 1366px+ width -- a flat 56px overflowed that narrower column by
+   59px. Hence the clamp instead of a flat value: it rides 4.3vw down to
+   fit the narrowing column from 1024px up, and its own 3.5rem ceiling
+   catches it at ~1310px and holds flat from there through 1920px+,
+   matching the flat value that was actually tested. Confirmed zero
+   overflow at every width swept from 1024 to 1920. The stroke below is
+   unchanged at 1.5px, which reads visibly heavier at this size (rough
+   cap-height ratio 2.7% here vs 1.7% at the old 88px) -- noticeable but
+   not yet clogging the counters; revisit if it looks off in person. */
+@media (min-width: 1024px) {
+  .hero-role { font-size: clamp(2.7rem, 4.3vw, 3.5rem); }
+}
 .hero-line {
   display: block;
   font-family: var(--serif); font-weight: 600;
