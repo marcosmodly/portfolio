@@ -542,9 +542,10 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
   /* a soft contact shadow, not the heavier floating-card shadow this had
      before -- a big soft blur under a grounded figure reads as it hovering
      just above the ground rather than standing on it. grayscale(1) is the
-     portrait treatment for the whole page -- chained onto the same filter
-     property as the shadow rather than a separate one, since filter only
-     applies its last declaration, not all of them. */
+     hero-only portrait treatment -- chained onto the same filter property
+     as the shadow rather than a separate one, since filter only applies
+     its last declaration, not all of them. The About photo below stays
+     in color; this isn't a whole-page rule. */
   filter: grayscale(1) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.22));
 }
 html[data-theme="dark"] .hero-headshot-img {
@@ -595,10 +596,10 @@ html[data-theme="dark"] .hero-headshot-img {
   position: absolute; inset: 0;
   display: block; width: 100%; height: 100%;
   border-radius: 50%;
-  filter: grayscale(1) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 }
 html[data-theme="dark"] .about-headshot-img {
-  filter: grayscale(1) drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
 }
 
 /* ---------- reveal on scroll ---------- */
