@@ -465,26 +465,22 @@ html[data-theme="dark"] .hero-vanta { opacity: 0.25; }
 }
 .hero-role span { display: block; }
 /* Desktop-only override (must come after the base rule above to win the
-   cascade -- same specificity, later source order): caps at 4.4rem/70.4px,
-   ~20% smaller than the base clamp's 5.5rem/88px ceiling. Confirmed with
-   an 8px overflow margin at 1366, 1440, and 1920px wide (the shared
-   1180px container makes the column, and so this fit, identical across
-   that whole range). Below 1024px this never applies (tablet keeps the
-   base clamp above); right at 1024px, though, .hero-grid's own container
-   hasn't reached its 1180px cap yet (it's ~1009px there), which shrinks
-   column1 well below its 1366px+ width -- a flat 70.4px overflows that
-   narrower column (a sibling proportion-pass variant with a much
-   narrower column hit this exact problem at 90px of overflow). Hence the
-   clamp instead of a flat value: it rides 5.6vw down to fit the
-   narrowing column from 1024px up, and its own 4.4rem ceiling catches it
-   before the column reaches its own 1366px+ width, holding flat from
-   there through 1920px+ and matching the flat value that was actually
-   tested. Confirmed zero overflow at every width swept from 1024 to
-   1920. The stroke below is unchanged at 1.5px, which reads a little
-   heavier at this size than the original 88px (cap-height ratio 2.1% vs
-   1.7%) but not enough to look clogged. */
+   cascade -- same specificity, later source order): caps at 4.5rem/72px.
+   Measured directly (not calculated) against the actual rendered column
+   at 1366/1440/1920px wide (all three share the same ~489px column1,
+   since .hero-grid's wrap-wide parent is capped at 1180px by then): a
+   72px cap leaves 21px of clear margin before the text would touch
+   column1's right edge. That measurement matters because this text is
+   far more overflow-sensitive than it looks -- going from 72px to 75px
+   (a 4% bump) ate 21px of margin down to under 1px, so don't nudge this
+   cap without re-measuring the actual DOM rect, not just scaling the
+   old confirmed-safe number by the percentage you want. Below 1024px
+   this never applies (tablet keeps the base clamp above); from 1024px
+   up, 6vw rides below this cap until 1200px wide, where it goes flat.
+   Confirmed zero overflow at every width swept from 1024 to 1920,
+   including the 1024-1200px fluid stretch. */
 @media (min-width: 1024px) {
-  .hero-role { font-size: clamp(3.4rem, 5.6vw, 4.4rem); }
+  .hero-role { font-size: clamp(3.6rem, 6vw, 4.5rem); }
 }
 .hero-line {
   display: block;
@@ -560,7 +556,7 @@ html[data-theme="dark"] .hero-headshot-img {
   .hero-headshot-img { animation: none; }
 }
 @media (min-width: 1024px) {
-  .hero-headshot-img { width: clamp(450px, 36vw, 630px); }
+  .hero-headshot-img { width: clamp(480px, 38vw, 670px); }
 }
 
 /* mobile: portrait cropped to a fixed-height frame rather than scaled by
@@ -576,12 +572,12 @@ html[data-theme="dark"] .hero-headshot-img {
 .receipts-band { padding: 28px 0; border-bottom: 1px solid var(--border); }
 .receipts-band .eyebrow { margin-bottom: 10px; }
 .hero-receipts {
-  font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim);
-  margin: 0; display: flex; flex-wrap: wrap; gap: 6px 0; align-items: baseline;
+  font-family: var(--mono); font-size: 0.88rem; color: var(--text-dim);
+  margin: 0; display: flex; flex-wrap: wrap; gap: 8px 0; align-items: baseline;
 }
 .hero-receipts a { color: var(--text-dim); text-decoration: none; border-bottom: 1px dotted var(--text-dim); }
 .hero-receipts a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-.hero-receipts .sep { margin: 0 8px; opacity: 0.5; }
+.hero-receipts .sep { margin: 0 10px; opacity: 0.5; }
 .hero-receipts-note { font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin: 6px 0 0; }
 
 /* ---------- about photo: solid circle behind, full-opacity photo on top ----------
@@ -805,8 +801,8 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .closing-line { font-family: var(--serif); font-size: 1.2rem; font-style: italic; max-width: 60ch; margin-top: 24px; }
 
 /* contact */
-#contact .section-head h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
-.contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; align-items: center; }
+#contact .section-head h2 { font-size: clamp(2.4rem, 6.5vw, 4rem); }
+.contact-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 8px; align-items: center; }
 .contact-links a:not(.btn) { text-decoration: none; color: var(--accent); border-bottom: 1px solid transparent; }
 .contact-links a:not(.btn):hover { border-bottom-color: var(--accent); }
 
@@ -927,7 +923,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <p class="hero-receipts">
         <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46k+ lines</a><span class="sep">·</span><a href="holdfast.html">36/36 extraction accuracy</a>
       </p>
-      <p class="hero-receipts-note">Snapshot as of this build, pulled from the case studies — may drift as they update.</p>
+      <p class="hero-receipts-note">Pulled from the case studies; may drift as they update.</p>
     </div>
   </div>
 
@@ -1114,8 +1110,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="section-head reveal">
         <span class="eyebrow">Work</span>
         <h2>Everything I've shipped</h2>
-        <p class="work-intro" style="max-width:60ch">Four shipped projects below: an AI furniture widget for furniture retailers, a voice-note memory bot, a GitHub hygiene tool, and a puzzle game that proves its own rooms solvable before you ever press play. No team, no reviewers, so the interesting part of each one is usually the bug I found after I thought it was done.</p>
-        <p class="dim" style="max-width:60ch">Thirteen projects. Four have a full write-up, the rest are here because they're finished and real, not because every one needs a story.</p>
+        <p class="work-intro" style="max-width:60ch">Thirteen projects, four with a full write-up — the rest are finished and real, just without a story attached. No team or reviewers, so the interesting part is usually the bug I found after I thought it was done.</p>
       </div>
 
       <p class="work-row-label">Featured work</p>
@@ -1245,7 +1240,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="section-head reveal">
         <span class="eyebrow">Contact</span>
         <h2>Let's build<br>something.</h2>
-        <p style="font-size:1.05rem; max-width:52ch">If you're hiring, evaluating a project, or want to build something together, I'd love to hear from you.</p>
+        <p style="font-size:1.05rem; max-width:56ch">If you're hiring, evaluating a project, or want to build something together, I'd love to hear from you.</p>
       </div>
       <div class="contact-links reveal">
         <a href="mailto:marcosking1221@gmail.com" class="btn btn-primary">Email me</a>
