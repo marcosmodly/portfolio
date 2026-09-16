@@ -867,7 +867,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
             <li><a href="modlyai.html">ModlyAI</a></li>
             <li><a href="holdfast.html">Holdfast</a></li>
             <li><a href="github-repo-hygiene.html">hygiene-skill</a></li>
-            <li><a href="#cs-lighthouse">Lighthouse</a></li>
+            <li><a href="grandmas-lighthouse.html">Lighthouse</a></li>
           </ul>
         </div>
         <a href="#case-studies">Case Studies</a>
@@ -1178,7 +1178,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
           <div class="card-links">
             <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it</a>
-            <a href="#cs-lighthouse">Case study →</a>
+            <a href="grandmas-lighthouse.html">Case study →</a>
           </div>
         </article>
 
@@ -1277,113 +1277,16 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
           <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
-        <a class="cs-index-card" href="#cs-lighthouse" style="--i:3">
+        <a class="cs-index-card" href="grandmas-lighthouse.html" style="--i:3">
           <h3>Grandma's Lighthouse</h3>
           <p>A cozy color-restoration Sokoban puzzle game where rooms are proved solvable, not playtested.</p>
           <p class="cs-index-stat">5 rooms, 26 headless verification suites.</p>
           <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
-          <span class="cs-index-read">Read the case study &darr;</span>
+          <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
       </div>
     </div>
   </section>
-
-  <!-- ===== CASE STUDY: GRANDMA'S LIGHTHOUSE ===== -->
-  <article class="case-study" id="cs-lighthouse">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="kicker">Case study 04</div>
-        <h2>Grandma's Lighthouse</h2>
-        <div class="cs-links-row">
-          <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it &nearr;</a>
-          <a href="https://github.com/marcosmodly/grandmas-lighthouse" target="_blank" rel="noopener">Source &nearr;</a>
-        </div>
-        <p class="role-line">Solo, design, code, integration, release · Godot 4.3, GDScript · Shipped, playable in browser + Windows · <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">modsy.itch.io/grandmas-lighthouse</a></p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>No fail state, except the one hiding inside that rule</h3>
-        <p>The design has one hard constraint: no fail state. Nothing chases you, nothing is timed, you cannot lose. A second mechanic contradicts it: when an object reaches its home tile it's committed, it blocks like a wall and undo will not take it back. Rewind past the move that placed it and the player and all unplaced objects roll back while that one stays home. You can take back your steps, you cannot take back the warmth.</p>
-        <p>Making one class of move permanent introduces the possibility of a stranded room, an arrangement from which no sequence of moves and no amount of undo can reach a solution, a fail state wearing a disguise. It would be silent: no message, no death, just a dead room.</p>
-      </div>
-
-      <div class="cs-section cs-hardest reveal">
-        <h3>The centerpiece: rooms aren't playtested, they're proved</h3>
-        <p>The rooms aren't playtested for solvability, they're proved, in a headless test that runs on every change (<code>tests/puzzle_model.gd</code>). It reimplements the room rules on plain data: border walls, fixed furniture, one-tile pushes with no pulling, gates that latch open when the right object rests on the right cell. Each arrangement packs into a single integer (coordinates are 0-7, three bits each, player in bits 0-5, each pushable in the next six, each gate one bit above), so a state becomes a dictionary key with no allocation, which is what makes a millions-of-nodes search fast enough to run constantly. Breadth-first search, solved states absorbing, the first solved state found is also the shortest solution, which doubles as the room's difficulty measure. Across the five shipped rooms that shortest solution runs from <b>7 moves</b> (Entryway) to <b>49</b> (Her Study), with the Kitchen at 36 and the Lamp Room at 34, and the search touches between <b>329 and 639,681 distinct arrangements</b> per room, median <b>52,369</b>.</p>
-        <p class="dim" style="margin-bottom:8px">What that check prints for the Entryway, the smallest room:</p>
-        <pre>$ godot --headless --path . --script res://tests/verify_entryway.gd
-
-[ENTRYWAY]
-  object count           : 2
-  optimal solve length   : 7 moves
-  re-handling required   : no &mdash; every object is handled in one pass
-  reachable arrangements : 1783
-  deepest arrangement    : 28 moves from start
-  dead ends (fairness)   : 1062 of 1780 non-solved  (718 still solvable)
-  safe explore window    : 6 move(s) &mdash; shallowest dead end that far in
-  shortest path into it  : SSEEEE
-  ok   a solution exists from the start state
-  ok   replaying that solution lands every object home
-  ok   reset restores a solvable state (reset returns to the start)
-  ok   undo buffer (256) covers the deepest arrangement (28)
-  ok   no placement strands the room: all 4 reachable placements stay
-       solvable from the start layout &mdash; undo always recovers
-  ok   the open exit is reachable from the player in every solved state
-ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
-        <p class="dim" style="margin-top:8px">Real output from the headless run; the other four rooms print the same shape with bigger numbers.</p>
-        <p>It asserts two things and deliberately not a third: a solution exists from the start; undo and reset always land somewhere solvable (the hard one, every set of committed objects the player can reach must itself leave the room solvable from the start layout with those pre-placed, the analyzer enumerates those placements and checks each); <b>not</b> dead ends, wedging an object that isn't yet home is fair, undo takes it back, the player loses time, not the room. They're counted and reported, never failed on. The raw dead-end count is useless as a design signal because it explodes combinatorially the moment one crate is wedged, so <code>first_dead_end</code>, moves from the start to the shallowest dead end, is a fairness reading instead: how far a player explores before a wrong move costs them a rewind.</p>
-        <h4>Honest limits</h4>
-        <p>The search caps at 2,000,000 distinct arrangements. As the rooms are tuned today the biggest is the Lamp Room at <b>639,681</b> arrangements explored, comfortably inside the cap, but a denser 5-6 object room with an 80-move solution would blow past it, and the report is built for that: solved states sit shallow so solvability, the shortest solution, and per-object metrics stay exact; <code>max_depth</code> and dead-end counts degrade to lower bounds, and the report says so and downgrades the undo-buffer check to a warning rather than printing a number it can't stand behind. The undo history holds 256 moves, set above the deepest arrangement measured (<b>145</b>, in the Lamp Room). The whole five-room proof runs headless in about <b>35 seconds</b>, five engine boots and all.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>Color as an engineering problem, not an art one</h3>
-        <p>Grey means unfinished, color means done, so if an object can't be told from its floor the puzzle is unreadable, a palette authority file (<code>palette.gd</code>) enforces minimum luma gaps using Rec. 601 weighting: a floor and any pushable object on it must sit at least <b>0.24</b> apart in luma, with tighter gaps for furniture against walls and gates against floors. Two findings came from measuring rather than looking: Godot's <code>modulate</code> multiplies, so it can only ever darken, a grayscale floor at 0.515 tinted with a 0.773-luma warm lands at 0.398, below both inputs, and all 14 objects were failing the legibility gate on all six floors, fixed by lifting the grayscale plates so the product landed where the ladder expected. And objects looked wrong when floors were tiled, measuring found the tile border pixels reading 103 against an interior of 144, each tile shipped with its own drop shadow, printing a grid of dark seams the palette system couldn't see, the tiles had to be de-framed before the value ladder meant anything. With that tuning done, the shipped palette now clears every one of the <b>95 floor-object pairings</b> the gate checks (19 objects across 5 rooms), the tightest by just <b>0.04</b> luma.</p>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/glh-kitchen-midsolve.avif" type="image/avif">
-            <img src="assets/case-studies/glh-kitchen-midsolve.webp" width="1200" height="675" loading="lazy" decoding="async"
-                 alt="The Kitchen room part-solved: the chair and the tin canister sit on their home tiles in full colour while the kettle, the two cabinets, the cup and the side table are still grey, with two empty target markers waiting. Both states are on screen at once, which is what the luma gate has to keep legible.">
-          </picture>
-          <figcaption>The Kitchen mid-solve: two objects home and back in colour, the rest still grey on the same floor. This is the exact frame the palette gate exists for &mdash; every grey object still has to read against the boards, and every restored one against its neighbours.</figcaption>
-        </figure>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>What shipped</h3>
-        <p>Five rooms chaining door to door (Entryway, Half-Landing, Kitchen, Her Study, Lamp Room), a closing cinematic, a title screen that reflects a finished save, a pause menu, sound synthesized in code with no audio files. 26 headless verification suites. Web build (threaded, for browser audio) at <b>14&nbsp;MB</b> zipped, <b>40&nbsp;MB</b> unpacked with the Godot wasm runtime accounting for 33 of it, and a Windows build at <b>35&nbsp;MB</b> zipped.</p>
-        <div class="before-after">
-          <figure>
-            <picture>
-              <source srcset="assets/case-studies/glh-entryway-grey.avif" type="image/avif">
-              <img src="assets/case-studies/glh-entryway-grey.webp" width="1200" height="675" loading="lazy" decoding="async"
-                   alt="The Entryway room as the player finds it: every object and the floor drained to grey, with pale outlined squares marking the target tiles each object has to reach.">
-            </picture>
-            <figcaption>Unrestored</figcaption>
-          </figure>
-          <figure>
-            <picture>
-              <source srcset="assets/case-studies/glh-entryway-restored.avif" type="image/avif">
-              <img src="assets/case-studies/glh-entryway-restored.webp" width="1200" height="675" loading="lazy" decoding="async"
-                   alt="The same Entryway room once solved: every object home and back in full colour, the target markers gone, the exit door lit and open.">
-            </picture>
-            <figcaption>Restored</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>Art</h3>
-        <p>The character and object sprites are mine. The illustrated lighthouse exterior, used on the title screen and in the closing cinematic, is AI generated, and the itch.io page is tagged accordingly, I'm not claiming otherwise, the store page carries the disclosure and anyone can check. What I did do to all of it: every sprite gets alpha-weighted mean luma measured against the palette thresholds before it ships, the same gate the placeholder polygons had to pass, textures get no exemption.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>Closing</h3>
-        <p>A bug once survived a test written specifically to catch it: the test reached the state it wanted to inspect by calling a seek function, and that function re-ran the layout pass on every call, so the test path repaired the exact bug it was checking for and reported green while the real thing was broken on screen. A test that reaches the state by a different path than production is testing a different program. The same week, twenty minutes of actually playing surfaced a dead end that 24 passing suites walked straight past.</p>
-      </div>
-    </div>
-  </article>
 
   <!-- ============ CONTACT ============ -->
   <section id="contact">
