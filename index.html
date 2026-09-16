@@ -865,7 +865,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </a>
           <ul class="nav-dropdown-menu" aria-label="Case studies">
             <li><a href="modlyai.html">ModlyAI</a></li>
-            <li><a href="#cs-holdfast">Holdfast</a></li>
+            <li><a href="holdfast.html">Holdfast</a></li>
             <li><a href="#cs-hygiene">hygiene-skill</a></li>
             <li><a href="#cs-lighthouse">Lighthouse</a></li>
           </ul>
@@ -942,7 +942,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <div class="receipts-band">
     <div class="wrap-wide">
       <p class="hero-receipts reveal">
-        <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46,710 lines</a><span class="sep">·</span><a href="#cs-holdfast">36/36 extraction accuracy</a><span class="sep">·</span><a href="modlyai.html">0 tests</a><span class="sep">·</span><a href="modlyai.html">0 customers</a>
+        <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46,710 lines</a><span class="sep">·</span><a href="holdfast.html">36/36 extraction accuracy</a><span class="sep">·</span><a href="modlyai.html">0 tests</a><span class="sep">·</span><a href="modlyai.html">0 customers</a>
         <span class="hero-receipts-note">Snapshot as of this build — pulled from the case studies below, may drift as they update.</span>
       </p>
     </div>
@@ -1156,7 +1156,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="card-links">
             <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site</a>
             <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">GitHub</a>
-            <a href="#cs-holdfast">Case study →</a>
+            <a href="holdfast.html">Case study →</a>
           </div>
         </article>
 
@@ -1263,12 +1263,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">InstantDB</span><span class="tag">Paddle</span></div>
           <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
-        <a class="cs-index-card" href="#cs-holdfast" style="--i:1">
+        <a class="cs-index-card" href="holdfast.html" style="--i:1">
           <h3>Holdfast</h3>
           <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on.</p>
           <p class="cs-index-stat">0 reminders acted on.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
-          <span class="cs-index-read">Read the case study &darr;</span>
+          <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
         <a class="cs-index-card" href="#cs-hygiene" style="--i:2">
           <h3>github-repo-hygiene-skill</h3>
@@ -1287,120 +1287,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
     </div>
   </section>
-
-  <!-- ===== CASE STUDY: HOLDFAST ===== -->
-  <article class="case-study" id="cs-holdfast">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="kicker">Case study 02</div>
-        <h2>Holdfast</h2>
-        <div class="cs-links-row">
-          <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site &nearr;</a>
-          <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">Source &nearr;</a>
-        </div>
-        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a></p>
-        <p class="dim" style="max-width:60ch">Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>01 / Problem: nobody decides to lose a friend</h3>
-        <p>There's no fight and no last conversation. There's a gap that quietly gets too wide to text across, and by the time you notice it, reaching out feels like an event rather than a message. The failure isn't that people stop caring, it's that the details fall out of your head between one meeting and the next.</p>
-        <div class="stat-row">
-          <div class="stat"><b>3% → 12%</b>Americans reporting no close friends, 1990 vs. 2021 <span class="dim">(Survey Center on American Life, May 2021)</span></div>
-          <div class="stat"><b>~200 hrs</b>shared time before an acquaintance becomes a close friend <span class="dim">(Hall, 2019)</span></div>
-        </div>
-        <p>Every product built at this problem so far has been a contact manager with softer language. They fail for the same reason: keeping a list of your friends up to date is work, and nobody does unpaid data entry about the people they love. So the design constraint came first: there must be nothing to maintain, and nothing to open.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>02 / Mechanism: twenty seconds in, one message out</h3>
-        <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio, text is stored, voice never is. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
-        <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send at most one, hard cap of three messages per person per rolling seven days, over-nudging is the failure mode that kills this category. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/holdfast-anne.avif" type="image/avif">
-            <img src="assets/case-studies/holdfast-anne.webp" width="1074" height="564" loading="lazy" decoding="async"
-                 alt="A chat thread: a 5-second voice note sent to the bot, then two reminder messages back. The first, hours later: 'Anne: tired for work. Anne: you said you'd check on her.' The second, that afternoon: 'Anne: you said you'd check on her. Still worth doing?'">
-          </picture>
-          <figcaption>The whole interface. A voice note in, and later that day the one reminder it produced, then the single follow-up nudge when nothing came back. "tired for work" is the extraction reading the transcript a little too literally.</figcaption>
-        </figure>
-        <p>Measured over a dozen captures, that pipeline runs in about <b>2.6&nbsp;s at the median</b> and <b>4.2&nbsp;s at worst</b> from voice note to scheduled reminder (the final database write not counted): transcription <b>~1.1&nbsp;s</b>, extraction <b>~1.5&nbsp;s</b>, and the in-code date resolver <b>~1&nbsp;µs</b>, which is the entire reason the arithmetic lives in TypeScript and not the prompt. The transcription figure is a synthesized clip rather than a real voice note, so it reflects upload and model time on clean audio, not a phone recording in a noisy room. Each capture is roughly <b>1,200 tokens</b> through gpt-4o-mini, about <b>1,120</b> of them the fixed system prompt, so extraction costs on the order of <b>$0.0002</b> and the whole capture stays under a tenth of a cent at list price.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>03 / Trace: one capture, all the way through</h3>
-        <p class="dim">A real record from the production database.</p>
-        <div class="trace-steps">
-          <div class="trace-step">
-            <div class="trace-label">Voice note</div>
-            <p>"Coffee with Marco this afternoon. His mom's out of the hospital and doing okay. He's got a final interview on the 28th and he's nervous about it. I told him I'd send him the recruiter's number this week."</p>
-          </div>
-          <div class="trace-step">
-            <div class="trace-label">Extracted</div>
-            <p>Person: Marco · fact: mom out of hospital, recovering (no date) · fact: final interview, nervous, 2026-08-28 · commitment: send over the recruiter's number, due 2026-08-24 · evidence: "I told him I'd send him the recruiter's number."</p>
-          </div>
-          <div class="trace-step">
-            <div class="trace-label">Delivered, four days later</div>
-            <p>"Marco: you said you'd send over the recruiter's number. Still worth doing?"</p>
-          </div>
-        </div>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/holdfast-marco.avif" type="image/avif">
-            <img src="assets/case-studies/holdfast-marco.webp" width="1074" height="745" loading="lazy" decoding="async"
-                 alt="The same capture in the chat thread: a 16-second voice note in, then the reminder listing the facts it pulled out (mom out of hospital, final interview on the 28th, nervous) and the commitment (send him the recruiter's number), then a follow-up. Two rough edges are visible: a stray 'okay., He's' where two sentences ran together, and 'you said you'd I'd send him' where the template doubled a pronoun.">
-          </picture>
-          <figcaption>That trace as it actually landed in the thread. The clean version above is the record; this is the message a real person received, doubled pronoun and run-on punctuation included.</figcaption>
-        </figure>
-
-        <p style="margin-top:20px">Note what's not in the record: Marco said nothing about what he'd do, so nothing was stored as a commitment for him. The interview date resolved without the model doing arithmetic. The reminder names Marco because the message template knows the person even though the stored text doesn't.</p>
-      </div>
-
-      <div class="cs-section cs-hardest reveal">
-        <h3>04 / Hard part: making a model trustworthy enough to hold someone's promises</h3>
-        <p>A wrong reminder is worse than no reminder. The extraction prompt was the highest-stakes string in the codebase, so the fix started with measurement: twelve real transcripts with exact expected output, run three times each against every prompt version, fixed reference date so results were comparable. Three failures survived every rewrite, each one the model being asked to do something it's bad at.</p>
-        <table class="compare">
-          <thead><tr><th>Failure</th><th>Tried</th><th>Actually fixed by</th></tr></thead>
-          <tbody>
-            <tr><td>"Thursday" resolved to a Monday</td><td>Stating today's date + a lookup table in the prompt</td><td>A pure date resolver in TypeScript</td></tr>
-            <tr><td>Commitments nobody made</td><td>An explicit rule, then a stronger rule with examples</td><td>Checking a verbatim quote against the transcript</td></tr>
-            <tr><td>Person's name dropped from the reminder</td><td>A rule requiring substitution</td><td>The message template, which already knew it</td></tr>
-          </tbody>
-        </table>
-        <p>The date lookup table is worth dwelling on: giving the model a table of all seven weekdays worked because seven is a closed set, every possible answer was there to copy. Extending the same idea to ordinals failed badly. With two worked examples and no entry for "the 14th," the model copied the nearest example date wholesale and returned the 28th. Demonstration is not lookup. Moving the arithmetic into code fixed it permanently and had a second effect: date behavior became testable in milliseconds with no API call, freeing the twelve slow, non-deterministic cases to test only what the model is genuinely good at, reading what a person said. The resolver has <b>8 rules</b> (weekday, weekday-plus-time, ordinal, "this weekend", "next week", today/tomorrow, an explicit date, and refuse) and the <b>23 tests</b> cover them across <b>14 groups</b>, including the boundaries that bite: an ordinal that lands on the capture day, a weekday that <i>is</i> today rolling a full week out, an ordinal crossing the December year line, and four vague phrasings that must return null rather than guess.</p>
-        <div class="stat-row">
-          <div class="stat"><b>24 / 36</b>first prompt version</div>
-          <div class="stat"><b>36 / 36</b>after logic moved into code</div>
-        </div>
-        <h4>The bug that hid for eleven captures</h4>
-        <p>The database showed eleven captures. One had a linked person and facts, the other ten had stored nothing, commitments table completely empty. The bot had replied convincingly to every one. One line was the cause: profile creation was gated on whether the person was new.</p>
-        <pre>if (existingPersonId === null) {
-  chunks.push(
-    db.tx.profiles[profileId].create({ ... }),   // already exists
-    db.tx.people[personId].create({ ... }),
-  );
-}</pre>
-        <p>The first time a returning user mentioned a new person, that re-created a profile that already existed. The chat id column is unique, the database rejected the step, and because it was one atomic transaction, the person, facts, and commitments went down with it. Two changes came out of it: the reply now reports what was saved rather than what was extracted, and a rule went into the project notes, a function named <code>findOrCreate</code> must actually create, this one only found.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>05 / Result: it works, and I stopped using it after two days</h3>
-        <div class="stat-row">
-          <div class="stat"><b>36/36</b>extraction suite, 3 trials</div>
-          <div class="stat"><b>23</b>date-resolution unit tests, no API calls</div>
-          <div class="stat"><b>6</b>captures recorded</div>
-          <div class="stat"><b>5</b>reminders delivered</div>
-          <div class="stat"><b>0</b>reminders acted on</div>
-          <div class="stat"><b>2 days</b>first capture to last</div>
-        </div>
-        <p>That last row is the finding, worth more than the passing tests. Working alone, in a normal week there are perhaps two moments seeing someone worth recording, Holdfast needs someone who has five or six. I built a product I'm not the user of, and then used myself to test it. The reminders that did arrive felt hollow, several were about example transcripts written during development rather than real promises to real people. Neither of those is a reason to stop, both are reasons to stop testing it on myself.</p>
-        <p>What happens next: five testers chosen for one property only, they see a lot of people, two weeks. The measure is their capture counts in the database, not their opinions in a chat. Nothing new gets built until those numbers exist.</p>
-        <p class="closing-line">I built a product I am not the user of, and then used myself to test it.</p>
-      </div>
-    </div>
-  </article>
 
   <!-- ===== CASE STUDY: GITHUB REPO HYGIENE ===== -->
   <article class="case-study" id="cs-hygiene">
