@@ -560,7 +560,7 @@ html[data-theme="dark"] .hero-headshot-img {
   .hero-headshot-img { animation: none; }
 }
 @media (min-width: 1024px) {
-  .hero-headshot-img { width: clamp(430px, 34vw, 600px); }
+  .hero-headshot-img { width: clamp(450px, 36vw, 630px); }
 }
 
 /* mobile: portrait cropped to a fixed-height frame rather than scaled by
@@ -574,6 +574,7 @@ html[data-theme="dark"] .hero-headshot-img {
 
 /* ---------- receipts band: first thing after the hero ---------- */
 .receipts-band { padding: 28px 0; border-bottom: 1px solid var(--border); }
+.receipts-band .eyebrow { margin-bottom: 10px; }
 .hero-receipts {
   font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim);
   margin: 0; display: flex; flex-wrap: wrap; gap: 6px 0; align-items: baseline;
@@ -581,7 +582,7 @@ html[data-theme="dark"] .hero-headshot-img {
 .hero-receipts a { color: var(--text-dim); text-decoration: none; border-bottom: 1px dotted var(--text-dim); }
 .hero-receipts a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .hero-receipts .sep { margin: 0 8px; opacity: 0.5; }
-.hero-receipts-note { display: block; flex: 0 0 100%; font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin-top: 4px; }
+.hero-receipts-note { font-size: 0.7rem; color: var(--text-dim); opacity: 0.7; margin: 6px 0 0; }
 
 /* ---------- about photo: solid circle behind, full-opacity photo on top ----------
    about-headshot.webp is already square with headroom baked in, so it's
@@ -662,7 +663,7 @@ section.tight { padding: 56px 0; }
    which is what made the duplicated loop set visible on screen at once.
    Row two (ten "daily tools", no single project to point at) has enough
    items to loop properly, so it stays a marquee. ---------- */
-.stack-row-label {
+.stack-row-label, .work-row-label {
   font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
   color: var(--text-dim); margin: 0 0 10px; padding-left: 4px;
 }
@@ -730,6 +731,8 @@ section.tight { padding: 56px 0; }
 }
 .card:hover { transform: translateY(-4px); border-color: var(--accent); }
 .card h3 { font-size: 1.05rem; margin-bottom: 0; font-family: var(--sans); }
+.card.is-featured { padding: 26px; }
+.card.is-featured h3 { font-size: 1.2rem; }
 .card p { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 4px; flex-grow: 1; }
 .card .card-stat { color: var(--text); font-weight: 600; flex-grow: 0; }
 .card .tag-row { margin-top: 2px; }
@@ -802,15 +805,12 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .closing-line { font-family: var(--serif); font-size: 1.2rem; font-style: italic; max-width: 60ch; margin-top: 24px; }
 
 /* contact */
-.contact-box {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
-  padding: 48px; text-align: left; box-shadow: var(--shadow);
-}
-.contact-links { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }
-.contact-links a { text-decoration: none; font-size: 1rem; padding-bottom: 2px; border-bottom: 1px solid var(--border); }
-.contact-links a:hover { border-bottom-color: var(--accent); }
+#contact .section-head h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+.contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; align-items: center; }
+.contact-links a:not(.btn) { text-decoration: none; color: var(--accent); border-bottom: 1px solid transparent; }
+.contact-links a:not(.btn):hover { border-bottom-color: var(--accent); }
 
-footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border); }
 
 /* one rule, every link that reads like a nav/action item gets a real 44px tap target */
 .card-links a, .contact-links a, .cs-links-row a {
@@ -922,11 +922,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   <div id="navSentinel" aria-hidden="true" style="height:0;"></div>
 
   <div class="receipts-band">
-    <div class="wrap-wide">
-      <p class="hero-receipts reveal">
-        <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46,710 lines</a><span class="sep">·</span><a href="holdfast.html">36/36 extraction accuracy</a><span class="sep">·</span><a href="modlyai.html">0 tests</a><span class="sep">·</span><a href="modlyai.html">0 customers</a>
-        <span class="hero-receipts-note">Snapshot as of this build — pulled from the case studies, may drift as they update.</span>
+    <div class="wrap-wide reveal">
+      <span class="eyebrow">Build snapshot</span>
+      <p class="hero-receipts">
+        <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46k+ lines</a><span class="sep">·</span><a href="holdfast.html">36/36 extraction accuracy</a>
       </p>
+      <p class="hero-receipts-note">Snapshot as of this build, pulled from the case studies — may drift as they update.</p>
     </div>
   </div>
 
@@ -1117,8 +1118,9 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p class="dim" style="max-width:60ch">Thirteen projects. Four have a full write-up, the rest are here because they're finished and real, not because every one needs a story.</p>
       </div>
 
+      <p class="work-row-label">Featured work</p>
       <div class="project-grid reveal stagger">
-        <article class="card is-case" style="--i:0">
+        <article class="card is-case is-featured" style="--i:0">
           <span class="case-flag">Case study</span>
           <h3>ModlyAI</h3>
           <p>Embeddable widget that puts a piece of furniture in a shopper's own room photo, at the correct scale, plus a merchant dashboard. Sold to independent furniture retailers.</p>
@@ -1131,7 +1133,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </div>
         </article>
 
-        <article class="card is-case" style="--i:1">
+        <article class="card is-case is-featured" style="--i:1">
           <span class="case-flag">Case study</span>
           <h3>Holdfast</h3>
           <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on, on the day it matters. No app to open.</p>
@@ -1144,7 +1146,22 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </div>
         </article>
 
-        <article class="card is-case" style="--i:2">
+        <article class="card is-case is-featured" style="--i:2">
+          <span class="case-flag">Case study</span>
+          <h3>Grandma's Lighthouse</h3>
+          <p>A cozy color-restoration Sokoban puzzle game. No fail state is possible, except the one the design quietly introduces on purpose.</p>
+          <p class="card-stat">5 rooms, 26 headless verification suites.</p>
+          <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
+          <div class="card-links">
+            <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it</a>
+            <a href="grandmas-lighthouse.html">Case study →</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="work-row-label" style="margin-top:48px">Other builds</p>
+      <div class="project-grid reveal stagger">
+        <article class="card is-case" style="--i:0">
           <span class="case-flag">Case study</span>
           <h3>github-repo-hygiene-skill</h3>
           <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or a README that's still scaffold text, then fixes what you approve.</p>
@@ -1156,75 +1173,63 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </div>
         </article>
 
-        <article class="card is-case" style="--i:3">
-          <span class="case-flag">Case study</span>
-          <h3>Grandma's Lighthouse</h3>
-          <p>A cozy color-restoration Sokoban puzzle game. No fail state is possible, except the one the design quietly introduces on purpose.</p>
-          <p class="card-stat">5 rooms, 26 headless verification suites.</p>
-          <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
-          <div class="card-links">
-            <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it</a>
-            <a href="grandmas-lighthouse.html">Case study →</a>
-          </div>
-        </article>
-
-        <article class="card" style="--i:4">
+        <article class="card" style="--i:1">
           <h3>AI Website Audit</h3>
           <p>Audits a site for performance, SEO, accessibility, UX, and broken links, and reports the findings.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Lighthouse</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/ai-website-audit" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:5">
+        <article class="card" style="--i:2">
           <h3>Freelancer Proposal Generator</h3>
           <p>Converts a job listing into a tailored proposal: relevant skills, suggested pricing, and red flags in the listing itself.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">OpenAI</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/freelancer-proposal-generator" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:6">
+        <article class="card" style="--i:3">
           <h3>PDF to Structured Data</h3>
           <p>Upload a PDF, get the sections and tables out of it as structured data, tailored to what the document actually contains.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Data extraction</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/pdf-to-structured-data" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:7">
+        <article class="card" style="--i:4">
           <h3>SaaS Analytics Dashboard</h3>
           <p>Self-hosted, multi-tenant analytics platform: a tracking script plus a dashboard of visitor statistics, no third party involved.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">SQLite</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/saas-analytics-dashboard" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:8">
+        <article class="card" style="--i:5">
           <h3>AI Interior Design Assistant</h3>
           <p>Upload a room photo and a style, get back a concept, a color palette, and furniture suggestions for that specific room.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Computer vision</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/ai-interior-design-assistant" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:9">
+        <article class="card" style="--i:6">
           <h3>Client Brief Generator</h3>
           <p>Turns a filled-out client questionnaire into a structured project brief: goals, scope, and timeline, ready to send.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">DOCX export</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/client-brief-generator" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:10">
+        <article class="card" style="--i:7">
           <h3>What Should I Build?</h3>
           <p>Generates specific, buildable project ideas from your skill level, stack, interests, and goals, not generic suggestions.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">TypeScript</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/what-should-i-build" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:11">
+        <article class="card" style="--i:8">
           <h3>Screenshot to Website</h3>
           <p>Upload a screenshot of a website, get back a responsive HTML and Tailwind reconstruction of it.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Computer vision</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/screenshot-to-website" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:12">
+        <article class="card" style="--i:9">
           <h3>skillsmith</h3>
           <p>Turns anything into a Claude Skill: an interview-driven generator that drafts, validates, and packages it.</p>
           <div class="tag-row"><span class="tag">TypeScript</span><span class="tag">CLI</span></div>
@@ -1239,15 +1244,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Contact</span>
-        <h2>Get in touch</h2>
+        <h2>Let's build<br>something.</h2>
+        <p style="font-size:1.05rem; max-width:52ch">If you're hiring, evaluating a project, or want to build something together, I'd love to hear from you.</p>
       </div>
-      <div class="contact-box reveal">
-        <p style="font-size:1.05rem; max-width:56ch">If you're hiring, evaluating one of these for a pilot, or just want to poke at something above, email is the fastest way to reach me.</p>
-        <div class="contact-links">
-          <a href="mailto:marcosking1221@gmail.com">marcosking1221@gmail.com</a>
-          <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">GitHub</a>
-          <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        </div>
+      <div class="contact-links reveal">
+        <a href="mailto:marcosking1221@gmail.com" class="btn btn-primary">Email me</a>
+        <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">GitHub</a>
+        <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
   </section>
@@ -1255,7 +1258,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 </main>
 
 <footer class="site">
-  <p>King Joshua Marcos · built as static HTML files, no framework, no build step.</p>
+  <p>King Joshua Marcos · Built from scratch with HTML, CSS &amp; JavaScript.</p>
 </footer>
 
 <script>
