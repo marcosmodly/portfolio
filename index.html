@@ -866,7 +866,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <ul class="nav-dropdown-menu" aria-label="Case studies">
             <li><a href="modlyai.html">ModlyAI</a></li>
             <li><a href="holdfast.html">Holdfast</a></li>
-            <li><a href="#cs-hygiene">hygiene-skill</a></li>
+            <li><a href="github-repo-hygiene.html">hygiene-skill</a></li>
             <li><a href="#cs-lighthouse">Lighthouse</a></li>
           </ul>
         </div>
@@ -984,7 +984,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <svg class="tool-icon scene-night-only" viewBox="0 0 560 360" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M80,0 L480,0 L480,200 L560,200 L560,240 L480,240 L480,280 L440,280 L440,360 L400,360 L400,280 L360,280 L360,360 L320,360 L320,280 L240,280 L240,360 L200,360 L200,280 L160,280 L160,360 L120,360 L120,280 L80,280 L80,240 L0,240 L0,200 L80,200 Z M160,60 L200,60 L200,140 L160,140 Z M360,60 L400,60 L400,140 L360,140 Z"/></svg>
           <svg class="tool-icon tool-icon-brand scene-day-only" viewBox="0 0 560 360" aria-hidden="true" focusable="false"><path fill="#D97757" fill-rule="evenodd" d="M80,0 L480,0 L480,200 L560,200 L560,240 L480,240 L480,280 L440,280 L440,360 L400,360 L400,280 L360,280 L360,360 L320,360 L320,280 L240,280 L240,360 L200,360 L200,280 L160,280 L160,360 L120,360 L120,280 L80,280 L80,240 L0,240 L0,200 L80,200 Z M160,60 L200,60 L200,140 L160,140 Z M360,60 L400,60 L400,140 L360,140 Z"/></svg>
           <span class="tool-name">Claude Code</span>
-          <span class="stack-card-caption">Ships the github-repo-hygiene-skill as a Claude Code skill. <a href="#cs-hygiene">See the case study &rarr;</a></span>
+          <span class="stack-card-caption">Ships the github-repo-hygiene-skill as a Claude Code skill. <a href="github-repo-hygiene.html">See the case study &rarr;</a></span>
         </div>
         <div class="stack-card" title="Next.js">
           <svg class="tool-icon scene-night-only" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>
@@ -1167,7 +1167,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
           <div class="card-links">
             <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">GitHub</a>
-            <a href="#cs-hygiene">Case study →</a>
+            <a href="github-repo-hygiene.html">Case study →</a>
           </div>
         </article>
 
@@ -1270,12 +1270,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
           <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
-        <a class="cs-index-card" href="#cs-hygiene" style="--i:2">
+        <a class="cs-index-card" href="github-repo-hygiene.html" style="--i:2">
           <h3>github-repo-hygiene-skill</h3>
           <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or scaffold-text README.</p>
           <p class="cs-index-stat">16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
           <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
-          <span class="cs-index-read">Read the case study &darr;</span>
+          <span class="cs-index-read">Read the case study &rarr;</span>
         </a>
         <a class="cs-index-card" href="#cs-lighthouse" style="--i:3">
           <h3>Grandma's Lighthouse</h3>
@@ -1287,78 +1287,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
     </div>
   </section>
-
-  <!-- ===== CASE STUDY: GITHUB REPO HYGIENE ===== -->
-  <article class="case-study" id="cs-hygiene">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="kicker">Case study 03</div>
-        <h2>github-repo-hygiene-skill</h2>
-        <div class="cs-links-row">
-          <span class="cs-links-note">No live demo &mdash; ships as a Claude Code skill, not a hosted site.</span>
-          <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">Source &nearr;</a>
-        </div>
-        <p class="role-line">Solo · Ships as a Claude Code skill · <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github.com/marcosmodly/github-repo-hygiene-skill</a></p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>The problem</h3>
-        <p>A repo with no description, no topics, no license, and a README that still says "This project was bootstrapped with create-next-app" reads as abandoned, even when the code behind it is solid. Nobody does this on purpose, it's just the stuff that's easy to forget once the thing works. Anyone vetting a developer, a recruiter, a client, another dev checking your work, starts on GitHub, and a sparse profile costs you before they've read a line of code.</p>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/gh-repo-bare.avif" type="image/avif">
-            <img src="assets/case-studies/gh-repo-bare.webp" width="1200" height="675" loading="lazy" decoding="async"
-                 alt="The GitHub page for marcosmodly/grandmas-lighthouse. The About sidebar reads 'No description, website, or topics provided.', there is no license shown, and no topic tags, even though the file list shows an active project with 24 commits.">
-          </picture>
-          <figcaption>One of my own repos the audit flags: real project, 24&nbsp;commits, and an About box that says "No description, website, or topics provided." This is the state that reads as abandoned.</figcaption>
-        </figure>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>What it audits and fixes</h3>
-        <p>It checks every repo (or a specific one) for five things: missing description, missing topics, no license, no README, and a README that's still unedited scaffold text (<code>create-next-app</code>, <code>create-react-app</code>, and similar). The audit is read-only and reports findings before touching anything, grouped as clean repos, small gaps, and real problems. Nothing gets written without you seeing it and approving it first, a wrong or invented project description is worse than no description at all since it's your public profile. For anything it does fix, it reads the actual code first (<code>package.json</code>, existing docs, source files) rather than guessing, then writes descriptions and topics with <code>gh repo edit</code>, and rewrites thin READMEs through a real clone, commit, and push.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>I ran it across my own account</h3>
-        <p>Dogfooding is the honest test, so I ran it across <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">my own GitHub</a>, all <b>16 public repos</b>. The first pass flagged <b>10 issues</b> across 6 repos, but 2 of those were the audit marking my profile README repo (<code>marcosmodly/marcosmodly</code>) for having no topics and no license, which is exactly how a profile repo is meant to look. That's a bug in the tool, not my profile, so I added a rule that recognises the profile repo and skips those two checks for it, then re-ran. The real result: <b>11 clean</b>, <b>5 with a genuine gap</b>, <b>8 issues</b>, all metadata: <b>4 repos with no license</b>, <b>2 missing topics</b>, <b>2 with no description</b>. Nothing was missing a README or still carrying scaffold text, so two of the five checks found zero. Of the 8, the skill can set <b>2</b> itself, the missing topics, inferred from each repo's own code, and holds <b>6</b> back for me to approve, the descriptions and the license choices, because a tool guessing either of those on your public profile is worse than the gap it's filling. The full sweep, two GitHub API calls per repo, runs in about <b>40 seconds</b>.</p>
-        <p class="dim" style="margin-bottom:8px">The scan is read-only and prints one JSON object per repo. The five that came back with something to fix:</p>
-        <pre>$ ./audit_repos.sh marcosmodly
-
-{"repo": "marcosmodly/grandmas-lighthouse", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set", "no license"], "clean": false}
-{"repo": "marcosmodly/portfolio", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": "MIT", "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set"], "clean": false}
-{"repo": "marcosmodly/holdfast", "is_fork": false, "is_profile_repo": false, "description": "Voice-first memory for the people you care about...", "topic_count": 6, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
-{"repo": "marcosmodly/modlyai", "is_fork": false, "is_profile_repo": false, "description": "AI-powered furniture recommendation and customization platform...", "topic_count": 7, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
-{"repo": "marcosmodly/second-brain-ai", "is_fork": false, "is_profile_repo": false, "description": "A personal knowledge base for developers...", "topic_count": 10, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
-
-# ...11 more lines, all "clean": true, including marcosmodly/marcosmodly
-#    ("is_profile_repo": true -> topics and license checks skipped)
-16 repos audited: 11 clean, 5 with a gap, 8 issues
-   4 x no license   2 x no description set   2 x no topics set</pre>
-        <p class="dim" style="margin-top:8px">Real output. Descriptions truncated here for width; the script prints them in full.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>Ships as a reusable Claude Code skill</h3>
-        <p>It's not a one-off script, it's a Claude Code skill: a <code>SKILL.md</code> with the audit/report/fix workflow plus a bash script (<code>audit_repos.sh</code>) that does the actual read-only scan against the GitHub API. Drop it into a Claude Code skills directory and it activates on its own whenever someone asks to clean up their GitHub, audit a repo, or mentions their profile looking sparse or unfinished, no need to name it directly.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>Published as its own repo</h3>
-        <p><a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github-repo-hygiene-skill</a>, MIT licensed, real README, topics set, the works, which is a little bit the joke: the tool that fixes exactly this problem doesn't have this problem itself.</p>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/gh-repo-done.avif" type="image/avif">
-            <img src="assets/case-studies/gh-repo-done.webp" width="1200" height="675" loading="lazy" decoding="async"
-                 alt="The GitHub page for marcosmodly/github-repo-hygiene-skill. The About sidebar carries a full description, six topic tags (claude, claude-code, claude-skill, cli, developer-tools, github-automation), an MIT licence, and a written-out README, none of the gaps the skill looks for.">
-          </picture>
-          <figcaption>The skill's own repo: description, topics, licence, a real README. Nothing here for the audit to say &mdash; which is the point of running it.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </article>
 
   <!-- ===== CASE STUDY: GRANDMA'S LIGHTHOUSE ===== -->
   <article class="case-study" id="cs-lighthouse">

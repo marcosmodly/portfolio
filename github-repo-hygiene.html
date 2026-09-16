@@ -9,9 +9,9 @@
     document.documentElement.classList.remove('js-reveal');
   }, 2500);
 </script>
-<title>Holdfast — King Joshua Marcos</title>
-<meta name="description" content="Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.">
-<link rel="canonical" href="https://marcosmodly.github.io/portfolio/holdfast.html">
+<title>github-repo-hygiene-skill — King Joshua Marcos</title>
+<meta name="description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
+<link rel="canonical" href="https://marcosmodly.github.io/portfolio/github-repo-hygiene.html">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -20,15 +20,15 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-700.woff2" crossorigin>
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://marcosmodly.github.io/portfolio/holdfast.html">
-<meta property="og:title" content="Holdfast — King Joshua Marcos">
-<meta property="og:description" content="Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.">
+<meta property="og:url" content="https://marcosmodly.github.io/portfolio/github-repo-hygiene.html">
+<meta property="og:title" content="github-repo-hygiene-skill — King Joshua Marcos">
+<meta property="og:description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
 <meta property="og:image" content="https://marcosmodly.github.io/portfolio/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Holdfast — King Joshua Marcos">
-<meta name="twitter:description" content="Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.">
+<meta name="twitter:title" content="github-repo-hygiene-skill — King Joshua Marcos">
+<meta name="twitter:description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
 <meta name="twitter:image" content="https://marcosmodly.github.io/portfolio/assets/og-image.png">
 <script>
 (function () {
@@ -855,8 +855,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </a>
           <ul class="nav-dropdown-menu" aria-label="Case studies">
             <li><a href="modlyai.html">ModlyAI</a></li>
-            <li><a href="#cs-holdfast">Holdfast</a></li>
-            <li><a href="github-repo-hygiene.html">hygiene-skill</a></li>
+            <li><a href="holdfast.html">Holdfast</a></li>
+            <li><a href="#cs-hygiene">hygiene-skill</a></li>
             <li><a href="index.html#cs-lighthouse">Lighthouse</a></li>
           </ul>
         </div>
@@ -902,116 +902,74 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 
   <div id="navSentinel" aria-hidden="true" style="height:0;"></div>
 
-  <!-- ===== CASE STUDY: HOLDFAST ===== -->
-  <article class="case-study" id="cs-holdfast">
+  <!-- ===== CASE STUDY: GITHUB REPO HYGIENE ===== -->
+  <article class="case-study" id="cs-hygiene">
     <div class="wrap">
       <div class="reveal">
-        <div class="kicker">Case study 02</div>
-        <h2>Holdfast</h2>
+        <div class="kicker">Case study 03</div>
+        <h2>github-repo-hygiene-skill</h2>
         <div class="cs-links-row">
-          <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site &nearr;</a>
-          <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">Source &nearr;</a>
+          <span class="cs-links-note">No live demo &mdash; ships as a Claude Code skill, not a hosted site.</span>
+          <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
-        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a></p>
-        <p class="dim" style="max-width:60ch">Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.</p>
+        <p class="role-line">Solo · Ships as a Claude Code skill · <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github.com/marcosmodly/github-repo-hygiene-skill</a></p>
       </div>
 
       <div class="cs-section reveal">
-        <h3>01 / Problem: nobody decides to lose a friend</h3>
-        <p>There's no fight and no last conversation. There's a gap that quietly gets too wide to text across, and by the time you notice it, reaching out feels like an event rather than a message. The failure isn't that people stop caring, it's that the details fall out of your head between one meeting and the next.</p>
-        <div class="stat-row">
-          <div class="stat"><b>3% → 12%</b>Americans reporting no close friends, 1990 vs. 2021 <span class="dim">(Survey Center on American Life, May 2021)</span></div>
-          <div class="stat"><b>~200 hrs</b>shared time before an acquaintance becomes a close friend <span class="dim">(Hall, 2019)</span></div>
-        </div>
-        <p>Every product built at this problem so far has been a contact manager with softer language. They fail for the same reason: keeping a list of your friends up to date is work, and nobody does unpaid data entry about the people they love. So the design constraint came first: there must be nothing to maintain, and nothing to open.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>02 / Mechanism: twenty seconds in, one message out</h3>
-        <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio, text is stored, voice never is. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
-        <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send at most one, hard cap of three messages per person per rolling seven days, over-nudging is the failure mode that kills this category. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
+        <h3>The problem</h3>
+        <p>A repo with no description, no topics, no license, and a README that still says "This project was bootstrapped with create-next-app" reads as abandoned, even when the code behind it is solid. Nobody does this on purpose, it's just the stuff that's easy to forget once the thing works. Anyone vetting a developer, a recruiter, a client, another dev checking your work, starts on GitHub, and a sparse profile costs you before they've read a line of code.</p>
 
         <figure class="cs-figure reveal">
           <picture>
-            <source srcset="assets/case-studies/holdfast-anne.avif" type="image/avif">
-            <img src="assets/case-studies/holdfast-anne.webp" width="1074" height="564" loading="lazy" decoding="async"
-                 alt="A chat thread: a 5-second voice note sent to the bot, then two reminder messages back. The first, hours later: 'Anne: tired for work. Anne: you said you'd check on her.' The second, that afternoon: 'Anne: you said you'd check on her. Still worth doing?'">
+            <source srcset="assets/case-studies/gh-repo-bare.avif" type="image/avif">
+            <img src="assets/case-studies/gh-repo-bare.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The GitHub page for marcosmodly/grandmas-lighthouse. The About sidebar reads 'No description, website, or topics provided.', there is no license shown, and no topic tags, even though the file list shows an active project with 24 commits.">
           </picture>
-          <figcaption>The whole interface. A voice note in, and later that day the one reminder it produced, then the single follow-up nudge when nothing came back. "tired for work" is the extraction reading the transcript a little too literally.</figcaption>
+          <figcaption>One of my own repos the audit flags: real project, 24&nbsp;commits, and an About box that says "No description, website, or topics provided." This is the state that reads as abandoned.</figcaption>
         </figure>
-        <p>Measured over a dozen captures, that pipeline runs in about <b>2.6&nbsp;s at the median</b> and <b>4.2&nbsp;s at worst</b> from voice note to scheduled reminder (the final database write not counted): transcription <b>~1.1&nbsp;s</b>, extraction <b>~1.5&nbsp;s</b>, and the in-code date resolver <b>~1&nbsp;µs</b>, which is the entire reason the arithmetic lives in TypeScript and not the prompt. The transcription figure is a synthesized clip rather than a real voice note, so it reflects upload and model time on clean audio, not a phone recording in a noisy room. Each capture is roughly <b>1,200 tokens</b> through gpt-4o-mini, about <b>1,120</b> of them the fixed system prompt, so extraction costs on the order of <b>$0.0002</b> and the whole capture stays under a tenth of a cent at list price.</p>
       </div>
 
       <div class="cs-section reveal">
-        <h3>03 / Trace: one capture, all the way through</h3>
-        <p class="dim">A real record from the production database.</p>
-        <div class="trace-steps">
-          <div class="trace-step">
-            <div class="trace-label">Voice note</div>
-            <p>"Coffee with Marco this afternoon. His mom's out of the hospital and doing okay. He's got a final interview on the 28th and he's nervous about it. I told him I'd send him the recruiter's number this week."</p>
-          </div>
-          <div class="trace-step">
-            <div class="trace-label">Extracted</div>
-            <p>Person: Marco · fact: mom out of hospital, recovering (no date) · fact: final interview, nervous, 2026-08-28 · commitment: send over the recruiter's number, due 2026-08-24 · evidence: "I told him I'd send him the recruiter's number."</p>
-          </div>
-          <div class="trace-step">
-            <div class="trace-label">Delivered, four days later</div>
-            <p>"Marco: you said you'd send over the recruiter's number. Still worth doing?"</p>
-          </div>
-        </div>
+        <h3>What it audits and fixes</h3>
+        <p>It checks every repo (or a specific one) for five things: missing description, missing topics, no license, no README, and a README that's still unedited scaffold text (<code>create-next-app</code>, <code>create-react-app</code>, and similar). The audit is read-only and reports findings before touching anything, grouped as clean repos, small gaps, and real problems. Nothing gets written without you seeing it and approving it first, a wrong or invented project description is worse than no description at all since it's your public profile. For anything it does fix, it reads the actual code first (<code>package.json</code>, existing docs, source files) rather than guessing, then writes descriptions and topics with <code>gh repo edit</code>, and rewrites thin READMEs through a real clone, commit, and push.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>I ran it across my own account</h3>
+        <p>Dogfooding is the honest test, so I ran it across <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">my own GitHub</a>, all <b>16 public repos</b>. The first pass flagged <b>10 issues</b> across 6 repos, but 2 of those were the audit marking my profile README repo (<code>marcosmodly/marcosmodly</code>) for having no topics and no license, which is exactly how a profile repo is meant to look. That's a bug in the tool, not my profile, so I added a rule that recognises the profile repo and skips those two checks for it, then re-ran. The real result: <b>11 clean</b>, <b>5 with a genuine gap</b>, <b>8 issues</b>, all metadata: <b>4 repos with no license</b>, <b>2 missing topics</b>, <b>2 with no description</b>. Nothing was missing a README or still carrying scaffold text, so two of the five checks found zero. Of the 8, the skill can set <b>2</b> itself, the missing topics, inferred from each repo's own code, and holds <b>6</b> back for me to approve, the descriptions and the license choices, because a tool guessing either of those on your public profile is worse than the gap it's filling. The full sweep, two GitHub API calls per repo, runs in about <b>40 seconds</b>.</p>
+        <p class="dim" style="margin-bottom:8px">The scan is read-only and prints one JSON object per repo. The five that came back with something to fix:</p>
+        <pre>$ ./audit_repos.sh marcosmodly
+
+{"repo": "marcosmodly/grandmas-lighthouse", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set", "no license"], "clean": false}
+{"repo": "marcosmodly/portfolio", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": "MIT", "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set"], "clean": false}
+{"repo": "marcosmodly/holdfast", "is_fork": false, "is_profile_repo": false, "description": "Voice-first memory for the people you care about...", "topic_count": 6, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+{"repo": "marcosmodly/modlyai", "is_fork": false, "is_profile_repo": false, "description": "AI-powered furniture recommendation and customization platform...", "topic_count": 7, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+{"repo": "marcosmodly/second-brain-ai", "is_fork": false, "is_profile_repo": false, "description": "A personal knowledge base for developers...", "topic_count": 10, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+
+# ...11 more lines, all "clean": true, including marcosmodly/marcosmodly
+#    ("is_profile_repo": true -> topics and license checks skipped)
+16 repos audited: 11 clean, 5 with a gap, 8 issues
+   4 x no license   2 x no description set   2 x no topics set</pre>
+        <p class="dim" style="margin-top:8px">Real output. Descriptions truncated here for width; the script prints them in full.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>Ships as a reusable Claude Code skill</h3>
+        <p>It's not a one-off script, it's a Claude Code skill: a <code>SKILL.md</code> with the audit/report/fix workflow plus a bash script (<code>audit_repos.sh</code>) that does the actual read-only scan against the GitHub API. Drop it into a Claude Code skills directory and it activates on its own whenever someone asks to clean up their GitHub, audit a repo, or mentions their profile looking sparse or unfinished, no need to name it directly.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>Published as its own repo</h3>
+        <p><a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github-repo-hygiene-skill</a>, MIT licensed, real README, topics set, the works, which is a little bit the joke: the tool that fixes exactly this problem doesn't have this problem itself.</p>
 
         <figure class="cs-figure reveal">
           <picture>
-            <source srcset="assets/case-studies/holdfast-marco.avif" type="image/avif">
-            <img src="assets/case-studies/holdfast-marco.webp" width="1074" height="745" loading="lazy" decoding="async"
-                 alt="The same capture in the chat thread: a 16-second voice note in, then the reminder listing the facts it pulled out (mom out of hospital, final interview on the 28th, nervous) and the commitment (send him the recruiter's number), then a follow-up. Two rough edges are visible: a stray 'okay., He's' where two sentences ran together, and 'you said you'd I'd send him' where the template doubled a pronoun.">
+            <source srcset="assets/case-studies/gh-repo-done.avif" type="image/avif">
+            <img src="assets/case-studies/gh-repo-done.webp" width="1200" height="675" loading="lazy" decoding="async"
+                 alt="The GitHub page for marcosmodly/github-repo-hygiene-skill. The About sidebar carries a full description, six topic tags (claude, claude-code, claude-skill, cli, developer-tools, github-automation), an MIT licence, and a written-out README, none of the gaps the skill looks for.">
           </picture>
-          <figcaption>That trace as it actually landed in the thread. The clean version above is the record; this is the message a real person received, doubled pronoun and run-on punctuation included.</figcaption>
+          <figcaption>The skill's own repo: description, topics, licence, a real README. Nothing here for the audit to say &mdash; which is the point of running it.</figcaption>
         </figure>
-
-        <p style="margin-top:20px">Note what's not in the record: Marco said nothing about what he'd do, so nothing was stored as a commitment for him. The interview date resolved without the model doing arithmetic. The reminder names Marco because the message template knows the person even though the stored text doesn't.</p>
-      </div>
-
-      <div class="cs-section cs-hardest reveal">
-        <h3>04 / Hard part: making a model trustworthy enough to hold someone's promises</h3>
-        <p>A wrong reminder is worse than no reminder. The extraction prompt was the highest-stakes string in the codebase, so the fix started with measurement: twelve real transcripts with exact expected output, run three times each against every prompt version, fixed reference date so results were comparable. Three failures survived every rewrite, each one the model being asked to do something it's bad at.</p>
-        <table class="compare">
-          <thead><tr><th>Failure</th><th>Tried</th><th>Actually fixed by</th></tr></thead>
-          <tbody>
-            <tr><td>"Thursday" resolved to a Monday</td><td>Stating today's date + a lookup table in the prompt</td><td>A pure date resolver in TypeScript</td></tr>
-            <tr><td>Commitments nobody made</td><td>An explicit rule, then a stronger rule with examples</td><td>Checking a verbatim quote against the transcript</td></tr>
-            <tr><td>Person's name dropped from the reminder</td><td>A rule requiring substitution</td><td>The message template, which already knew it</td></tr>
-          </tbody>
-        </table>
-        <p>The date lookup table is worth dwelling on: giving the model a table of all seven weekdays worked because seven is a closed set, every possible answer was there to copy. Extending the same idea to ordinals failed badly. With two worked examples and no entry for "the 14th," the model copied the nearest example date wholesale and returned the 28th. Demonstration is not lookup. Moving the arithmetic into code fixed it permanently and had a second effect: date behavior became testable in milliseconds with no API call, freeing the twelve slow, non-deterministic cases to test only what the model is genuinely good at, reading what a person said. The resolver has <b>8 rules</b> (weekday, weekday-plus-time, ordinal, "this weekend", "next week", today/tomorrow, an explicit date, and refuse) and the <b>23 tests</b> cover them across <b>14 groups</b>, including the boundaries that bite: an ordinal that lands on the capture day, a weekday that <i>is</i> today rolling a full week out, an ordinal crossing the December year line, and four vague phrasings that must return null rather than guess.</p>
-        <div class="stat-row">
-          <div class="stat"><b>24 / 36</b>first prompt version</div>
-          <div class="stat"><b>36 / 36</b>after logic moved into code</div>
-        </div>
-        <h4>The bug that hid for eleven captures</h4>
-        <p>The database showed eleven captures. One had a linked person and facts, the other ten had stored nothing, commitments table completely empty. The bot had replied convincingly to every one. One line was the cause: profile creation was gated on whether the person was new.</p>
-        <pre>if (existingPersonId === null) {
-  chunks.push(
-    db.tx.profiles[profileId].create({ ... }),   // already exists
-    db.tx.people[personId].create({ ... }),
-  );
-}</pre>
-        <p>The first time a returning user mentioned a new person, that re-created a profile that already existed. The chat id column is unique, the database rejected the step, and because it was one atomic transaction, the person, facts, and commitments went down with it. Two changes came out of it: the reply now reports what was saved rather than what was extracted, and a rule went into the project notes, a function named <code>findOrCreate</code> must actually create, this one only found.</p>
-      </div>
-
-      <div class="cs-section reveal">
-        <h3>05 / Result: it works, and I stopped using it after two days</h3>
-        <div class="stat-row">
-          <div class="stat"><b>36/36</b>extraction suite, 3 trials</div>
-          <div class="stat"><b>23</b>date-resolution unit tests, no API calls</div>
-          <div class="stat"><b>6</b>captures recorded</div>
-          <div class="stat"><b>5</b>reminders delivered</div>
-          <div class="stat"><b>0</b>reminders acted on</div>
-          <div class="stat"><b>2 days</b>first capture to last</div>
-        </div>
-        <p>That last row is the finding, worth more than the passing tests. Working alone, in a normal week there are perhaps two moments seeing someone worth recording, Holdfast needs someone who has five or six. I built a product I'm not the user of, and then used myself to test it. The reminders that did arrive felt hollow, several were about example transcripts written during development rather than real promises to real people. Neither of those is a reason to stop, both are reasons to stop testing it on myself.</p>
-        <p>What happens next: five testers chosen for one property only, they see a lot of people, two weeks. The measure is their capture counts in the database, not their opinions in a chat. Nothing new gets built until those numbers exist.</p>
-        <p class="closing-line">I built a product I am not the user of, and then used myself to test it.</p>
       </div>
     </div>
   </article>
