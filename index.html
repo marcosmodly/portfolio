@@ -731,6 +731,7 @@ section.tight { padding: 56px 0; }
 .card:hover { transform: translateY(-4px); border-color: var(--accent); }
 .card h3 { font-size: 1.05rem; margin-bottom: 0; font-family: var(--sans); }
 .card p { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 4px; flex-grow: 1; }
+.card .card-stat { color: var(--text); font-weight: 600; flex-grow: 0; }
 .card .tag-row { margin-top: 2px; }
 .card-links { display: flex; gap: 14px; font-size: 0.85rem; margin-top: 6px; }
 .card-links a { text-decoration: none; color: var(--accent); border-bottom: 1px solid transparent; }
@@ -870,7 +871,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
             <li><a href="grandmas-lighthouse.html">Lighthouse</a></li>
           </ul>
         </div>
-        <a href="#case-studies">Case Studies</a>
         <a href="#contact">Contact</a>
         <a class="nav-icon-link" href="https://github.com/marcosmodly" target="_blank" rel="noopener" aria-label="GitHub profile" title="GitHub">
           <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -898,7 +898,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <a href="#about">About</a>
     <a href="#stack">Stacks</a>
     <a href="#work">Work</a>
-    <a href="#case-studies">Case Studies</a>
     <a href="#contact">Contact</a>
     <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">GitHub</a>
   </nav>
@@ -923,7 +922,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p class="hero-line reveal" style="--i:3">I build things by myself, then go looking for what I got wrong.</p>
         <p class="hero-desc reveal" style="--i:3">I build SaaS products, AI systems, and practical digital tools from idea to deployment.</p>
         <div class="hero-links reveal" style="--i:4">
-          <a href="#case-studies" class="btn btn-primary">Case Studies</a>
+          <a href="#work" class="btn btn-primary">Case Studies</a>
           <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn">Resume</a>
           <a href="mailto:marcosking1221@gmail.com" class="btn">Email me</a>
         </div>
@@ -1140,6 +1139,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>ModlyAI</h3>
           <p>Embeddable widget that puts a piece of furniture in a shopper's own room photo, at the correct scale, plus a merchant dashboard. Sold to independent furniture retailers.</p>
+          <p class="card-stat">0 customers so far.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">InstantDB</span><span class="tag">Paddle</span></div>
           <div class="card-links">
             <a href="https://modlyai.tech" target="_blank" rel="noopener">Live site</a>
@@ -1152,6 +1152,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>Holdfast</h3>
           <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on, on the day it matters. No app to open.</p>
+          <p class="card-stat">0 reminders acted on.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
           <div class="card-links">
             <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site</a>
@@ -1164,6 +1165,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>github-repo-hygiene-skill</h3>
           <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or a README that's still scaffold text, then fixes what you approve.</p>
+          <p class="card-stat">16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
           <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
           <div class="card-links">
             <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">GitHub</a>
@@ -1175,6 +1177,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>Grandma's Lighthouse</h3>
           <p>A cozy color-restoration Sokoban puzzle game. No fail state is possible, except the one the design quietly introduces on purpose.</p>
+          <p class="card-stat">5 rooms, 26 headless verification suites.</p>
           <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
           <div class="card-links">
             <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it</a>
@@ -1244,46 +1247,6 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="tag-row"><span class="tag">TypeScript</span><span class="tag">CLI</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/skillsmith" target="_blank" rel="noopener">GitHub</a></div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CASE STUDIES ============ -->
-  <section id="case-studies" class="tight">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Case studies</span>
-        <h2>The four with the real story</h2>
-      </div>
-      <div class="cs-index-grid reveal stagger">
-        <a class="cs-index-card" href="modlyai.html" style="--i:0">
-          <h3>ModlyAI</h3>
-          <p>Embeddable widget that puts a piece of furniture in a shopper's own room photo, at the correct scale, plus a merchant dashboard.</p>
-          <p class="cs-index-stat">0 customers so far.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">InstantDB</span><span class="tag">Paddle</span></div>
-          <span class="cs-index-read">Read the case study &rarr;</span>
-        </a>
-        <a class="cs-index-card" href="holdfast.html" style="--i:1">
-          <h3>Holdfast</h3>
-          <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on.</p>
-          <p class="cs-index-stat">0 reminders acted on.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
-          <span class="cs-index-read">Read the case study &rarr;</span>
-        </a>
-        <a class="cs-index-card" href="github-repo-hygiene.html" style="--i:2">
-          <h3>github-repo-hygiene-skill</h3>
-          <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or scaffold-text README.</p>
-          <p class="cs-index-stat">16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
-          <div class="tag-row"><span class="tag">Shell</span><span class="tag">GitHub CLI</span><span class="tag">Claude Code skill</span></div>
-          <span class="cs-index-read">Read the case study &rarr;</span>
-        </a>
-        <a class="cs-index-card" href="grandmas-lighthouse.html" style="--i:3">
-          <h3>Grandma's Lighthouse</h3>
-          <p>A cozy color-restoration Sokoban puzzle game where rooms are proved solvable, not playtested.</p>
-          <p class="cs-index-stat">5 rooms, 26 headless verification suites.</p>
-          <div class="tag-row"><span class="tag">Godot 4</span><span class="tag">GDScript</span></div>
-          <span class="cs-index-read">Read the case study &rarr;</span>
-        </a>
       </div>
     </div>
   </section>
