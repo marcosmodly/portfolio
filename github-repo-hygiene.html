@@ -134,7 +134,7 @@ a { color: inherit; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; margin: 0 0 0.5em; }
 p { margin: 0 0 1em; color: var(--text); }
 .dim { color: var(--text-dim); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 /* ---------- header ----------
@@ -752,15 +752,16 @@ section.tight { padding: 56px 0; }
 .case-study {
   padding: 64px 0; border-top: 1px solid var(--border);
 }
-.case-study .kicker { font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
-.case-study h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
+.case-study .kicker { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.03em; color: var(--accent); margin-bottom: 10px; }
+.case-study h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
 .case-study .role-line { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 32px; }
 .case-study .role-line a { color: var(--accent); text-decoration: none; }
-.cs-section { max-width: 72ch; margin-bottom: 40px; }
-.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; }
-.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; }
+.cs-section { margin-bottom: 40px; }
+.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; max-width: 620px; }
+.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; max-width: 620px; }
 .cs-section p, .cs-section li { font-size: 1rem; }
-.cs-section ol, .cs-section ul { padding-left: 1.3em; }
+.cs-section > p { max-width: 72ch; }
+.cs-section ol, .cs-section ul { padding-left: 1.3em; max-width: 72ch; }
 .cs-section li { margin-bottom: 10px; }
 .cs-hardest {
   background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
@@ -785,7 +786,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 /* ---------- case-study screenshots: one treatment, both themes ---------- */
 /* every screenshot is a capture of a real screen; the frame keeps light-UI
    captures from floating as glowing rectangles on the dark theme */
-.cs-figure { margin: 26px 0; max-width: 78ch; }
+.cs-figure { margin: 26px 0; max-width: 960px; }
 .cs-figure img,
 .before-after img {
   display: block; width: 100%; height: auto;
@@ -798,7 +799,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
 .cs-figure figure { margin: 0; }
 .cs-figure.cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 26px 0; }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 960px; margin: 26px 0; }
 @media (max-width: 640px) {
   .before-after,
   .cs-figure.cs-pair { grid-template-columns: 1fr; }
@@ -905,12 +906,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap">
       <div class="reveal">
         <div class="kicker">Case study 03</div>
-        <h2>github-repo-hygiene-skill</h2>
+        <h1>github-repo-hygiene-skill</h1>
         <div class="cs-links-row">
           <span class="cs-links-note">No live demo &mdash; ships as a Claude Code skill, not a hosted site.</span>
           <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
         <p class="role-line">Solo · Ships as a Claude Code skill · <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github.com/marcosmodly/github-repo-hygiene-skill</a></p>
+        <p class="dim" style="max-width:60ch">A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or a README still full of scaffold text, then fixes what you approve.</p>
       </div>
 
       <div class="cs-section reveal">

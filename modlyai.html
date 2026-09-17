@@ -134,7 +134,7 @@ a { color: inherit; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; margin: 0 0 0.5em; }
 p { margin: 0 0 1em; color: var(--text); }
 .dim { color: var(--text-dim); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 /* ---------- header ----------
@@ -752,15 +752,16 @@ section.tight { padding: 56px 0; }
 .case-study {
   padding: 64px 0; border-top: 1px solid var(--border);
 }
-.case-study .kicker { font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
-.case-study h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
+.case-study .kicker { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.03em; color: var(--accent); margin-bottom: 10px; }
+.case-study h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
 .case-study .role-line { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 32px; }
 .case-study .role-line a { color: var(--accent); text-decoration: none; }
-.cs-section { max-width: 72ch; margin-bottom: 40px; }
-.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; }
-.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; }
+.cs-section { margin-bottom: 40px; }
+.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; max-width: 620px; }
+.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; max-width: 620px; }
 .cs-section p, .cs-section li { font-size: 1rem; }
-.cs-section ol, .cs-section ul { padding-left: 1.3em; }
+.cs-section > p { max-width: 72ch; }
+.cs-section ol, .cs-section ul { padding-left: 1.3em; max-width: 72ch; }
 .cs-section li { margin-bottom: 10px; }
 .cs-hardest {
   background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
@@ -785,7 +786,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 /* ---------- case-study screenshots: one treatment, both themes ---------- */
 /* every screenshot is a capture of a real screen; the frame keeps light-UI
    captures from floating as glowing rectangles on the dark theme */
-.cs-figure { margin: 26px 0; max-width: 78ch; }
+.cs-figure { margin: 26px 0; max-width: 960px; }
 .cs-figure img,
 .before-after img {
   display: block; width: 100%; height: auto;
@@ -798,7 +799,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
 .cs-figure figure { margin: 0; }
 .cs-figure.cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 26px 0; }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 960px; margin: 26px 0; }
 @media (max-width: 640px) {
   .before-after,
   .cs-figure.cs-pair { grid-template-columns: 1fr; }
@@ -905,12 +906,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap">
       <div class="reveal">
         <div class="kicker">Case study 01 / For hiring managers and technical recruiters</div>
-        <h2>ModlyAI</h2>
+        <h1>ModlyAI</h1>
         <div class="cs-links-row">
           <a href="https://modlyai.tech" target="_blank" rel="noopener">Live site &nearr;</a>
           <a href="https://github.com/marcosmodly/modlyai" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
-        <p class="role-line">Sole engineer, designer, and founder · Jan–Aug 2026 · <a href="https://modlyai.tech" target="_blank" rel="noopener">modlyai.tech</a></p>
+        <p class="role-line">Sole engineer, designer, and founder · Jan–Aug 2026 · <a href="https://modlyai.tech" target="_blank" rel="noopener">modlyai.tech</a><br>Every line, every design decision, every deploy. No teammates, no reviewers, no QA.</p>
+        <p class="dim" style="max-width:60ch">An embeddable widget that places a shopper's furniture pick into their own room photo at the correct scale, plus the merchant dashboard behind it.</p>
       </div>
 
       <div class="cs-section reveal">
@@ -949,8 +951,9 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
 
       <div class="cs-section reveal">
-        <h3>My role</h3>
-        <p>Every line, every design decision, every deploy. No teammates, no reviewers, no QA.</p>
+        <h3>What I built</h3>
+        <p>The widget opens as a chat: a shopper asks a fit question and gets an answer grounded in the store's own catalog, not a generic reply. From there, the Room Planner tab takes an uploaded room photo, reads back style, color, and layout cues from the image itself, and returns catalog matches with a placement position and clearances to all four walls, not just a carousel. The Customizer tab sets color and material on a made-to-order piece — plus a free-text field for anything else the shopper wants — every option priced from the merchant's own catalog data, before it becomes a quote request to the retailer with the exact spec attached.</p>
+        <p>On the merchant side, there's a dashboard: an onboarding checklist that includes uploading the product catalog and installing the widget snippet, an overview with sync and usage stats, widget branding settings with a live preview, and analytics with date-range filtering.</p>
       </div>
 
       <div class="cs-section reveal">
@@ -973,8 +976,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </picture>
           <figcaption>The Customizer, where a made-to-order piece gets its finish and size set before the quote request goes to the retailer with the exact spec attached. Every option is priced from the merchant's own catalog data.</figcaption>
         </figure>
+      </div>
 
-        <h4>The InstantDB decision, told honestly</h4>
+      <div class="cs-section reveal">
+        <h3>The InstantDB decision, told honestly</h3>
         <p>InstantDB was picked for iteration speed. In August 2026 the InstantDB team announced they were joining OpenAI: signups closed, cloud apps shut down 31 August 2027, backups retained to August 2028. Rather than panic-migrate, I measured the actual coupling: 52 files use the server-side admin SDK, 78 queries and 41 transactions; 2 files use the realtime React SDK, with exactly 2 live subscriptions (a notification badge and a trial banner); the embeddable widget has no direct dependency at all, it goes through the API.</p>
         <p>So the product was using a realtime sync database as a plain server-side store. The expensive part of leaving a sync database, reimplementing optimistic updates and subscriptions on the client, didn't apply. What remained was a mechanical rewrite of server-side query call sites. Self-hosting also exists as a zero-code-change fallback, which caps the downside. Decision: don't migrate now, migrate at the third paying merchant or February 2027, whichever comes first, because the cost curve tracks number of live merchants, not the calendar.</p>
       </div>
@@ -1027,6 +1032,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </figure>
         <p><b>Performance, measured against production:</b> the demo catalog route — the live demo's data source — answers in <b>434&nbsp;ms p50 / 508&nbsp;ms p95</b> over 60 requests; the widget-config route, hit with an unknown store so it runs the full handler and the InstantDB lookup but returns not-found, comes back in <b>456 / 527&nbsp;ms</b>. Both are over the public internet, so network is part of the figure. Lighthouse 12.8.2, run locally against the live site, scores desktop performance <b>74</b>, held there by a largest-contentful-paint of about <b>5.5&nbsp;s</b> — the metric to bring down.</p>
         <p><b>Commercially, honestly: zero customers.</b> Around 35 furniture retailers contacted by cold email, each on a three-touch sequence, plus a live demo running on a public URL. One inbound conversation from a manufacturer in Nagpur. No signed pilot yet. That gap is the real state of it, and pretending otherwise would undercut everything above.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>What I learned</h3>
         <p class="closing-line">The compiler was the only reviewer I had, and it couldn't see any of the things that were actually wrong. What I built in the second half of this project wasn't features, it was a way to find out I was wrong before a merchant did.</p>
       </div>
     </div>

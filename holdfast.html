@@ -134,7 +134,7 @@ a { color: inherit; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; margin: 0 0 0.5em; }
 p { margin: 0 0 1em; color: var(--text); }
 .dim { color: var(--text-dim); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 /* ---------- header ----------
@@ -752,15 +752,16 @@ section.tight { padding: 56px 0; }
 .case-study {
   padding: 64px 0; border-top: 1px solid var(--border);
 }
-.case-study .kicker { font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
-.case-study h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
+.case-study .kicker { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.03em; color: var(--accent); margin-bottom: 10px; }
+.case-study h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
 .case-study .role-line { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 32px; }
 .case-study .role-line a { color: var(--accent); text-decoration: none; }
-.cs-section { max-width: 72ch; margin-bottom: 40px; }
-.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; }
-.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; }
+.cs-section { margin-bottom: 40px; }
+.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; max-width: 620px; }
+.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; max-width: 620px; }
 .cs-section p, .cs-section li { font-size: 1rem; }
-.cs-section ol, .cs-section ul { padding-left: 1.3em; }
+.cs-section > p { max-width: 72ch; }
+.cs-section ol, .cs-section ul { padding-left: 1.3em; max-width: 72ch; }
 .cs-section li { margin-bottom: 10px; }
 .cs-hardest {
   background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
@@ -785,7 +786,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 /* ---------- case-study screenshots: one treatment, both themes ---------- */
 /* every screenshot is a capture of a real screen; the frame keeps light-UI
    captures from floating as glowing rectangles on the dark theme */
-.cs-figure { margin: 26px 0; max-width: 78ch; }
+.cs-figure { margin: 26px 0; max-width: 960px; }
 .cs-figure img,
 .before-after img {
   display: block; width: 100%; height: auto;
@@ -798,7 +799,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
 .cs-figure figure { margin: 0; }
 .cs-figure.cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 26px 0; }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 960px; margin: 26px 0; }
 @media (max-width: 640px) {
   .before-after,
   .cs-figure.cs-pair { grid-template-columns: 1fr; }
@@ -905,12 +906,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap">
       <div class="reveal">
         <div class="kicker">Case study 02</div>
-        <h2>Holdfast</h2>
+        <h1>Holdfast</h1>
         <div class="cs-links-row">
           <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site &nearr;</a>
           <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
-        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a></p>
+        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a><br>Built with TypeScript · Telegram · gpt-4o-mini · database</p>
         <p class="dim" style="max-width:60ch">Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.</p>
       </div>
 
@@ -921,11 +922,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="stat"><b>3% → 12%</b>Americans reporting no close friends, 1990 vs. 2021 <span class="dim">(Survey Center on American Life, May 2021)</span></div>
           <div class="stat"><b>~200 hrs</b>shared time before an acquaintance becomes a close friend <span class="dim">(Hall, 2019)</span></div>
         </div>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>02 / Approach: nothing to maintain, nothing to open</h3>
         <p>Every product built at this problem so far has been a contact manager with softer language. They fail for the same reason: keeping a list of your friends up to date is work, and nobody does unpaid data entry about the people they love. So the design constraint came first: there must be nothing to maintain, and nothing to open.</p>
       </div>
 
       <div class="cs-section reveal">
-        <h3>02 / Mechanism: twenty seconds in, one message out</h3>
+        <h3>03 / Mechanism: twenty seconds in, one message out</h3>
         <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio, text is stored, voice never is. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
         <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send at most one, hard cap of three messages per person per rolling seven days, over-nudging is the failure mode that kills this category. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
 
@@ -941,7 +946,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
 
       <div class="cs-section reveal">
-        <h3>03 / Trace: one capture, all the way through</h3>
+        <h3>04 / Trace: one capture, all the way through</h3>
         <p class="dim">A real record from the production database.</p>
         <div class="trace-steps">
           <div class="trace-step">
@@ -971,7 +976,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
 
       <div class="cs-section cs-hardest reveal">
-        <h3>04 / Hard part: making a model trustworthy enough to hold someone's promises</h3>
+        <h3>05 / Hard part: making a model trustworthy enough to hold someone's promises</h3>
         <p>A wrong reminder is worse than no reminder. The extraction prompt was the highest-stakes string in the codebase, so the fix started with measurement: twelve real transcripts with exact expected output, run three times each against every prompt version, fixed reference date so results were comparable. Three failures survived every rewrite, each one the model being asked to do something it's bad at.</p>
         <table class="compare">
           <thead><tr><th>Failure</th><th>Tried</th><th>Actually fixed by</th></tr></thead>
@@ -998,7 +1003,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
 
       <div class="cs-section reveal">
-        <h3>05 / Result: it works, and I stopped using it after two days</h3>
+        <h3>06 / Result: it works, and I stopped using it after two days</h3>
         <div class="stat-row">
           <div class="stat"><b>36/36</b>extraction suite, 3 trials</div>
           <div class="stat"><b>23</b>date-resolution unit tests, no API calls</div>
@@ -1007,7 +1012,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <div class="stat"><b>0</b>reminders acted on</div>
           <div class="stat"><b>2 days</b>first capture to last</div>
         </div>
-        <p>That last row is the finding, worth more than the passing tests. Working alone, in a normal week there are perhaps two moments seeing someone worth recording, Holdfast needs someone who has five or six. I built a product I'm not the user of, and then used myself to test it. The reminders that did arrive felt hollow, several were about example transcripts written during development rather than real promises to real people. Neither of those is a reason to stop, both are reasons to stop testing it on myself.</p>
+        <p>That last row is the finding, worth more than the passing tests. Working alone, in a normal week there are perhaps two moments seeing someone worth recording, Holdfast needs someone who has five or six. The reminders that did arrive felt hollow, several were about example transcripts written during development rather than real promises to real people. Neither of those is a reason to stop, both are reasons to stop testing it on myself.</p>
         <p>What happens next: five testers chosen for one property only, they see a lot of people, two weeks. The measure is their capture counts in the database, not their opinions in a chat. Nothing new gets built until those numbers exist.</p>
         <p class="closing-line">I built a product I am not the user of, and then used myself to test it.</p>
       </div>

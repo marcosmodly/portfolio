@@ -134,7 +134,7 @@ a { color: inherit; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; margin: 0 0 0.5em; }
 p { margin: 0 0 1em; color: var(--text); }
 .dim { color: var(--text-dim); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 .wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 /* ---------- header ----------
@@ -752,15 +752,16 @@ section.tight { padding: 56px 0; }
 .case-study {
   padding: 64px 0; border-top: 1px solid var(--border);
 }
-.case-study .kicker { font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
-.case-study h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
+.case-study .kicker { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.03em; color: var(--accent); margin-bottom: 10px; }
+.case-study h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 10px; }
 .case-study .role-line { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 32px; }
 .case-study .role-line a { color: var(--accent); text-decoration: none; }
-.cs-section { max-width: 72ch; margin-bottom: 40px; }
-.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; }
-.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; }
+.cs-section { margin-bottom: 40px; }
+.cs-section h3 { font-size: 1.15rem; margin-bottom: 12px; max-width: 620px; }
+.cs-section h4 { font-size: 1rem; margin: 20px 0 8px; max-width: 620px; }
 .cs-section p, .cs-section li { font-size: 1rem; }
-.cs-section ol, .cs-section ul { padding-left: 1.3em; }
+.cs-section > p { max-width: 72ch; }
+.cs-section ol, .cs-section ul { padding-left: 1.3em; max-width: 72ch; }
 .cs-section li { margin-bottom: 10px; }
 .cs-hardest {
   background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
@@ -785,7 +786,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 /* ---------- case-study screenshots: one treatment, both themes ---------- */
 /* every screenshot is a capture of a real screen; the frame keeps light-UI
    captures from floating as glowing rectangles on the dark theme */
-.cs-figure { margin: 26px 0; max-width: 78ch; }
+.cs-figure { margin: 26px 0; max-width: 960px; }
 .cs-figure img,
 .before-after img {
   display: block; width: 100%; height: auto;
@@ -798,7 +799,7 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .before-after figcaption { font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5; }
 .cs-figure figure { margin: 0; }
 .cs-figure.cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 78ch; margin: 26px 0; }
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 960px; margin: 26px 0; }
 @media (max-width: 640px) {
   .before-after,
   .cs-figure.cs-pair { grid-template-columns: 1fr; }
@@ -905,12 +906,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap">
       <div class="reveal">
         <div class="kicker">Case study 04</div>
-        <h2>Grandma's Lighthouse</h2>
+        <h1>Grandma's Lighthouse</h1>
         <div class="cs-links-row">
           <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">Play it &nearr;</a>
           <a href="https://github.com/marcosmodly/grandmas-lighthouse" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
         <p class="role-line">Solo, design, code, integration, release · Godot 4.3, GDScript · Shipped, playable in browser + Windows · <a href="https://modsy.itch.io/grandmas-lighthouse" target="_blank" rel="noopener">modsy.itch.io/grandmas-lighthouse</a></p>
+        <p class="dim" style="max-width:60ch">A color-restoration Sokoban puzzle: push objects onto their home tiles and the room comes back into color, one commitment at a time.</p>
       </div>
 
       <div class="cs-section reveal">
@@ -992,7 +994,12 @@ ENTRYWAY PUZZLE TEST: PASS &mdash; solvable, undo/reset always recover</pre>
 
       <div class="cs-section reveal">
         <h3>Closing</h3>
-        <p>A bug once survived a test written specifically to catch it: the test reached the state it wanted to inspect by calling a seek function, and that function re-ran the layout pass on every call, so the test path repaired the exact bug it was checking for and reported green while the real thing was broken on screen. A test that reaches the state by a different path than production is testing a different program. The same week, twenty minutes of actually playing surfaced a dead end that 24 passing suites walked straight past.</p>
+        <p>A bug once survived a test written specifically to catch it: the test reached the state it wanted to inspect by calling a seek function, and that function re-ran the layout pass on every call, so the test path repaired the exact bug it was checking for and reported green while the real thing was broken on screen.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>What I learned</h3>
+        <p>A test that reaches the state by a different path than production is testing a different program. The same week, twenty minutes of actually playing surfaced a dead end that 24 passing suites walked straight past.</p>
       </div>
     </div>
   </article>
