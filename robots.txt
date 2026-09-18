@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marcosmodly.github.io/portfolio/sitemap.xml
+Sitemap: https://portfolio-ebon-pi-34.vercel.app/sitemap.xml

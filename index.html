@@ -9,9 +9,9 @@
     document.documentElement.classList.remove('js-reveal');
   }, 2500);
 </script>
-<title>King Joshua Marcos — Full Stack Developer</title>
+<title>King Joshua Marcos — Full Stack Developer | AI & SaaS, shipped solo</title>
 <meta name="description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
-<link rel="canonical" href="https://marcosmodly.github.io/portfolio/">
+<link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -20,23 +20,23 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-700.woff2" crossorigin>
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://marcosmodly.github.io/portfolio/">
+<meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/">
 <meta property="og:title" content="King Joshua Marcos — Full Stack Developer">
 <meta property="og:description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
-<meta property="og:image" content="https://marcosmodly.github.io/portfolio/assets/og-image.png">
+<meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="King Joshua Marcos — Full Stack Developer">
 <meta name="twitter:description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
-<meta name="twitter:image" content="https://marcosmodly.github.io/portfolio/assets/og-image.png">
+<meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "King Joshua Marcos",
   "jobTitle": "Full Stack Developer",
-  "url": "https://marcosmodly.github.io/portfolio/",
+  "url": "https://portfolio-ebon-pi-34.vercel.app/",
   "sameAs": ["https://github.com/marcosmodly"]
 }
 </script>
@@ -735,6 +735,9 @@ section.tight { padding: 56px 0; }
 .card-links { display: flex; gap: 14px; font-size: 0.85rem; margin-top: 6px; }
 .card-links a { text-decoration: none; color: var(--accent); border-bottom: 1px solid transparent; }
 .card-links a:hover { border-bottom-color: var(--accent); }
+.also-on-github { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; max-width: 70ch; }
+.also-on-github a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.also-on-github a:hover { border-bottom-color: var(--accent); }
 .card.is-case { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
 .case-flag {
   font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -805,6 +808,25 @@ table.compare th { background: var(--surface-2); font-family: var(--sans); font-
 .contact-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 8px; align-items: center; }
 .contact-links a:not(.btn) { text-decoration: none; color: var(--accent); border-bottom: 1px solid transparent; }
 .contact-links a:not(.btn):hover { border-bottom-color: var(--accent); }
+
+.contact-email-inline { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.contact-email-text { font-family: var(--mono); font-size: 0.88rem; color: var(--text-dim); cursor: text; user-select: all; }
+.copy-email-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-dim); font-size: 0.8rem; font-family: var(--sans);
+  cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease;
+}
+.copy-email-btn:hover { border-color: var(--accent); color: var(--text); }
+.copy-email-btn svg { width: 14px; height: 14px; flex: none; }
+.copy-email-btn .icon-check { display: none; }
+.copy-email-btn.is-copied { border-color: var(--accent); color: var(--accent-strong); }
+.copy-email-btn.is-copied .icon-copy { display: none; }
+.copy-email-btn.is-copied .icon-check { display: block; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
 
 footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border); }
 
@@ -898,12 +920,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <h1 class="hero-h1 reveal" style="--i:1">
           <span class="hero-role"><span>Full Stack</span> <span>Developer</span></span>
         </h1>
-        <p class="hero-line reveal" style="--i:3">I build things by myself, then go looking for what I got wrong.</p>
-        <p class="hero-desc reveal" style="--i:3">I build SaaS products, AI systems, and practical digital tools from idea to deployment.</p>
+        <p class="hero-line reveal" style="--i:3">I ship production software solo, then write down exactly where I was wrong.</p>
+        <p class="hero-desc reveal" style="--i:3">SaaS products, AI systems, and visualization tools, from database schema to production deployment.</p>
         <div class="hero-links reveal" style="--i:4">
           <a href="#work" class="btn btn-primary">Case Studies</a>
           <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener" class="btn">Resume</a>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=marcosking1221@gmail.com" target="_blank" rel="noopener" class="btn">Email me</a>
+          <a href="mailto:marcosking1221@gmail.com" class="btn">Email me</a>
         </div>
       </div>
       <div class="hero-photo-slot">
@@ -921,9 +943,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap-wide reveal">
       <span class="eyebrow">Build snapshot</span>
       <p class="hero-receipts">
-        <a href="modlyai.html">121 commits</a><span class="sep">·</span><a href="modlyai.html">46k+ lines</a><span class="sep">·</span><a href="holdfast.html">36/36 extraction accuracy</a>
+        13 projects shipped<span class="sep">·</span>4 full write-ups<span class="sep">·</span>1 live SaaS with billing integrated
       </p>
-      <p class="hero-receipts-note">Pulled from the case studies; may drift as they update.</p>
     </div>
   </div>
 
@@ -940,10 +961,10 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div>
         <div class="section-head reveal">
           <span class="eyebrow">About</span>
-          <h2>Mostly I build alone, which changes what you have to build in.</h2>
+          <h2>I own the whole stack, which changes what you have to build in.</h2>
         </div>
         <div class="about-body reveal">
-          <p>I write TypeScript and Next.js for a living, and GDScript when I'm making a game instead. On everything below, I was the only engineer, the only designer, and the only QA, which means the usual safety net (a reviewer who catches the thing you missed) doesn't exist. So a lot of what I've actually gotten better at isn't a framework or a language, it's noticing when I'm wrong before someone else has to.</p>
+          <p>I write TypeScript and Next.js for a living, and GDScript when I'm making a game instead. On everything below, I was the only engineer, the only designer, and the only QA, so the verification had to be built into the work instead of into a reviewer. So a lot of what I've actually gotten better at isn't a framework or a language, it's noticing when I'm wrong before someone else has to.</p>
           <p>That shows up as a habit more than a skill: write down the traps that cost real time, measure instead of assume, and say what I checked and how, rather than what I believe should be true. The case studies are mostly about the times that habit was missing and what it cost, and the one time it caught something before it shipped.</p>
         </div>
       </div>
@@ -969,7 +990,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <svg class="tool-icon scene-night-only" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>
           <svg class="tool-icon tool-icon-brand scene-day-only" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#000000" d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>
           <span class="tool-name">Next.js</span>
-          <span class="stack-card-caption">Framework behind ModlyAI and Holdfast, both in production. <a href="modlyai.html">See the case study &rarr;</a></span>
+          <span class="stack-card-caption">Framework behind ModlyAI in production and Holdfast in early access. <a href="modlyai.html">See the case study &rarr;</a></span>
         </div>
         <div class="stack-card" title="React">
           <svg class="tool-icon scene-night-only" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/></svg>
@@ -1119,7 +1140,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>ModlyAI</h3>
           <p>Embeddable widget that puts a piece of furniture in a shopper's own room photo, at the correct scale, plus a merchant dashboard. Sold to independent furniture retailers.</p>
-          <p class="card-stat">0 customers so far.</p>
+          <p class="card-stat">Live in production. AR room placement, merchant dashboard, Paddle billing.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">InstantDB</span><span class="tag">Paddle</span></div>
           <div class="card-links">
             <a href="https://modlyai.tech" target="_blank" rel="noopener">Live site</a>
@@ -1132,7 +1153,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <span class="case-flag">Case study</span>
           <h3>Holdfast</h3>
           <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on, on the day it matters. No app to open.</p>
-          <p class="card-stat">0 reminders acted on.</p>
+          <p class="card-stat">Early access. Voice note in, structured reminder out, no app to open.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
           <div class="card-links">
             <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site</a>
@@ -1169,68 +1190,29 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         </article>
 
         <article class="card" style="--i:1">
-          <h3>AI Website Audit</h3>
-          <p>Audits a site for performance, SEO, accessibility, UX, and broken links, and reports the findings.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Lighthouse</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/ai-website-audit" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:2">
-          <h3>Freelancer Proposal Generator</h3>
-          <p>Converts a job listing into a tailored proposal: relevant skills, suggested pricing, and red flags in the listing itself.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">OpenAI</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/freelancer-proposal-generator" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:3">
-          <h3>PDF to Structured Data</h3>
-          <p>Upload a PDF, get the sections and tables out of it as structured data, tailored to what the document actually contains.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Data extraction</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/pdf-to-structured-data" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:4">
           <h3>SaaS Analytics Dashboard</h3>
           <p>Self-hosted, multi-tenant analytics platform: a tracking script plus a dashboard of visitor statistics, no third party involved.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">SQLite</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/saas-analytics-dashboard" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:5">
+        <article class="card" style="--i:2">
           <h3>AI Interior Design Assistant</h3>
           <p>Upload a room photo and a style, get back a concept, a color palette, and furniture suggestions for that specific room.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Computer vision</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/ai-interior-design-assistant" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:6">
-          <h3>Client Brief Generator</h3>
-          <p>Turns a filled-out client questionnaire into a structured project brief: goals, scope, and timeline, ready to send.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">DOCX export</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/client-brief-generator" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:7">
-          <h3>What Should I Build?</h3>
-          <p>Generates specific, buildable project ideas from your skill level, stack, interests, and goals, not generic suggestions.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">TypeScript</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/what-should-i-build" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:8">
-          <h3>Screenshot to Website</h3>
-          <p>Upload a screenshot of a website, get back a responsive HTML and Tailwind reconstruction of it.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Computer vision</span></div>
-          <div class="card-links"><a href="https://github.com/marcosmodly/screenshot-to-website" target="_blank" rel="noopener">GitHub</a></div>
-        </article>
-
-        <article class="card" style="--i:9">
+        <article class="card" style="--i:3">
           <h3>skillsmith</h3>
           <p>Turns anything into a Claude Skill: an interview-driven generator that drafts, validates, and packages it.</p>
           <div class="tag-row"><span class="tag">TypeScript</span><span class="tag">CLI</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/skillsmith" target="_blank" rel="noopener">GitHub</a></div>
         </article>
       </div>
+
+      <p class="work-row-label" style="margin-top:32px">Also on GitHub</p>
+      <p class="also-on-github reveal"><a href="https://github.com/marcosmodly/ai-website-audit" target="_blank" rel="noopener">AI Website Audit</a>, <a href="https://github.com/marcosmodly/freelancer-proposal-generator" target="_blank" rel="noopener">Freelancer Proposal Generator</a>, <a href="https://github.com/marcosmodly/pdf-to-structured-data" target="_blank" rel="noopener">PDF to Structured Data</a>, <a href="https://github.com/marcosmodly/client-brief-generator" target="_blank" rel="noopener">Client Brief Generator</a>, <a href="https://github.com/marcosmodly/what-should-i-build" target="_blank" rel="noopener">What Should I Build?</a>, <a href="https://github.com/marcosmodly/screenshot-to-website" target="_blank" rel="noopener">Screenshot to Website</a></p>
     </div>
   </section>
 
@@ -1243,7 +1225,16 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p style="font-size:1.05rem; max-width:56ch">If you're hiring, evaluating a project, or want to build something together, I'd love to hear from you.</p>
       </div>
       <div class="contact-links reveal">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=marcosking1221@gmail.com" target="_blank" rel="noopener" class="btn btn-primary">Email me</a>
+        <a href="mailto:marcosking1221@gmail.com" class="btn btn-primary">Email me</a>
+        <span class="contact-email-inline">
+          <span class="contact-email-text" id="contactEmailText">marcosking1221@gmail.com</span>
+          <button type="button" class="copy-email-btn" id="copyEmailBtn" data-email="marcosking1221@gmail.com" aria-label="Copy email address" title="Copy email address">
+            <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            <span class="copy-email-label">Copy</span>
+          </button>
+          <span class="sr-only" aria-live="polite" id="copyEmailStatus"></span>
+        </span>
         <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">GitHub</a>
         <a href="assets/resume/King-Joshua-Marcos-Resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
@@ -1365,6 +1356,36 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
   if (backToTop) {
     backToTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  // ---------- contact: copy email to clipboard ----------
+  // Both mailto: (commit ba0f7fe) and the Gmail compose link it replaced fail
+  // for some visitor (no default client / not signed into Gmail), so this
+  // doesn't try to pick a winner -- the address sits as plain selectable text
+  // with copy as a convenience. A denied/unsupported clipboard is a silent
+  // no-op: the text is already right there to select by hand.
+  var copyEmailBtn = document.getElementById('copyEmailBtn');
+  if (copyEmailBtn) {
+    var copyEmailLabel = copyEmailBtn.querySelector('.copy-email-label');
+    var copyEmailStatus = document.getElementById('copyEmailStatus');
+    var copyResetTimer = null;
+    copyEmailBtn.addEventListener('click', async function () {
+      var email = copyEmailBtn.getAttribute('data-email');
+      try {
+        await navigator.clipboard.writeText(email);
+        copyEmailBtn.classList.add('is-copied');
+        if (copyEmailLabel) copyEmailLabel.textContent = 'Copied';
+        if (copyEmailStatus) copyEmailStatus.textContent = 'Email address copied';
+        clearTimeout(copyResetTimer);
+        copyResetTimer = setTimeout(function () {
+          copyEmailBtn.classList.remove('is-copied');
+          if (copyEmailLabel) copyEmailLabel.textContent = 'Copy';
+          if (copyEmailStatus) copyEmailStatus.textContent = '';
+        }, 1600);
+      } catch (e) {
+        // clipboard denied or unsupported -- silent no-op, see comment above
+      }
     });
   }
 

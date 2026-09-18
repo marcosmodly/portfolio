@@ -2,7 +2,7 @@
 
 King Joshua Marcos's portfolio. One page, one file, no build step.
 
-Live at [marcosmodly.github.io/portfolio](https://marcosmodly.github.io/portfolio).
+Live at [portfolio-ebon-pi-34.vercel.app](https://portfolio-ebon-pi-34.vercel.app).
 
 ## What it is
 
