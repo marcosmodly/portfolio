@@ -9,9 +9,9 @@
     document.documentElement.classList.remove('js-reveal');
   }, 2500);
 </script>
-<title>github-repo-hygiene-skill — Case Study | King Joshua Marcos</title>
-<meta name="description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
-<link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/github-repo-hygiene.html">
+<title>Marketing Skill — Case Study | King Joshua Marcos</title>
+<meta name="description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
+<link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/marketing-skill.html">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -20,15 +20,15 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-700.woff2" crossorigin>
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/github-repo-hygiene.html">
-<meta property="og:title" content="github-repo-hygiene-skill — King Joshua Marcos">
-<meta property="og:description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
+<meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/marketing-skill.html">
+<meta property="og:title" content="Marketing Skill — King Joshua Marcos">
+<meta property="og:description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
 <meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="github-repo-hygiene-skill — King Joshua Marcos">
-<meta name="twitter:description" content="A repo with no description, no topics, no license, and a README that still says &quot;This project was bootstrapped with create-next-app&quot; reads as abandoned, even when the code behind it is solid.">
+<meta name="twitter:title" content="Marketing Skill — King Joshua Marcos">
+<meta name="twitter:description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
 <meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script>
 (function () {
@@ -842,6 +842,126 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 }
 .cs-links-row a:hover { border-bottom-color: var(--accent); }
 .cs-links-row .cs-links-note { color: var(--text-dim); font-size: 0.88rem; }
+
+/* ---------- marketing-skill case study: what this page adds ----------
+   Kicker, h1, cs-section, stat-row, table.compare, pre, tag-row and cs-links-row
+   are the shared case-study system above. This block only adds the pieces that
+   system has no equivalent for: the hero meta grid, skill lists, decision cards,
+   status pills and the approval-flow diagram. --ok and --text-faint exist for
+   those last two and nothing else. */
+:root {
+  --ok: #2a7048;
+  --ok-soft: rgba(42,112,72,0.10);
+  --text-faint: color-mix(in srgb, var(--text-dim) 70%, var(--bg));
+}
+html[data-theme="dark"] {
+  --ok: #63c08a;
+  --ok-soft: rgba(99,192,138,0.14);
+}
+
+.case-study h1.cs-title { max-width: 32ch; text-wrap: balance; }
+.cs-mono { font-family: var(--mono); }
+.cs-lead { max-width: 62ch; font-size: 1.05rem; margin: 0; }
+
+.cs-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px 28px;
+  max-width: 900px; margin: 28px 0 40px; padding-top: 22px; border-top: 1px solid var(--border);
+}
+.cs-meta dt {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 4px;
+}
+.cs-meta dd { margin: 0; font-weight: 600; font-size: 0.95rem; }
+.cs-meta dd.sub { font-weight: 400; color: var(--text-dim); font-size: 0.88rem; }
+
+/* section headings: an eyebrow over an h2, where the other case studies use a bare h3 */
+.cs-section > .eyebrow { margin-bottom: 8px; }
+.cs-section h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem); line-height: 1.25;
+  margin: 0 0 14px; max-width: 26em; text-wrap: balance;
+}
+
+.cs-stats { margin: 0; gap: 12px; }
+.cs-stats .stat { flex: 1 1 150px; padding: 16px 18px; font-size: 0.86rem; color: var(--text-dim); }
+.cs-stats .stat b {
+  font-family: var(--mono); font-size: 1.7rem; font-weight: 600; line-height: 1.1;
+  letter-spacing: -0.01em; color: var(--text); margin-bottom: 6px;
+}
+.cs-stats .stat b.accent { color: var(--accent); }
+
+/* skills, grouped by job */
+.skill-groups { display: grid; gap: 30px; margin-top: 28px; }
+.cs-section .skill-group h3 {
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+}
+.skill-list { margin: 0; border-top: 1px solid var(--border); }
+.skill-row {
+  display: grid; grid-template-columns: minmax(150px, 220px) 1fr; gap: 6px 20px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.skill-row dt { font-family: var(--mono); font-weight: 600; font-size: 0.86rem; padding-top: 1px; overflow-wrap: anywhere; }
+.skill-row dd { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+.setup-note { margin-top: 22px; font-family: var(--mono); font-size: 0.84rem; color: var(--text-dim); overflow-wrap: anywhere; }
+@media (max-width: 600px) { .skill-row { grid-template-columns: 1fr; } }
+
+/* engineering decisions */
+/* minmax(0, 1fr): a plain 1fr track can't shrink below its content's min width, so the
+   diagram's 520px floor would have stretched every card past a phone screen */
+.decision-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; margin-top: 28px; }
+.decision {
+  background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: 14px; padding: 26px 28px; box-shadow: var(--shadow);
+}
+.decision-tag {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.cs-section .decision h3 { font-size: 1.12rem; line-height: 1.3; margin: 0 0 10px; max-width: 34em; text-wrap: balance; }
+.decision p { font-size: 0.98rem; color: var(--text-dim); max-width: 68ch; margin: 0; }
+.decision p + p { margin-top: 10px; }
+.decision code { white-space: nowrap; }
+.pill {
+  display: inline-block; font-family: var(--mono); font-size: 0.78em; padding: 0.15em 0.6em;
+  border-radius: 999px; border: 1px solid var(--border);
+}
+.pill.hold { color: var(--accent-strong); background: var(--accent-soft); }
+.pill.ok { color: var(--ok); background: var(--ok-soft); }
+@media (max-width: 560px) { .decision { padding: 20px 18px; } }
+
+/* approval-flow diagram */
+.cs-diagram { margin: 26px 0 4px; }
+.diagram-frame {
+  max-width: 680px; margin-inline: auto; padding: 18px 14px 8px;
+  background: var(--surface-2); border: 1px solid var(--border-figure); border-radius: 10px;
+}
+.diagram-frame svg { display: block; width: 100%; height: auto; color: var(--text); }
+/* on a phone the labels would shrink below ~5px: keep them readable and scroll instead */
+@media (max-width: 640px) {
+  .diagram-frame { overflow-x: auto; }
+  .diagram-frame svg { min-width: 520px; }
+}
+.dg-mono { font-family: var(--mono); }
+.dg-sans { font-family: var(--display); }
+.cs-diagram figcaption {
+  max-width: 56ch; margin: 14px auto 0; text-align: center;
+  font-size: 0.82rem; line-height: 1.5; color: var(--text-dim);
+}
+.cs-diagram .dash { color: var(--text-faint); }
+
+/* platform table */
+.table-scroll { overflow-x: auto; margin-top: 26px; }
+table.platforms { max-width: none; min-width: 680px; margin: 0; }
+table.platforms td { color: var(--text-dim); font-size: 0.9rem; }
+table.platforms td:first-child { font-family: var(--mono); font-weight: 600; font-size: 0.84rem; color: var(--text); white-space: nowrap; }
+
+.cs-quote { border-left: 3px solid var(--accent); padding-left: 22px; margin: 24px 0; max-width: 62ch; }
+
+/* install block, links, fine print */
+pre.install { margin: 0; }
+pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg)); }
+.cs-install .cs-links-row { margin: 18px 0 0; }
+.cs-fine { font-size: 0.82rem; margin: 12px 0 0; }
 </style>
 </head>
 <body>
@@ -865,9 +985,9 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <ul class="nav-dropdown-menu" aria-label="Case studies">
             <li><a href="modlyai.html">ModlyAI</a></li>
             <li><a href="holdfast.html">Holdfast</a></li>
-            <li><a href="#cs-hygiene">hygiene-skill</a></li>
+            <li><a href="github-repo-hygiene.html">hygiene-skill</a></li>
             <li><a href="grandmas-lighthouse.html">Lighthouse</a></li>
-            <li><a href="marketing-skill.html">Marketing Skill</a></li>
+            <li><a href="#cs-marketing-skill">Marketing Skill</a></li>
           </ul>
         </div>
         <a href="index.html#contact">Contact</a>
@@ -912,75 +1032,280 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 
   <div id="navSentinel" aria-hidden="true" style="height:0;"></div>
 
-  <!-- ===== CASE STUDY: GITHUB REPO HYGIENE ===== -->
-  <article class="case-study" id="cs-hygiene">
+  <!-- ===== CASE STUDY: MARKETING SKILL ===== -->
+  <article class="case-study" id="cs-marketing-skill">
     <div class="wrap">
       <div class="reveal">
-        <div class="kicker">Case study 03</div>
-        <h1>github-repo-hygiene-skill</h1>
+        <div class="kicker">Case study 05</div>
+        <h1 class="cs-title">A marketing department, encoded as twelve Claude Code skills.</h1>
         <div class="cs-links-row">
-          <span class="cs-links-note">No live demo &mdash; ships as a Claude Code skill, not a hosted site.</span>
-          <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">Source &nearr;</a>
+          <span class="cs-links-note cs-mono">marketing-skill</span>
+          <a href="https://github.com/marcosmodly/marketing-skill" target="_blank" rel="noopener">github.com/marcosmodly/marketing-skill →</a>
         </div>
-        <p class="role-line">Solo · Ships as a Claude Code skill · <a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github.com/marcosmodly/github-repo-hygiene-skill</a></p>
-        <p class="dim" style="max-width:60ch">A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or a README still full of scaffold text, then fixes what you approve.</p>
+        <p class="dim cs-lead">Competitor research, content, SEO, ads, cold outreach, and community-specific posting for eleven platforms, all built around one rule that isn't a suggestion: nothing goes out until a human reads the real thing and says so, live.</p>
+
+        <dl class="cs-meta">
+          <div class="cs-meta-item">
+            <dt>Role</dt>
+            <dd>Sole designer &amp; builder</dd>
+          </div>
+          <div class="cs-meta-item">
+            <dt>Timeframe</dt>
+            <dd>4 days · Sep 2026</dd>
+            <dd class="sub">30 commits, shipped iteratively</dd>
+          </div>
+          <div class="cs-meta-item">
+            <dt>Built with</dt>
+            <dd>Claude Code Agent Skills</dd>
+            <dd class="sub">Python, Markdown-based state</dd>
+          </div>
+          <div class="cs-meta-item">
+            <dt>Status</dt>
+            <dd>Installable plugin</dd>
+            <dd class="sub">public repo, MIT-licensed</dd>
+          </div>
+        </dl>
       </div>
 
       <div class="cs-section reveal">
-        <h3>The problem</h3>
-        <p>A repo with no description, no topics, no license, and a README that still says "This project was bootstrapped with create-next-app" reads as abandoned, even when the code behind it is solid. Nobody does this on purpose, it's just the stuff that's easy to forget once the thing works. Anyone vetting a developer, a recruiter, a client, another dev checking your work, starts on GitHub, and a sparse profile costs you before they've read a line of code.</p>
-
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/gh-repo-bare.avif" type="image/avif">
-            <img src="assets/case-studies/gh-repo-bare.webp" width="1200" height="675" loading="lazy" decoding="async"
-                 alt="The GitHub page for marcosmodly/grandmas-lighthouse. The About sidebar reads 'No description, website, or topics provided.', there is no license shown, and no topic tags, even though the file list shows an active project with 24 commits.">
-          </picture>
-          <figcaption>One of my own repos the audit flags: real project, 24&nbsp;commits, and an About box that says "No description, website, or topics provided." This is the state that reads as abandoned.</figcaption>
-        </figure>
+        <div class="stat-row cs-stats">
+          <div class="stat"><b class="accent">12</b>composable skills, one setup command</div>
+          <div class="stat"><b>11+</b>platforms with a scripted send path</div>
+          <div class="stat"><b>~4,800</b>lines of skill specs &amp; docs</div>
+          <div class="stat"><b>~1,100</b>lines of dependency-free Python</div>
+          <div class="stat"><b class="accent">0</b>sends that happen without a human reply</div>
+        </div>
       </div>
 
-      <div class="cs-section reveal">
-        <h3>What it audits and fixes</h3>
-        <p>It checks every repo (or a specific one) for five things: missing description, missing topics, no license, no README, and a README that's still unedited scaffold text (<code>create-next-app</code>, <code>create-react-app</code>, and similar). The audit is read-only and reports findings before touching anything, grouped as clean repos, small gaps, and real problems. Nothing gets written without you seeing it and approving it first, a wrong or invented project description is worse than no description at all since it's your public profile. For anything it does fix, it reads the actual code first (<code>package.json</code>, existing docs, source files) rather than guessing, then writes descriptions and topics with <code>gh repo edit</code>, and rewrites thin READMEs through a real clone, commit, and push.</p>
+      <div class="cs-section reveal" aria-labelledby="ms-problem">
+        <span class="eyebrow">The problem</span>
+        <h2 id="ms-problem">A solo founder needs five job functions and can't hire for any of them.</h2>
+        <p class="dim">Competitor intelligence, content production, SEO, paid ad copy, cold outreach, community management, and publishing operations are normally five different people's jobs. A small team either drops most of them or does each one shallowly, in whatever time is left over.</p>
+        <p class="dim">Most "AI marketing" tools solve the drafting half of that problem well. Fewer stop to ask whether the posting half should be automatic too, even though that half carries the real consequences: your brand voice, your sender reputation, your standing in the communities that ban self-promotion the moment they smell it. The interesting design problem here wasn't "write good marketing copy." It was building a system a non-technical operator could actually trust not to embarrass them while they weren't watching.</p>
       </div>
 
-      <div class="cs-section reveal">
-        <h3>I ran it across my own account</h3>
-        <p>Dogfooding is the honest test, so I ran it across <a href="https://github.com/marcosmodly" target="_blank" rel="noopener">my own GitHub</a>, all <b>16 public repos</b>. The first pass flagged <b>10 issues</b> across 6 repos, but 2 of those were the audit marking my profile README repo (<code>marcosmodly/marcosmodly</code>) for having no topics and no license, which is exactly how a profile repo is meant to look. That's a bug in the tool, not my profile, so I added a rule that recognises the profile repo and skips those two checks for it, then re-ran. The real result: <b>11 clean</b>, <b>5 with a genuine gap</b>, <b>8 issues</b>, all metadata: <b>4 repos with no license</b>, <b>2 missing topics</b>, <b>2 with no description</b>. Nothing was missing a README or still carrying scaffold text, so two of the five checks found zero. Of the 8, the skill can set <b>2</b> itself, the missing topics, inferred from each repo's own code, and holds <b>6</b> back for me to approve, the descriptions and the license choices, because a tool guessing either of those on your public profile is worse than the gap it's filling. The full sweep, two GitHub API calls per repo, runs in about <b>40 seconds</b>.</p>
-        <p class="dim" style="margin-bottom:8px">The scan is read-only and prints one JSON object per repo. The five that came back with something to fix:</p>
-        <pre>$ ./audit_repos.sh marcosmodly
+      <div class="cs-section reveal" aria-labelledby="ms-built">
+        <span class="eyebrow">What I built</span>
+        <h2 id="ms-built">Twelve skills, five jobs, one shared config.</h2>
+        <p class="dim">Each skill is a self-contained agent specification: trigger phrases, a step-by-step process, and an exact output structure. Every one of them reads the same brand-voice file, so tone, audience, and banned words are set once and honored everywhere.</p>
 
-{"repo": "marcosmodly/grandmas-lighthouse", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set", "no license"], "clean": false}
-{"repo": "marcosmodly/portfolio", "is_fork": false, "is_profile_repo": false, "description": null, "topic_count": 0, "license": "MIT", "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no description set", "no topics set"], "clean": false}
-{"repo": "marcosmodly/holdfast", "is_fork": false, "is_profile_repo": false, "description": "Voice-first memory for the people you care about...", "topic_count": 6, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
-{"repo": "marcosmodly/modlyai", "is_fork": false, "is_profile_repo": false, "description": "AI-powered furniture recommendation and customization platform...", "topic_count": 7, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
-{"repo": "marcosmodly/second-brain-ai", "is_fork": false, "is_profile_repo": false, "description": "A personal knowledge base for developers...", "topic_count": 10, "license": null, "readme_status": "present", "readme_looks_like_boilerplate": false, "issues": ["no license"], "clean": false}
+        <div class="skill-groups">
+          <div class="skill-group">
+            <h3>Research</h3>
+            <dl class="skill-list">
+              <div class="skill-row"><dt>competitor-research</dt><dd>Full competitor brief: overview, recent moves, messaging analysis, a real SWOT, sourced recommendations.</dd></div>
+            </dl>
+          </div>
 
-# ...11 more lines, all "clean": true, including marcosmodly/marcosmodly
-#    ("is_profile_repo": true -> topics and license checks skipped)
-16 repos audited: 11 clean, 5 with a gap, 8 issues
-   4 x no license   2 x no description set   2 x no topics set</pre>
-        <p class="dim" style="margin-top:8px">Real output. Descriptions truncated here for width; the script prints them in full.</p>
+          <div class="skill-group">
+            <h3>Produce</h3>
+            <dl class="skill-list">
+              <div class="skill-row"><dt>content-calendar</dt><dd>Batch-generates dated, platform-tagged posts, checked against history so it never repeats a recent topic.</dd></div>
+              <div class="skill-row"><dt>content-repurposer</dt><dd>One source in; a LinkedIn post, an X thread, and a newsletter blurb out, in one pass.</dd></div>
+              <div class="skill-row"><dt>seo-brief</dt><dd>Keywords, search intent, outline, meta title/description. Never invents a search-volume number.</dd></div>
+              <div class="skill-row"><dt>ad-copy-generator</dt><dd>Multiple variants per platform, each a distinct hook angle, sized to that platform's limits.</dd></div>
+              <div class="skill-row"><dt>email-sequence</dt><dd>A multi-email drip with send timing, subject lines, and an actual narrative arc across emails.</dd></div>
+              <div class="skill-row"><dt>visual-brief-generator</dt><dd>Shot list, per-scene prompts, aspect ratios, style guide. Generates the asset only if a tool is connected.</dd></div>
+              <div class="skill-row"><dt>short-form-video</dt><dd>Hook-first script and a ready-to-post package for Shorts, Reels, and TikTok: caption, hashtags, best-time-to-post.</dd></div>
+            </dl>
+          </div>
+
+          <div class="skill-group">
+            <h3>Reach out</h3>
+            <dl class="skill-list">
+              <div class="skill-row"><dt>email-outreach</dt><dd>Researches real prospects, personalizes each email, dedupes against a permanent contact log, refreshes strategy monthly.</dd></div>
+            </dl>
+          </div>
+
+          <div class="skill-group">
+            <h3>Belong</h3>
+            <dl class="skill-list">
+              <div class="skill-row"><dt>community-post-generator</dt><dd>Researches a specific community's actual rules before drafting anything, and gives a plain No-Go when they say no.</dd></div>
+            </dl>
+          </div>
+
+          <div class="skill-group">
+            <h3>Ship</h3>
+            <dl class="skill-list">
+              <div class="skill-row"><dt>publish-pipeline</dt><dd>Packages content to JSON, shows the exact payload, and hands off to your automation or a platform API.</dd></div>
+              <div class="skill-row"><dt>full-pipeline</dt><dd>Chains research, content, and visuals into one run, still stopping at the same approval gate before anything sends.</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p class="setup-note">+ /marketing-skill:marketing-setup — the one command every skill above reads its defaults from</p>
       </div>
 
-      <div class="cs-section reveal">
-        <h3>Ships as a reusable Claude Code skill</h3>
-        <p>It's not a one-off script, it's a Claude Code skill: a <code>SKILL.md</code> with the audit/report/fix workflow plus a bash script (<code>audit_repos.sh</code>) that does the actual read-only scan against the GitHub API. Drop it into a Claude Code skills directory and it activates on its own whenever someone asks to clean up their GitHub, audit a repo, or mentions their profile looking sparse or unfinished, no need to name it directly.</p>
+      <div class="cs-section reveal" aria-labelledby="ms-decisions">
+        <span class="eyebrow">Engineering decisions</span>
+        <h2 id="ms-decisions">The parts that were actually hard.</h2>
+        <p class="dim">Getting a model to write a decent LinkedIn post is a solved problem. These are the six decisions that turned twelve drafting skills into a system worth trusting with a real account.</p>
+
+        <div class="decision-list">
+
+          <div class="decision">
+            <div class="decision-tag">Governance</div>
+            <h3>Generation and approval are different jobs, and the file format enforces it.</h3>
+            <p>Any skill that drafts content can only ever write <span class="pill hold">Planned</span>, <span class="pill hold">Drafted</span>, or <span class="pill hold">Ready for Approval</span> to a row's status in the shared state file. Only <code>publish-pipeline</code> is allowed to write <span class="pill ok">Approved</span>, and only in the same turn where it has shown the real content to a person and gotten an actual reply back.</p>
+            <p>A blanket instruction like "just post these," silence, a timeout, or a scheduled trigger firing with nobody around to answer all fail that check the same way. The diagram below is the whole mechanism.</p>
+
+            <figure class="cs-diagram">
+              <div class="diagram-frame">
+                <svg viewBox="0 0 640 600" role="img" aria-label="Flow diagram: a skill drafts content and queues it as Ready for Approval in a state file. The draft is shown verbatim in a live conversation. Only an explicit human reply moves it to Approved and then Sent via publish-pipeline. Without that reply, the row stays Ready for Approval and nothing is sent.">
+                  <!-- A -->
+                  <rect x="160" y="16" width="320" height="60" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5"/>
+                  <text x="320" y="40" text-anchor="middle" class="dg-mono" font-weight="600" font-size="12.5" fill="var(--text)">A skill drafts content</text>
+                  <text x="320" y="58" text-anchor="middle" class="dg-mono" font-size="10.5" fill="var(--text-dim)">one of nine content / outreach skills</text>
+
+                  <line x1="320" y1="76" x2="320" y2="120" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <polygon points="313,120 327,120 320,132" fill="currentColor" fill-opacity="0.5"/>
+                  <text x="335" y="102" class="dg-mono" font-size="10.5" fill="var(--text-faint)">writes + queues</text>
+
+                  <!-- B -->
+                  <rect x="140" y="132" width="360" height="64" rx="9" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+                  <text x="320" y="158" text-anchor="middle" class="dg-mono" font-weight="600" font-size="13" fill="var(--accent)">Ready for Approval</text>
+                  <text x="320" y="176" text-anchor="middle" class="dg-mono" font-size="10.5" fill="var(--text-dim)">state/content-calendar.md row</text>
+
+                  <line x1="320" y1="196" x2="320" y2="236" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <polygon points="313,236 327,236 320,248" fill="currentColor" fill-opacity="0.5"/>
+                  <text x="335" y="222" class="dg-mono" font-size="10.5" fill="var(--text-faint)">shown live, verbatim</text>
+
+                  <!-- diamond -->
+                  <polygon points="320,248 440,300 320,352 200,300" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.75"/>
+                  <text x="320" y="296" text-anchor="middle" class="dg-sans" font-weight="600" font-size="12" fill="var(--text)">Explicit reply</text>
+                  <text x="320" y="312" text-anchor="middle" class="dg-sans" font-weight="600" font-size="12" fill="var(--text)">in this chat?</text>
+
+                  <!-- No branch -->
+                  <line x1="440" y1="300" x2="450" y2="300" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <polygon points="450,294 450,306 462,300" fill="currentColor" fill-opacity="0.5"/>
+                  <rect x="462" y="268" width="150" height="64" rx="9" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <text x="537" y="294" text-anchor="middle" class="dg-mono" font-size="10.5" fill="var(--text-dim)">no reply / timeout</text>
+                  <text x="537" y="312" text-anchor="middle" class="dg-sans" font-weight="700" font-size="12.5" fill="var(--accent)">Nothing sent</text>
+
+                  <!-- loop back -->
+                  <path d="M537,268 L537,160 L500,160" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 4"/>
+                  <polygon points="500,160 512,154 512,166" fill="var(--accent)"/>
+                  <text x="545" y="150" class="dg-mono" font-style="italic" font-size="10" fill="var(--text-faint)">stays queued</text>
+                  <text x="545" y="163" class="dg-mono" font-style="italic" font-size="10" fill="var(--text-faint)">for next time</text>
+
+                  <!-- Yes branch -->
+                  <line x1="320" y1="352" x2="320" y2="390" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <polygon points="313,390 327,390 320,402" fill="currentColor" fill-opacity="0.5"/>
+                  <text x="335" y="380" class="dg-mono" font-size="10.5" fill="var(--text-faint)">yes, explicit reply</text>
+
+                  <!-- E -->
+                  <rect x="140" y="402" width="360" height="64" rx="9" fill="var(--surface)" stroke="var(--ok)" stroke-width="1.5"/>
+                  <text x="320" y="428" text-anchor="middle" class="dg-mono" font-weight="600" font-size="13" fill="var(--ok)">Approved</text>
+                  <text x="320" y="446" text-anchor="middle" class="dg-mono" font-size="10.5" fill="var(--text-dim)">human said go, live, this turn</text>
+
+                  <line x1="320" y1="466" x2="320" y2="504" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <polygon points="313,504 327,504 320,516" fill="currentColor" fill-opacity="0.5"/>
+                  <text x="335" y="492" class="dg-mono" font-size="10.5" fill="var(--text-faint)">publish-pipeline sends</text>
+
+                  <!-- F -->
+                  <rect x="140" y="516" width="360" height="64" rx="9" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="1.75"/>
+                  <text x="320" y="542" text-anchor="middle" class="dg-sans" font-weight="700" font-size="13.5" fill="var(--ok)">Sent</text>
+                  <text x="320" y="560" text-anchor="middle" class="dg-mono" font-size="10.5" fill="var(--text-dim)">webhook or direct platform API</text>
+                </svg>
+              </div>
+              <figcaption>The only path from drafted to sent runs through a live human reply. Dashed lines mark the alternative: a scheduled run with nobody there to answer leaves the row exactly where it was <span class="dash">—</span> Ready for Approval, not gone, not sent.</figcaption>
+            </figure>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Data integrity</div>
+            <h3>A suppression list that keeps itself honest.</h3>
+            <p>Cold outreach lives or dies on never re-contacting someone who already said no. Every run opens by syncing the connected Gmail inbox: a real reply becomes <span class="pill ok">Replied</span>, a bounce notice becomes <span class="pill hold">Bounced</span>, opt-out language becomes <span class="pill hold">Unsubscribed</span>, and all three permanently block that contact from ever being re-queued, no matter how a later request is phrased.</p>
+            <p>Anything genuinely ambiguous gets reported, not guessed at. The log itself is append-only, so it doubles as an audit trail of exactly who was contacted, when, and why they stopped being.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Research discipline</div>
+            <h3>Eight communities, eight rulebooks, one honest No-Go.</h3>
+            <p><code>community-post-generator</code> doesn't reuse one template across Reddit, Product Hunt, Hacker News, Indie Hackers, dev.to, Discord, Slack, and Telegram. It researches that specific target's actual rules first, or, where no public rules page exists, asks the person who's actually a member, and will flatly say a post isn't welcome rather than draft something polished that gets removed anyway.</p>
+            <p>Building it surfaced a real failure mode. One early research pass on "Indie Hackers" was actually describing r/indiehackers, a same-named subreddit that isn't the site at all. The fix was a source-verification step that confirms a source is genuinely about the named target before anything gets drafted from it.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Extensibility</div>
+            <h3>Skills check what's connected. They don't assume it.</h3>
+            <p><code>visual-brief-generator</code>, <code>short-form-video</code>, and <code>email-outreach</code> each check the current session for a relevant connected tool, an image or video generator, Gmail, a prospecting service, at runtime instead of hardcoding one. Nothing connected still produces a complete, usable brief or draft. Something connected upgrades the same skill's output with no code change.</p>
+            <p>Being connected never implies being willing to spend, either: credit-metered tools still show projected cost and wait for a go-ahead before using it.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Defensive scripting</div>
+            <h3>No script here has a default that sends.</h3>
+            <p>Both hand-off scripts, the webhook sender and the direct-to-platform poster, refuse to run at all unless called with exactly <code>--dry-run</code> or <code>--confirmed</code>. Dry-run prints the literal request, with credentials redacted to match what each platform actually treats as secret: the full URL for a Discord or Slack webhook, just the token segment inside a Telegram URL, a single header value for a dev.to API key.</p>
+            <p>Nothing sends by accident, because nothing sends by default.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Shared configuration</div>
+            <h3>Define voice once. Let strategy remember its own age.</h3>
+            <p>Every skill reads the same <code>brand-voice.md</code> for tone, audience, and banned words, set once through a four-question setup instead of re-asked per skill. <code>email-outreach</code>'s own strategy file goes one step further: the skill checks its own last-refreshed date on every run and walks through a strategy-refresh conversation once 30 days have passed, using the accumulated send, reply, and bounce counts to inform it.</p>
+            <p>No external scheduler, cron job, or reminder is needed. The cadence lives inside the skill itself.</p>
+          </div>
+
+        </div>
       </div>
 
-      <div class="cs-section reveal">
-        <h3>Published as its own repo</h3>
-        <p><a href="https://github.com/marcosmodly/github-repo-hygiene-skill" target="_blank" rel="noopener">github-repo-hygiene-skill</a>, MIT licensed, real README, topics set, the works, which is a little bit the joke: the tool that fixes exactly this problem doesn't have this problem itself.</p>
+      <div class="cs-section reveal" aria-labelledby="ms-platforms">
+        <span class="eyebrow">Platform research</span>
+        <h2 id="ms-platforms">Eleven platforms, and no two of them work the same way.</h2>
+        <p class="dim">Part of this build was simply reverse-engineering how eleven different platforms actually let you post, since none of them share a credential model, a formatting syntax, or an approval process.</p>
 
-        <figure class="cs-figure reveal">
-          <picture>
-            <source srcset="assets/case-studies/gh-repo-done.avif" type="image/avif">
-            <img src="assets/case-studies/gh-repo-done.webp" width="1200" height="675" loading="lazy" decoding="async"
-                 alt="The GitHub page for marcosmodly/github-repo-hygiene-skill. The About sidebar carries a full description, six topic tags (claude, claude-code, claude-skill, cli, developer-tools, github-automation), an MIT licence, and a written-out README, none of the gaps the skill looks for.">
-          </picture>
-          <figcaption>The skill's own repo: description, topics, licence, a real README. Nothing here for the audit to say &mdash; which is the point of running it.</figcaption>
-        </figure>
+        <div class="table-scroll" role="region" aria-labelledby="ms-platforms" tabindex="0">
+          <table class="compare platforms">
+            <thead>
+              <tr><th>Platform</th><th>How the draft gets researched</th><th>How it actually ships</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LinkedIn, X, Meta</td><td>Fixed brand-voice template</td><td>Direct API, your own app credentials</td></tr>
+              <tr><td>Reddit</td><td>Live per-subreddit rules + style sample</td><td>Direct API (manual approval queue since late 2025)</td></tr>
+              <tr><td>Product Hunt</td><td>Live guideline research</td><td>Draft only — write API needs Product Hunt's own approval</td></tr>
+              <tr><td>Hacker News</td><td>Live guidelines + Show&nbsp;HN norms</td><td>Draft only — the API is read-only by design</td></tr>
+              <tr><td>Indie Hackers</td><td>Live research, source-verified</td><td>Draft only — no confirmed write API exists</td></tr>
+              <tr><td>dev.to</td><td>Sitewide + per-tag rules</td><td>Direct API — the simplest credential of the eight</td></tr>
+              <tr><td>Discord</td><td>Asks the member — no public rules page</td><td>Webhook — easiest access, hardest research</td></tr>
+              <tr><td>Slack</td><td>Asks the member; drafted in mrkdwn</td><td>App/webhook — often needs admin approval first</td></tr>
+              <tr><td>Telegram</td><td>Live preview if public, otherwise asks</td><td>Bot via BotFather — a chat admin still has to add it</td></tr>
+              <tr><td>Shorts, Reels, TikTok</td><td>short-form-video's script, caption, hashtags, timing</td><td>Three different models: self-serve upload, a 3-step Graph API flow, or an audited API</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cs-section reveal" aria-labelledby="ms-outcome">
+        <span class="eyebrow">Outcome</span>
+        <h2 id="ms-outcome">What one operator can actually run with this.</h2>
+        <p class="dim">Put together, the twelve skills behave less like a content generator and more like a small marketing team with one person directing it: competitor research on Monday morning, a week of platform-tagged posts queued by lunch, a freshly researched and individually personalized outreach batch going out that afternoon, and a Reddit post that's already been checked against that subreddit's actual rules before it was ever drafted.</p>
+        <blockquote class="closing-line cs-quote">None of it reaches an inbox, a feed, or a webhook until a person reads the real thing and says go.</blockquote>
+        <p class="dim">That last part is the actual product. Anyone can wire an LLM to an API and call it "automation." The harder, more useful thing is building automation with a governor built in, one that a founder can hand their real accounts to without spending the next month checking it hasn't posted something unhinged to a subreddit at 2am.</p>
+      </div>
+
+      <div class="cs-section reveal" aria-labelledby="ms-skills">
+        <span class="eyebrow" id="ms-skills">Skills demonstrated</span>
+        <div class="tag-row cs-tags">
+          <span class="tag">Agent &amp; skill system design</span>
+          <span class="tag">Safety-first / governance architecture</span>
+          <span class="tag">API research across 11+ platforms</span>
+          <span class="tag">Python — dependency-free tooling</span>
+          <span class="tag">State-machine &amp; data-model design</span>
+          <span class="tag">Technical specification writing</span>
+          <span class="tag">Graceful degradation by design</span>
+        </div>
+      </div>
+
+      <div class="cs-section cs-install reveal">
+        <pre class="install">claude plugin marketplace add marcosmodly/marketing-skill
+claude plugin install marketing-skill@marketing-skill
+<span class="cmt"># or copy skills/* straight into ~/.claude/skills/</span></pre>
+        <div class="cs-links-row">
+          <a href="https://github.com/marcosmodly/marketing-skill" target="_blank" rel="noopener">Source →</a>
+          <a href="https://github.com/marcosmodly/marketing-skill/blob/claude/marketing-skill-builder-uzp891/EXAMPLE.md" target="_blank" rel="noopener">A full worked run →</a>
+          <a href="https://github.com/marcosmodly/marketing-skill/blob/claude/marketing-skill-builder-uzp891/README.md" target="_blank" rel="noopener">Full documentation →</a>
+        </div>
+        <p class="dim cs-fine">Case study written from the project's own commit history, source, and documentation.</p>
       </div>
     </div>
   </article>

@@ -21,8 +21,8 @@ no `node_modules`. Open the file and you're looking at the entire site.
 
 ## Structure
 
-Hero → about → skills → project grid → four case studies (ModlyAI, Holdfast,
-github-repo-hygiene-skill, Grandma's Lighthouse) → contact.
+Hero → about → skills → project grid → five case studies (ModlyAI, Holdfast,
+github-repo-hygiene-skill, Grandma's Lighthouse, Marketing Skill) → contact.
 
 ## Resume
 

@@ -10,7 +10,7 @@
   }, 2500);
 </script>
 <title>King Joshua Marcos — Full Stack Developer | AI & SaaS, shipped solo</title>
-<meta name="description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
+<meta name="description" content="Solo full stack developer. ModlyAI, Marketing Skill, Grandma's Lighthouse, Holdfast, and github-repo-hygiene, with the parts that went wrong left in.">
 <link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -22,13 +22,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/">
 <meta property="og:title" content="King Joshua Marcos — Full Stack Developer">
-<meta property="og:description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
+<meta property="og:description" content="Solo full stack developer. ModlyAI, Marketing Skill, Grandma's Lighthouse, Holdfast, and github-repo-hygiene, with the parts that went wrong left in.">
 <meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="King Joshua Marcos — Full Stack Developer">
-<meta name="twitter:description" content="Solo full stack developer. ModlyAI, Holdfast, github-repo-hygiene, and Grandma's Lighthouse, with the parts that went wrong left in.">
+<meta name="twitter:description" content="Solo full stack developer. ModlyAI, Marketing Skill, Grandma's Lighthouse, Holdfast, and github-repo-hygiene, with the parts that went wrong left in.">
 <meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script type="application/ld+json">
 {
@@ -591,20 +591,34 @@ html[data-theme="dark"] .hero-headshot-img {
 /* ---------- about photo: solid circle behind, full-opacity photo on top ----------
    about-headshot.webp is already square with headroom baked in, so it's
    rendered at the circle's own full box size with no object-fit cropping of
-   its own -- the circle's curve (border-radius on the img itself) is what
-   trims the shirt, not a fade or a mask. */
+   its own -- the circle's curve (border-radius on .about-photo-crop) is what
+   trims the shirt, not a fade or a mask.
+
+   Centred as-is, the crop lands on the shoulders: in the photo the nose sits
+   at x=482 of 1200 (about 40% across), left of the frame's middle. The img is
+   pushed right by --about-nose-shift (118 / 1200 = 9.8%) inside a crop that
+   stays put, which puts the nose on the circle's vertical axis. That needs the
+   crop to be its own element rather than the img's own border-radius, since
+   the circle has to hold still while the photo slides under it. The
+   drop-shadow lives on the crop for the same reason; filter runs after the
+   clip, so it still follows the circle's edge. If the photo is ever swapped,
+   re-measure: shift = 50% minus (nose x / image width). */
 .about-photo-circle {
   position: absolute; inset: 0; border-radius: 50%;
   background: var(--surface);
 }
-.about-headshot-img {
-  position: absolute; inset: 0;
-  display: block; width: 100%; height: 100%;
+.about-photo-crop {
+  position: absolute; inset: 0; overflow: hidden;
   border-radius: 50%;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 }
-html[data-theme="dark"] .about-headshot-img {
+html[data-theme="dark"] .about-photo-crop {
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+}
+.about-headshot-img {
+  --about-nose-shift: 9.8%;
+  position: absolute; top: 0; left: var(--about-nose-shift);
+  display: block; width: 100%; height: 100%;
 }
 
 /* ---------- reveal on scroll ---------- */
@@ -878,6 +892,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
             <li><a href="holdfast.html">Holdfast</a></li>
             <li><a href="github-repo-hygiene.html">hygiene-skill</a></li>
             <li><a href="grandmas-lighthouse.html">Lighthouse</a></li>
+            <li><a href="marketing-skill.html">Marketing Skill</a></li>
           </ul>
         </div>
         <a href="#contact">Contact</a>
@@ -953,7 +968,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap-wide reveal">
       <span class="eyebrow">Build snapshot</span>
       <p class="hero-receipts">
-        13 projects shipped<span class="sep">·</span>4 full write-ups<span class="sep">·</span>1 live SaaS with billing integrated
+        14 projects shipped<span class="sep">·</span>5 full write-ups<span class="sep">·</span>1 live SaaS with billing integrated
       </p>
     </div>
   </div>
@@ -963,10 +978,12 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
     <div class="wrap about-grid">
       <div class="about-photo-slot reveal">
         <div class="about-photo-circle" aria-hidden="true"></div>
-        <picture>
-          <source srcset="assets/hero/about-headshot.avif" type="image/avif">
-          <img class="about-headshot-img" src="assets/hero/about-headshot.webp" width="1200" height="1200" alt="King Joshua Marcos" loading="lazy" decoding="async">
-        </picture>
+        <div class="about-photo-crop">
+          <picture>
+            <source srcset="assets/hero/about-headshot.avif" type="image/avif">
+            <img class="about-headshot-img" src="assets/hero/about-headshot.webp" width="1200" height="1200" alt="King Joshua Marcos" loading="lazy" decoding="async">
+          </picture>
+        </div>
       </div>
       <div>
         <div class="section-head reveal">
@@ -1141,7 +1158,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="section-head reveal">
         <span class="eyebrow">Work</span>
         <h2>Everything I've shipped</h2>
-        <p class="work-intro" style="max-width:60ch">Thirteen projects, four with a full write-up — the rest are finished and real, just without a story attached. No team or reviewers, so the interesting part is usually the bug I found after I thought it was done.</p>
+        <p class="work-intro" style="max-width:60ch">Fourteen projects, five with a full write-up — the rest are finished and real, just without a story attached. No team or reviewers, so the interesting part is usually the bug I found after I thought it was done.</p>
       </div>
 
       <p class="work-row-label">Featured work</p>
@@ -1161,14 +1178,13 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 
         <article class="card is-case is-featured" style="--i:1">
           <span class="case-flag">Case study</span>
-          <h3>Holdfast</h3>
-          <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on, on the day it matters. No app to open.</p>
-          <p class="card-stat">Early access. Voice note in, structured reminder out, no app to open.</p>
-          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
+          <h3>Marketing Skill</h3>
+          <p>A marketing department encoded as twelve Claude Code skills, from competitor research to community posting. Nothing goes out until a human reads the real thing and says so.</p>
+          <p class="card-stat">12 skills, 11+ platforms, 0 sends without a human reply.</p>
+          <div class="tag-row"><span class="tag">Claude Code skills</span><span class="tag">Python</span><span class="tag">Markdown state</span></div>
           <div class="card-links">
-            <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site</a>
-            <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">GitHub</a>
-            <a href="holdfast.html">Case study →</a>
+            <a href="https://github.com/marcosmodly/marketing-skill" target="_blank" rel="noopener">GitHub</a>
+            <a href="marketing-skill.html">Case study →</a>
           </div>
         </article>
 
@@ -1189,6 +1205,19 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="project-grid reveal stagger">
         <article class="card is-case" style="--i:0">
           <span class="case-flag">Case study</span>
+          <h3>Holdfast</h3>
+          <p>Send a twenty-second voice note about someone you saw, get reminded of the one thing worth following up on, on the day it matters. No app to open.</p>
+          <p class="card-stat">Early access. Voice note in, structured reminder out, no app to open.</p>
+          <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Telegram Bot API</span><span class="tag">OpenAI</span></div>
+          <div class="card-links">
+            <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site</a>
+            <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">GitHub</a>
+            <a href="holdfast.html">Case study →</a>
+          </div>
+        </article>
+
+        <article class="card is-case" style="--i:1">
+          <span class="case-flag">Case study</span>
           <h3>github-repo-hygiene-skill</h3>
           <p>A Claude Code skill that audits every repo on a GitHub account for a missing description, topics, license, or a README that's still scaffold text, then fixes what you approve.</p>
           <p class="card-stat">16 repos audited: 11 clean, 5 with a gap, 8 issues.</p>
@@ -1199,21 +1228,21 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           </div>
         </article>
 
-        <article class="card" style="--i:1">
+        <article class="card" style="--i:2">
           <h3>SaaS Analytics Dashboard</h3>
           <p>Self-hosted, multi-tenant analytics platform: a tracking script plus a dashboard of visitor statistics, no third party involved.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">SQLite</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/saas-analytics-dashboard" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:2">
+        <article class="card" style="--i:3">
           <h3>AI Interior Design Assistant</h3>
           <p>Upload a room photo and a style, get back a concept, a color palette, and furniture suggestions for that specific room.</p>
           <div class="tag-row"><span class="tag">Next.js</span><span class="tag">Computer vision</span></div>
           <div class="card-links"><a href="https://github.com/marcosmodly/ai-interior-design-assistant" target="_blank" rel="noopener">GitHub</a></div>
         </article>
 
-        <article class="card" style="--i:3">
+        <article class="card" style="--i:4">
           <h3>skillsmith</h3>
           <p>Turns anything into a Claude Skill: an interview-driven generator that drafts, validates, and packages it.</p>
           <div class="tag-row"><span class="tag">TypeScript</span><span class="tag">CLI</span></div>
