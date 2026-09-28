@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  Source of truth for the resume. The web page and the PDF both come from this
+  file: the PDF is this page printed through the @media print rules below, by
+  scripts/build-resume-pdf.py -> assets/resume/King-Joshua-Marcos-Resume.pdf.
+  Edit the resume here, re-run that script, and commit both files.
+-->
+<title>King Joshua Marcos — Resume</title>
+<meta name="description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems. Read it here or download the PDF.">
+<link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/resume.html">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/resume.html">
+<meta property="og:title" content="Resume — King Joshua Marcos">
+<meta property="og:description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems.">
+<meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Resume — King Joshua Marcos">
+<meta name="twitter:description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems.">
+<meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+<style>
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+}
+
+:root {
+  --bg: #faf8f3;
+  --surface: #ffffff;
+  --text: #1c1a16;
+  --text-dim: #64604f;
+  --border: #e3ddd0;
+  --accent: #b8531f;
+  --accent-strong: #8f4419;
+  --shadow: 0 1px 2px rgba(28,26,22,0.04), 0 8px 24px rgba(28,26,22,0.06);
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --display: "Montserrat", var(--sans);
+}
+
+html[data-theme="dark"] {
+  --bg: #15151a;
+  --surface: #1c1c22;
+  --text: #eae6dc;
+  --text-dim: #9d988b;
+  --border: #302f36;
+  --accent: #e8823f;
+  --accent-strong: var(--accent);
+  --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 30px rgba(0,0,0,0.35);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.skip-link {
+  position: absolute; left: 12px; top: -60px;
+  z-index: 100;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--accent); border-radius: 8px;
+  padding: 10px 16px; font-size: 0.9rem; text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus, .skip-link:focus-visible { top: 12px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+a { color: inherit; }
+
+/* ---------- site chrome (screen only; hidden when printed) ---------- */
+header.site {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; max-width: 1180px; margin: 0 auto; }
+.nav-name { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; text-decoration: none; }
+.nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.theme-toggle {
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover { border-color: var(--accent); transform: rotate(12deg); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 8px; text-decoration: none;
+  font-size: 0.92rem; white-space: nowrap; transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  border: 1px solid color-mix(in srgb, var(--text) 65%, var(--bg));
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+footer.site p { margin: 0; }
+@media (max-width: 480px) {
+  .nav-row { padding: 12px 16px; }
+  .btn { padding: 8px 12px; font-size: 0.85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body, .skip-link, .theme-toggle, .btn { transition: none; }
+}
+
+/* ---------- resume, on screen ---------- */
+main { padding: 32px 16px 72px; }
+.resume {
+  max-width: 820px; margin: 0 auto;
+  padding: clamp(24px, 5vw, 56px);
+  background: var(--surface);
+  border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: var(--shadow);
+  font-size: 0.97rem; line-height: 1.6;
+}
+.r-head { text-align: center; }
+.r-name {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em;
+  font-size: clamp(1.9rem, 5vw, 2.5rem); line-height: 1.1; margin: 0 0 0.4rem;
+}
+.resume .r-headline { margin: 0 0 0.7rem; color: var(--text-dim); }
+.resume .r-contact { margin: 0; font-size: 0.88rem; color: var(--text-dim); overflow-wrap: anywhere; }
+.r-contact a { text-decoration: none; border-bottom: 1px solid var(--border); }
+.r-contact a:hover { color: var(--text); border-color: var(--accent); }
+.sep { margin: 0 0.1em; opacity: 0.6; }
+
+.resume section { margin-top: 1.9rem; }
+.resume h2 {
+  font-family: var(--display); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-strong);
+  margin: 0 0 0.9rem; padding-bottom: 0.55rem; border-bottom: 1px solid var(--border);
+}
+.entry { margin-top: 1.15rem; }
+.entry:first-of-type { margin-top: 0; }
+.entry h3 {
+  display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.7rem;
+  font-family: var(--serif); font-weight: 600; font-size: 1.05rem; line-height: 1.35;
+  margin: 0 0 0.4rem; overflow-wrap: anywhere;
+}
+.e-meta { font-family: var(--sans); font-weight: 400; font-style: italic; font-size: 0.86rem; color: var(--text-dim); }
+.e-meta .sep { display: none; }
+.resume p { margin: 0 0 0.5rem; }
+.resume ul { margin: 0; padding-left: 1.25rem; }
+.resume li { margin: 0 0 0.4rem; padding-left: 0.15rem; }
+.resume li::marker { color: var(--text-dim); }
+.resume .cert-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem 0; padding: 0; }
+.resume .cert-list li { margin: 0; padding: 0; }
+.cert-list li:not(:last-child)::after { content: "\2022"; margin: 0 0.7em; color: var(--text-dim); }
+
+/* Shown only on paper. The phone number lives in the PDF but not on the web page. */
+.print-only { display: none; }
+
+/* ---------- resume, on paper ----------
+   Everything below is the PDF layout. It deliberately ignores the site theme
+   (always black on white, classic serif, navy headings) so the PDF stays the
+   same document recruiters and ATS parsers have always received, whatever
+   theme the page was in when it was printed. */
+@page { size: Letter; margin: 0.25in 0.5in; }
+
+@media print {
+  html, body { background: #fff; }
+  body { color: #000; font-size: 10pt; line-height: 1.15; transition: none; }
+  .screen-only { display: none !important; }
+  .print-only { display: inline; }
+  main { padding: 0; }
+
+  .resume {
+    max-width: none; margin: 0; padding: 0;
+    background: none; border: 0; border-radius: 0; box-shadow: none;
+    font-family: "Times New Roman", "Liberation Serif", Times, serif;
+    font-size: 10pt; line-height: 1.15; color: #000;
+    font-kerning: none; /* the word-processor PDF this replaces was unkerned; keeps line breaks the same */
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .resume a { color: inherit; text-decoration: none; border: 0; }
+  .sep { margin: 0 0.2em; opacity: 1; }
+
+  .r-name { font-family: inherit; font-size: 17pt; font-weight: 700; letter-spacing: 0; line-height: 1.15; color: #1f3864; margin: 0 0 2pt; }
+  .resume .r-headline { color: #666; margin: 0 0 3pt; }
+  .resume .r-contact { font-size: 8.5pt; color: #666; overflow-wrap: normal; }
+  /* keep each contact item whole, so the URL can't split at its hyphens */
+  .r-contact .nowrap { white-space: nowrap; }
+
+  .resume section { margin-top: 8pt; }
+  .resume h2 {
+    font-family: inherit; font-size: 11pt; font-weight: 700; letter-spacing: 0.02em; color: #1f3864;
+    margin: 0 0 4pt; padding-bottom: 1pt; border-bottom: 1px solid #1f3864;
+  }
+  .entry { margin-top: 6.5pt; }
+  .entry h3 { display: block; font-family: inherit; font-size: 10.5pt; line-height: 1.15; margin: 0; overflow-wrap: normal; }
+  .e-meta { font-family: inherit; font-size: 10.5pt; color: #666; }
+  .e-meta .sep { display: inline; }
+  .resume p { margin: 0; }
+  .resume ul { padding-left: 0; list-style: none; }
+  .resume li { margin: 0; padding: 0; }
+  /* Bullets are real "•" text rather than list markers: Chrome draws markers as
+     shapes, which would drop them from the PDF's text layer (the old PDF had them).
+     Hanging indent instead of position:absolute, because positioned boxes paint in a
+     later layer and text extraction (ATS) would read every bullet after every heading. */
+  .entry li { padding-left: 18pt; text-indent: -12pt; margin-bottom: 1.5pt; }
+  .entry li::before { content: "\2022"; display: inline-block; width: 12pt; text-indent: 0; }
+  .cert-list li:not(:last-child)::after { color: inherit; margin: 0 0.5em; }
+
+  .resume h2, .resume h3 { break-after: avoid; }
+  .resume li, .resume p { orphans: 2; widows: 2; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link screen-only" href="#top">Skip to content</a>
+
+<header class="site screen-only">
+  <div class="nav-row">
+    <a href="index.html" class="nav-name">King Joshua Marcos</a>
+    <div class="nav-actions">
+      <a class="btn btn-primary" href="assets/resume/King-Joshua-Marcos-Resume.pdf" download>Download PDF</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">
+        <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top" tabindex="-1">
+  <article class="resume">
+
+    <header class="r-head">
+      <h1 class="r-name">King Joshua Marcos</h1>
+      <p class="r-headline">Full Stack Developer | AI Products, APIs &amp; Data Systems | Remote</p>
+      <p class="r-contact">
+        <span class="nowrap">Pangasinan, Philippines <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap">Available for Remote Roles <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap"><a href="mailto:marcosking1221@gmail.com">marcosking1221@gmail.com</a> <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap print-only">0929 479 1598 <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap"><a href="https://github.com/marcosmodly">github.com/marcosmodly</a> <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap"><a href="https://portfolio-ebon-pi-34.vercel.app/">https://portfolio-ebon-pi-34.vercel.app/</a></span>
+      </p>
+    </header>
+
+    <section aria-labelledby="r-summary">
+      <h2 id="r-summary">Professional Summary</h2>
+      <p>Full stack developer who builds and ships AI products solo, from database schema to production deployment. Founded and runs ModlyAI, a live AI furniture platform where shoppers upload a room photo and preview furniture in 3D before buying. Also ships independent projects end to end, including Holdfast, a Telegram bot that turns voice notes into structured reminders, plus other tools spanning vector search, computer vision, and developer tooling. Uses Claude daily to prototype and debug, and is comfortable being the only person who understands a system from front end to database.</p>
+    </section>
+
+    <section aria-labelledby="r-experience">
+      <h2 id="r-experience">Experience</h2>
+
+      <div class="entry">
+        <h3><span class="e-title">Founder &amp; Developer, ModlyAI</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Remote | 2025 &ndash; Present</span></h3>
+        <ul>
+          <li>Built and shipped an AI furniture platform (modlyai.tech) solo, covering front end, back end, database, and hosting on Vercel, taking it from concept to a live product.</li>
+          <li>Own the full technology stack and day-to-day operations, architecture, feature builds, deployment, SOPs, reporting, and CMS/content pipelines, keeping the platform running and shipping without a team.</li>
+          <li>Automated repetitive data workflows with AI-powered tools, cutting manual processing time by about 40 percent.</li>
+          <li>Use Claude daily to prototype features and debug issues, shortening the time between an idea and a shipped feature.</li>
+          <li>Wrote SQL queries to extract, validate, and cross-check data across system tables, catching inconsistencies before they reached reporting.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Engineering Department Assistant (Work Immersion), Municipal Government of Urdaneta City</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Urdaneta, Pangasinan | 2020</span></h3>
+        <ul>
+          <li>Assisted licensed engineers and architects during site visits and field inspections, supporting accurate on-site documentation.</li>
+          <li>Encoded and filed technical documents, engineering records, and administrative paperwork, keeping departmental records accurate and easy to retrieve.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="r-projects">
+      <h2 id="r-projects">Projects</h2>
+
+      <div class="entry">
+        <h3><span class="e-title">ModlyAI (<a href="https://modlyai.tech">modlyai.tech</a> &middot; <a href="https://github.com/marcosmodly/modlyai">github.com/marcosmodly/modlyai</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Live product. Next.js, TypeScript, Claude API, 3D rendering</span></h3>
+        <ul>
+          <li>Built an AI furniture platform end to end, taking a shopper's room photo through catalog matching, AI material customization, and 3D rendering, so they can preview furniture in their own space before buying.</li>
+          <li>Owned architecture, backend, frontend, and deployment as the sole developer, taking the product from first commit to a live production site.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Holdfast (<a href="https://useholdfast.co">useholdfast.co</a> &middot; <a href="https://github.com/marcosmodly/holdfast">github.com/marcosmodly/holdfast</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Live product. Next.js, TypeScript, Telegram Bot API, Claude API</span></h3>
+        <ul>
+          <li>Built a Telegram bot that transcribes a short voice note after you meet someone and extracts the person, what is happening in their life, and what was promised, resurfacing it as a reminder on the day it matters.</li>
+          <li>Built an evaluation suite of twelve test transcripts run across four prompt versions, three trials each, taking extraction accuracy from 24/36 to 36/36 by moving date resolution, commitment verification, and message copy out of the model and into deterministic code, with 23 unit tests covering date handling.</li>
+          <li>Found and fixed a persistence bug where ten of eleven captures silently stored nothing despite the bot reporting success every time, tracing it to a single Instant transaction where one rejected step discarded the person, the facts, and the commitments, and closing the gap between reported and actual success.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Second Brain (<a href="https://github.com/marcosmodly/second-brain-ai">github.com/marcosmodly/second-brain-ai</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, PostgreSQL, pgvector, OpenAI embeddings, JWT auth</span></h3>
+        <ul>
+          <li>Built a personal knowledge base with real semantic search, embedding notes on save and retrieving them by cosine similarity over pgvector, so related notes surface even without shared keywords.</li>
+          <li>Built auth (bcrypt + JWT session cookies) and the Postgres schema from scratch instead of a managed auth/DB product, keeping full control over the data model and session security.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Screenshot to Website (<a href="https://github.com/marcosmodly/screenshot-to-website">github.com/marcosmodly/screenshot-to-website</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, TypeScript, Claude vision API, Tailwind</span></h3>
+        <ul>
+          <li>Built a tool that converts a UI screenshot into working, responsive HTML and Tailwind, with a live split-pane preview that re-renders as you edit the code, so changes show up instantly with no build step.</li>
+          <li>Verified the sandboxed preview mechanism (iframe srcdoc, script execution) with real headless-browser tests, confirming generated code actually ran safely instead of assuming it worked.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">skillsmith (<a href="https://github.com/marcosmodly/skillsmith">github.com/marcosmodly/skillsmith</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> TypeScript, Node CLI, Claude API, npm package</span></h3>
+        <ul>
+          <li>Built and published an open-source CLI that turns a description of desired expertise into a real Claude Skill, running a structured interview, drafting the files, and validating the result against written authoring standards, so the output stays consistent instead of a single unchecked LLM pass.</li>
+          <li>Shipped the tool two ways from one codebase, a CLI that calls the Claude API and a native in-product skill that runs with no API key, backed by 19 unit tests and strict TypeScript, and confirmed it with a real npm-pack-and-install round trip.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Grandma's Lighthouse</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Godot 4, GDScript</span></h3>
+        <ul>
+          <li>Built a five-room puzzle game where the player restores color to a lighthouse, with save and load, room transitions, and audio synthesized entirely in code, shipping with zero external art or sound assets.</li>
+          <li>Wrote a breadth-first solver that proves every room is solvable and free of soft-locks, using it as a design tool to reject bad layouts before building them, so every shipped room is guaranteed completable.</li>
+          <li>Built a palette system that enforces measured contrast between floors, objects, and furniture, keeping every room readable in both the desaturated and restored states.</li>
+          <li>Wrote 19 automated headless checks that catch parse errors, unreachable exits, and unsolvable layouts, keeping broken layouts from ever reaching a shipped build.</li>
+          <li>Directed Claude Code as the implementer across the project and ran external playtests, driving three rounds of difficulty rework based on real player feedback.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="r-skills">
+      <h2 id="r-skills">Technical Skills</h2>
+      <p><strong>Frontend:</strong> Next.js, React, TypeScript, JavaScript, Tailwind, HTML5, CSS3, responsive UI development</p>
+      <p><strong>Backend &amp; Data:</strong> PostgreSQL, pgvector, InstantDB, SQL (schema design, querying, cross-checking production data), JWT/session auth</p>
+      <p><strong>AI &amp; LLM Integration:</strong> Claude API, OpenAI API (embeddings, vision), prompt evaluation suites, moving model output into deterministic code with unit tests</p>
+      <p><strong>Deployment &amp; Tooling:</strong> Vercel, Git/GitHub workflows, Telegram Bot API, REST API design, npm package publishing</p>
+    </section>
+
+    <section aria-labelledby="r-education">
+      <h2 id="r-education">Education</h2>
+      <div class="entry">
+        <h3><span class="e-title">Bachelor of Science in Architecture (Undergraduate)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Pangasinan State University | 2021 &ndash; Present</span></h3>
+        <p>Developed precision, structured problem-solving, and systems thinking through technical drafting and digital documentation. Self-taught in full stack web development and AI systems since.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="r-certifications">
+      <h2 id="r-certifications">Certifications</h2>
+      <ul class="cert-list">
+        <li>Computer-Aided Design (CAD)</li>
+        <li>Adobe Photoshop</li>
+        <li>Adobe Premiere Pro</li>
+        <li>AI Agent Building Course</li>
+      </ul>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site screen-only">
+  <p>King Joshua Marcos · this page is the source; the PDF is printed from it.</p>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+  var iconSun = document.getElementById('iconSun');
+  var iconMoon = document.getElementById('iconMoon');
+
+  function syncIcon() {
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    iconSun.style.display = isDark ? 'none' : 'block';
+    iconMoon.style.display = isDark ? 'block' : 'none';
+    toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+  }
+  syncIcon();
+
+  toggle.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncIcon();
+  });
+})();
+</script>
+</body>
+</html>

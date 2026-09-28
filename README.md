@@ -24,6 +24,20 @@ no `node_modules`. Open the file and you're looking at the entire site.
 Hero → about → skills → project grid → four case studies (ModlyAI, Holdfast,
 github-repo-hygiene-skill, Grandma's Lighthouse) → contact.
 
+## Resume
+
+`resume.html` is the source of truth for the resume. The web page is the page
+itself; the PDF at `assets/resume/King-Joshua-Marcos-Resume.pdf` is that same
+page printed through its `@media print` rules by headless Edge or Chrome, so the
+two can't drift apart. The site has no build step, so the PDF is committed:
+
+```bash
+python scripts/build-resume-pdf.py
+```
+
+Re-run it and commit both files whenever the resume changes. It needs Python 3
+and Edge or Chrome, nothing else.
+
 ## Running it locally
 
 Any static file server works, since it's just HTML:
