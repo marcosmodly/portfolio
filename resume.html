@@ -182,6 +182,10 @@ main { padding: 32px 16px 72px; }
 .resume .cert-list li { margin: 0; padding: 0; }
 .cert-list li:not(:last-child)::after { content: "\2022"; margin: 0 0.7em; color: var(--text-dim); }
 
+/* keeps a hyphenated word whole, so a line can't break inside it (a broken hyphen
+   also reads as a missing one to text extraction) */
+.nw { white-space: nowrap; }
+
 /* Shown only on paper. The phone number lives in the PDF but not on the web page. */
 .print-only { display: none; }
 
@@ -309,6 +313,15 @@ main { padding: 32px 16px 72px; }
         <ul>
           <li>Built an AI furniture platform end to end, taking a shopper's room photo through catalog matching, AI material customization, and 3D rendering, so they can preview furniture in their own space before buying.</li>
           <li>Owned architecture, backend, frontend, and deployment as the sole developer, taking the product from first commit to a live production site.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Marketing Skill (<a href="https://github.com/marcosmodly/marketing-skill">github.com/marcosmodly/marketing-skill</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Installable plugin. Claude Code Agent Skills, Python, Markdown-based state</span></h3>
+        <ul>
+          <li>Built and published in four days an installable, MIT-licensed Claude Code plugin of twelve composable skills covering competitor research, content, SEO, ads, cold outreach, and community posting for eleven platforms, all reading one shared <span class="nw">brand-voice</span> config.</li>
+          <li>Designed the approval gate into the shared state file itself: drafting skills can only write Planned, Drafted, or Ready for Approval, and only publish-pipeline can write Approved, in the same turn a person has seen the real content and replied, so nothing sends without a live human reply.</li>
+          <li>Wrote about 1,100 lines of dependency-free Python, including hand-off scripts that refuse to run without --dry-run or --confirmed and redact credentials in dry-run output, alongside a Gmail-synced suppression list that permanently blocks re-contact after a reply, bounce, or opt-out.</li>
         </ul>
       </div>
 
