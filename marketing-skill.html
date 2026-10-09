@@ -10,7 +10,7 @@
   }, 2500);
 </script>
 <title>Marketing Skill — Case Study | King Joshua Marcos</title>
-<meta name="description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
+<meta name="description" content="A marketing department, encoded as twelve Claude Code skills that also render the videos. 39 GitHub stars in two weeks, and nothing goes out until a human reads the real thing and says so, live.">
 <link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/marketing-skill.html">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -22,13 +22,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/marketing-skill.html">
 <meta property="og:title" content="Marketing Skill — King Joshua Marcos">
-<meta property="og:description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
+<meta property="og:description" content="A marketing department, encoded as twelve Claude Code skills that also render the videos. 39 GitHub stars in two weeks, and nothing goes out until a human reads the real thing and says so, live.">
 <meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Marketing Skill — King Joshua Marcos">
-<meta name="twitter:description" content="A marketing department, encoded as twelve Claude Code skills. Nothing goes out until a human reads the real thing and says so, live.">
+<meta name="twitter:description" content="A marketing department, encoded as twelve Claude Code skills that also render the videos. 39 GitHub stars in two weeks, and nothing goes out until a human reads the real thing and says so, live.">
 <meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script>
 (function () {
@@ -949,6 +949,13 @@ html[data-theme="dark"] {
 }
 .cs-diagram .dash { color: var(--text-faint); }
 
+/* template galleries: seven frames in one strip; on a phone each frame would be
+   ~50px wide, so the strip keeps a readable width and scrolls instead */
+@media (max-width: 640px) {
+  .strip-scroll { overflow-x: auto; }
+  .strip-scroll img { min-width: 760px; }
+}
+
 /* platform table */
 .table-scroll { overflow-x: auto; margin-top: 26px; }
 table.platforms { max-width: none; min-width: 680px; margin: 0; }
@@ -1042,7 +1049,7 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
           <span class="cs-links-note cs-mono">marketing-skill</span>
           <a href="https://github.com/marcosmodly/marketing-skill" target="_blank" rel="noopener">github.com/marcosmodly/marketing-skill →</a>
         </div>
-        <p class="dim cs-lead">Competitor research, content, SEO, ads, cold outreach, and community-specific posting for eleven platforms, all built around one rule that isn't a suggestion: nothing goes out until a human reads the real thing and says so, live.</p>
+        <p class="dim cs-lead">Competitor research, content, SEO, ads, cold outreach, community-specific posting for eleven platforms, and short-form videos rendered on your own machine, all built around one rule that isn't a suggestion: nothing goes out until a human reads the real thing and says so, live.</p>
 
         <dl class="cs-meta">
           <div class="cs-meta-item">
@@ -1051,28 +1058,42 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
           </div>
           <div class="cs-meta-item">
             <dt>Timeframe</dt>
-            <dd>4 days · Sep 2026</dd>
-            <dd class="sub">30 commits, shipped iteratively</dd>
+            <dd>2 weeks · Sep–Oct 2026</dd>
+            <dd class="sub">first release in 4 days, 70 commits</dd>
           </div>
           <div class="cs-meta-item">
             <dt>Built with</dt>
             <dd>Claude Code Agent Skills</dd>
-            <dd class="sub">Python, Markdown-based state</dd>
+            <dd class="sub">Python, Node, Playwright, ffmpeg</dd>
           </div>
           <div class="cs-meta-item">
             <dt>Status</dt>
-            <dd>Installable plugin</dd>
-            <dd class="sub">public repo, MIT-licensed</dd>
+            <dd>Installable plugin, v0.8</dd>
+            <dd class="sub">Claude Code &amp; Codex · MIT · CI</dd>
           </div>
         </dl>
+      </div>
+
+      <div class="cs-section reveal" aria-labelledby="ms-traction">
+        <span class="eyebrow">Traction</span>
+        <h2 id="ms-traction">Two stars after the first week. Thirty-nine after the second.</h2>
+        <p class="dim">For its first week the repo sat at two stars. Then 22 landed on October 3 and 4 alone, and the first forks followed. Reddit sent about four of every five referred visits, a fair share of them from its mobile app.</p>
+        <div class="stat-row cs-stats">
+          <div class="stat"><b class="accent">39</b>GitHub stars</div>
+          <div class="stat"><b>4</b>forks</div>
+          <div class="stat"><b>1,241</b>clones in 14 days, from 387 unique cloners</div>
+          <div class="stat"><b>808</b>repo views in 14 days, from 305 unique visitors</div>
+        </div>
+        <p class="dim cs-fine">Clones outnumber views because installing the plugin clones the repo, so the clone count is the closest thing GitHub reports to an install count. It also includes the repo's own CI checkouts. Figures from GitHub as of October 9, 2026.</p>
       </div>
 
       <div class="cs-section reveal">
         <div class="stat-row cs-stats">
           <div class="stat"><b class="accent">12</b>composable skills, one setup command</div>
+          <div class="stat"><b>29</b>video templates, rendered locally</div>
           <div class="stat"><b>11+</b>platforms with a scripted send path</div>
-          <div class="stat"><b>~4,800</b>lines of skill specs &amp; docs</div>
-          <div class="stat"><b>~1,100</b>lines of dependency-free Python</div>
+          <div class="stat"><b>~6,200</b>lines of skill specs &amp; docs</div>
+          <div class="stat"><b>~8,100</b>lines of Python &amp; Node tooling</div>
           <div class="stat"><b class="accent">0</b>sends that happen without a human reply</div>
         </div>
       </div>
@@ -1106,7 +1127,7 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
               <div class="skill-row"><dt>ad-copy-generator</dt><dd>Multiple variants per platform, each a distinct hook angle, sized to that platform's limits.</dd></div>
               <div class="skill-row"><dt>email-sequence</dt><dd>A multi-email drip with send timing, subject lines, and an actual narrative arc across emails.</dd></div>
               <div class="skill-row"><dt>visual-brief-generator</dt><dd>Shot list, per-scene prompts, aspect ratios, style guide. Generates the asset only if a tool is connected.</dd></div>
-              <div class="skill-row"><dt>short-form-video</dt><dd>Hook-first script and a ready-to-post package for Shorts, Reels, and TikTok: caption, hashtags, best-time-to-post.</dd></div>
+              <div class="skill-row"><dt>short-form-video</dt><dd>Hook-first script and a ready-to-post package for Shorts, Reels, and TikTok: caption, hashtags, best-time-to-post. Opt in and it renders the finished video too.</dd></div>
             </dl>
           </div>
 
@@ -1135,10 +1156,60 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
         <p class="setup-note">+ /marketing-skill:marketing-setup — the one command every skill above reads its defaults from</p>
       </div>
 
+      <div class="cs-section reveal" aria-labelledby="ms-video">
+        <span class="eyebrow">The second week</span>
+        <h2 id="ms-video">Then the scripts started turning into finished videos.</h2>
+        <p class="dim">The first release wrote short-form scripts and stopped there, which left the hardest part, actually making the video, to whoever was reading. The second week went into a renderer that runs on your own machine with free tools only: Node, Playwright, and ffmpeg. An animated HTML page goes in; a vertical MP4 with captions, a cover frame, and an original soundtrack comes out.</p>
+
+        <figure class="cs-figure">
+          <div class="strip-scroll" role="region" aria-label="Marketing video templates" tabindex="0">
+          <picture>
+            <source srcset="assets/case-studies/ms-templates-marketing.avif" type="image/avif">
+            <img src="assets/case-studies/ms-templates-marketing.webp" width="1890" height="524" loading="lazy" decoding="async"
+                 alt="Seven vertical video frames side by side, each one template caught mid-video: promo (a checklist of the plugin's skills), how-to (a phone mockup on step 2 of 3), narrated (a caption reading 'you're losing money on every late invoice'), testimonial (6 hrs saved, 40% fewer late payments), FAQ (a large 'No.' with three bullets), announcement (three new features), and team (three avatars).">
+          </picture>
+          </div>
+          <figcaption>Seven marketing templates, each frame caught mid-video. The copy is placeholder; the skill rewrites it for the product and the brand voice before rendering.</figcaption>
+        </figure>
+        <figure class="cs-figure">
+          <div class="strip-scroll" role="region" aria-label="Everyday video formats" tabindex="0">
+          <picture>
+            <source srcset="assets/case-studies/ms-templates-everyday.avif" type="image/avif">
+            <img src="assets/case-studies/ms-templates-everyday.webp" width="1890" height="524" loading="lazy" decoding="async"
+                 alt="Seven more vertical frames from the everyday formats: text-chat (a client asking for a logo bigger but also smaller), notifications (a lock screen of work pings), post-card (a social post with replies), storytime, countdown (#3: put the due date in the subject line), reveal (a 'wait for it' progress bar), and before-after (an inbox at zero unread on Friday).">
+          </picture>
+          </div>
+          <figcaption>Seven of the 22 everyday formats, the skits and stories that do well on a For You page, not just ads.</figcaption>
+        </figure>
+
+        <div class="decision-list">
+          <div class="decision">
+            <div class="decision-tag">Audio</div>
+            <h3>Music nobody has to license, in a sound the brand can own.</h3>
+            <p>Every soundtrack is synthesized from scratch, about 1,200 lines of dependency-free JavaScript covering eleven genres and twenty sound effects with no samples. Each project picks one sonic identity, a genre, key, tempo, and a two-bar signature hook, and every video it makes closes on the same "sonic logo," the way a jingle works. Rendering is deterministic, so the same page always sounds the same.</p>
+            <p>It also solves a platform problem: in-app sounds can't be added when posting through an API, so the music has to be in the file. Loudness turned out harder than the music. Every render targets −14&nbsp;LUFS with true peaks at or under −1&nbsp;dBTP, and the first pass missed by 0.3&nbsp;dB, because ffmpeg's <code>loudnorm</code> under-reads a limiter's output and AAC encoding overshoots unpredictably. The renderer now measures loudness itself, limits at 192&nbsp;kHz to catch peaks between samples, then measures the encoded file and re-encodes at a lower ceiling until it fits.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Captions</div>
+            <h3>Word-by-word captions without a transcription service.</h3>
+            <p>A narrated video starts as a script of numbered lines. Each line is voiced by Kokoro, a free model that runs locally, or by the user's own takes, and <code>captions.js</code> works out when each word is said from the clip's pauses and the words' relative lengths. Against synthesized speech that lands about 50&nbsp;ms from the true word starts on average, with Whisper as an option.</p>
+            <p>The same timing drives <code>cut.js</code>, which takes a talking-head clip filmed on a phone, cuts out the pauses, and re-times the captions to what's left.</p>
+          </div>
+
+          <div class="decision">
+            <div class="decision-tag">Quality gate</div>
+            <h3>A QA pass that fails a blank first frame.</h3>
+            <p>The first frame is the default cover and the moment a viewer decides whether to swipe, so <code>check.js</code> fails any page whose first frame or first second is empty, or whose text leaves the screen before it can be read, and it flags any stretch over three seconds where nothing changes. CI runs it against every template in headless Chromium on every pull request.</p>
+            <p>Rendering frames in parallel across browsers took a 12-second template from 76&nbsp;s to 25&nbsp;s on a 4-core machine. A video log then records how each posted video actually did, pulling the numbers from YouTube, Instagram, or TikTok, and after about ten posts the skills start steering formats, hooks, and posting times by that account's own results.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="cs-section reveal" aria-labelledby="ms-decisions">
         <span class="eyebrow">Engineering decisions</span>
         <h2 id="ms-decisions">The parts that were actually hard.</h2>
-        <p class="dim">Getting a model to write a decent LinkedIn post is a solved problem. These are the six decisions that turned twelve drafting skills into a system worth trusting with a real account.</p>
+        <p class="dim">Getting a model to write a decent LinkedIn post is a solved problem. These are the seven decisions that turned twelve drafting skills into a system worth trusting with a real account.</p>
 
         <div class="decision-list">
 
@@ -1246,6 +1317,13 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
             <p>No external scheduler, cron job, or reminder is needed. The cadence lives inside the skill itself.</p>
           </div>
 
+          <div class="decision">
+            <div class="decision-tag">Portability</div>
+            <h3>One repo, two agents, and CI that knows both sets of limits.</h3>
+            <p>OpenAI's Codex reads Claude Code's plugin manifests, so the same repo installs there with no fork. The differences are small and easy to break later: Codex doesn't fill in <code>${CLAUDE_PLUGIN_ROOT}</code>, so each skill finds its own plugin folder, and Codex only turns a command into a skill if it's under 4&nbsp;KB, so the setup command has to stay short.</p>
+            <p>Limits like that get forgotten by the next edit, so they live in CI instead of in anyone's memory. Every pull request checks skill frontmatter against the Agent Skills description limit, the setup command against Codex's size limit, the manifests, every path a skill points at, and every link in the docs, then dry-runs both publish scripts and confirms the generated templates match their source.</p>
+          </div>
+
         </div>
       </div>
 
@@ -1278,9 +1356,10 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
       <div class="cs-section reveal" aria-labelledby="ms-outcome">
         <span class="eyebrow">Outcome</span>
         <h2 id="ms-outcome">What one operator can actually run with this.</h2>
-        <p class="dim">Put together, the twelve skills behave less like a content generator and more like a small marketing team with one person directing it: competitor research on Monday morning, a week of platform-tagged posts queued by lunch, a freshly researched and individually personalized outreach batch going out that afternoon, and a Reddit post that's already been checked against that subreddit's actual rules before it was ever drafted.</p>
+        <p class="dim">Put together, the twelve skills behave less like a content generator and more like a small marketing team with one person directing it: competitor research on Monday morning, a week of platform-tagged posts queued by lunch, the vertical videos for them rendered in the brand's own sound, a freshly researched and individually personalized outreach batch going out that afternoon, and a Reddit post that's already been checked against that subreddit's actual rules before it was ever drafted.</p>
         <blockquote class="closing-line cs-quote">None of it reaches an inbox, a feed, or a webhook until a person reads the real thing and says go.</blockquote>
         <p class="dim">That last part is the actual product. Anyone can wire an LLM to an API and call it "automation." The harder, more useful thing is building automation with a governor built in, one that a founder can hand their real accounts to without spending the next month checking it hasn't posted something unhinged to a subreddit at 2am.</p>
+        <p class="dim">I run it on my own products. Holdfast's October landing-page rework came straight out of three of these skills: <code>competitor-research</code> on Monica found its homepage already used a near-identical "better friend" line, so Holdfast's closing headline was rebuilt around the voice note; <code>seo-brief</code> retargeted the homepage at what people actually search for; and <code>visual-brief-generator</code> wrote the brief for the 72-second explainer now under its hero. <a href="holdfast.html">The Holdfast case study</a> has the details, and <a href="https://github.com/marcosmodly/holdfast/tree/main/marketing" target="_blank" rel="noopener">the three briefs are public</a>.</p>
       </div>
 
       <div class="cs-section reveal" aria-labelledby="ms-skills">
@@ -1290,6 +1369,10 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
           <span class="tag">Safety-first / governance architecture</span>
           <span class="tag">API research across 11+ platforms</span>
           <span class="tag">Python — dependency-free tooling</span>
+          <span class="tag">Video pipeline — Node, Playwright, ffmpeg</span>
+          <span class="tag">Procedural audio &amp; loudness</span>
+          <span class="tag">CI with GitHub Actions</span>
+          <span class="tag">Claude Code &amp; Codex compatibility</span>
           <span class="tag">State-machine &amp; data-model design</span>
           <span class="tag">Technical specification writing</span>
           <span class="tag">Graceful degradation by design</span>
@@ -1299,11 +1382,14 @@ pre.install .cmt { color: color-mix(in srgb, var(--code-text) 55%, var(--code-bg
       <div class="cs-section cs-install reveal">
         <pre class="install">claude plugin marketplace add marcosmodly/marketing-skill
 claude plugin install marketing-skill@marketing-skill
-<span class="cmt"># or copy skills/* straight into ~/.claude/skills/</span></pre>
+<span class="cmt"># OpenAI Codex</span>
+codex plugin marketplace add marcosmodly/marketing-skill
+codex plugin add marketing-skill@marketing-skill</pre>
         <div class="cs-links-row">
           <a href="https://github.com/marcosmodly/marketing-skill" target="_blank" rel="noopener">Source →</a>
-          <a href="https://github.com/marcosmodly/marketing-skill/blob/claude/marketing-skill-builder-uzp891/EXAMPLE.md" target="_blank" rel="noopener">A full worked run →</a>
-          <a href="https://github.com/marcosmodly/marketing-skill/blob/claude/marketing-skill-builder-uzp891/README.md" target="_blank" rel="noopener">Full documentation →</a>
+          <a href="https://github.com/marcosmodly/marketing-skill/blob/main/EXAMPLE.md" target="_blank" rel="noopener">A full worked run →</a>
+          <a href="https://github.com/marcosmodly/marketing-skill/blob/main/media/explainer/marketing-skill-explainer.mp4" target="_blank" rel="noopener">The explainer video it rendered →</a>
+          <a href="https://github.com/marcosmodly/marketing-skill/blob/main/docs/video.md" target="_blank" rel="noopener">How the videos get made →</a>
         </div>
         <p class="dim cs-fine">Case study written from the project's own commit history, source, and documentation.</p>
       </div>

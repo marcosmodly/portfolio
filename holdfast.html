@@ -922,7 +922,7 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <a href="https://useholdfast.co" target="_blank" rel="noopener">Live site &nearr;</a>
           <a href="https://github.com/marcosmodly/holdfast" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
-        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, pre-launch, one user · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a><br>Built with TypeScript · Telegram · gpt-4o-mini · database</p>
+        <p class="role-line">Solo, product / build / deploy · 2026 · Status: live, waitlist open · <a href="https://useholdfast.co" target="_blank" rel="noopener">useholdfast.co</a><br>Built with TypeScript · Telegram · gpt-4o-mini · database</p>
         <p class="dim" style="max-width:60ch">Talk for twenty seconds after you see someone, get reminded of the one thing worth saying, on the day it matters.</p>
       </div>
 
@@ -942,8 +942,8 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
 
       <div class="cs-section reveal">
         <h3>03 / Mechanism: twenty seconds in, one message out</h3>
-        <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio, text is stored, voice never is. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
-        <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send at most one, hard cap of three messages per person per rolling seven days, over-nudging is the failure mode that kills this category. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
+        <p>No app. Capture is a voice note to a Telegram bot, roughly twenty seconds, said the way you'd tell a friend what happened. Transcribe, then delete the audio: the text is kept, the recording is gone as soon as it's transcribed. Extract who you saw, what's happening in their life, and what <i>you</i> said you'd do (that last distinction is the product). Dates are resolved by a pure function, not the model. Commitments must quote the transcript verbatim or they're dropped. Persist person, facts, and commitments as linked records in one atomic transaction.</p>
+        <p>Rank once a day: overdue commitments first, then facts dated yesterday, then people drifting past their usual cadence. Send from the top, under a hard cap of three messages per rolling seven days across everyone you know, because over-nudging is the failure mode that kills this category. Whatever doesn't fit under the cap is dropped, not queued for later. Listen for the answer: "done" closes it, "not yet" brings it back in three days, "no" drops it without guilt.</p>
 
         <figure class="cs-figure reveal">
           <picture>
@@ -1026,6 +1026,20 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
         <p>That last row is the finding, worth more than the passing tests. Working alone, in a normal week there are perhaps two moments seeing someone worth recording, Holdfast needs someone who has five or six. The reminders that did arrive felt hollow, several were about example transcripts written during development rather than real promises to real people. Neither of those is a reason to stop, both are reasons to stop testing it on myself.</p>
         <p>What happens next: five testers chosen for one property only, they see a lot of people, two weeks. The measure is their capture counts in the database, not their opinions in a chat. Nothing new gets built until those numbers exist.</p>
         <p class="closing-line">I built a product I am not the user of, and then used myself to test it.</p>
+      </div>
+
+      <div class="cs-section reveal">
+        <h3>07 / Since then: letting strangers in safely</h3>
+        <p>Nothing built since has been a new feature. It has all been about letting people I don't know in safely, through the waitlist that has sat on the landing page since August.</p>
+        <p><b>Limits before strangers.</b> A voice note over two minutes, or past fifteen in a rolling day, is turned away in the webhook before the audio is downloaded or sent to OpenAI, so a rejected note costs nothing. The length check uses Telegram's own duration field and needs no query, so it runs first; a note with no duration is accepted rather than guessed at.</p>
+        <p><b>A hole in the storage rules.</b> Audio sits in file storage between upload and transcription, and the rule on those files let anyone holding the app's public id view, upload, or delete anything under <code>captures/</code>. Only the server ever touches them, through an admin SDK that skips client rules, so every client action is now denied. Verified against the live rules: a guest reads zero rows in every namespace.</p>
+        <p><b>A welcome email that can't break signup.</b> New waitlist rows get one email through Resend, sent after the response so signup stays fast. A failed send never fails the signup, an idempotency key built from a hash of the address stops a double submit from sending twice, and the address is never logged. The copy has its own tests: no dashes, no exclamation marks, no CRM words.</p>
+        <p><b>Landing copy from research, not guesses.</b> Three briefs, made with my own <a href="marketing-skill.html">Marketing Skill</a> plugin, are <a href="https://github.com/marcosmodly/holdfast/tree/main/marketing" target="_blank" rel="noopener">committed alongside the code</a>. A competitor brief on Monica found its homepage already used a near-identical "better friend" line, so the closing headline was rebuilt around the voice note instead. An SEO brief retargeted the page at what people actually search for ("app to remember things about friends"). A visual brief became a 72-second narrated explainer, placed under the hero. The page also gained a plain section on where a voice note goes: OpenAI for transcription and extraction, audio deleted once the text is saved, the original left in Telegram.</p>
+        <div class="stat-row">
+          <div class="stat"><b>40</b>unit tests, up from 23</div>
+          <div class="stat"><b>2 min · 15/day</b>voice-note limits, checked before download</div>
+          <div class="stat"><b>0</b>rows a guest can read</div>
+        </div>
       </div>
     </div>
   </article>

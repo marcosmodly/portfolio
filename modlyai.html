@@ -10,7 +10,7 @@
   }, 2500);
 </script>
 <title>ModlyAI — Case Study | King Joshua Marcos</title>
-<meta name="description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room, see the piece placed in it at the correct scale, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers at $299 and $599 a month.">
+<meta name="description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room with its measurements, get the catalog pieces that fit and where each one goes, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers from $19 to $199 a month.">
 <link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/modlyai.html">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -22,13 +22,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/modlyai.html">
 <meta property="og:title" content="ModlyAI — King Joshua Marcos">
-<meta property="og:description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room, see the piece placed in it at the correct scale, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers at $299 and $599 a month.">
+<meta property="og:description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room with its measurements, get the catalog pieces that fit and where each one goes, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers from $19 to $199 a month.">
 <meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ModlyAI — King Joshua Marcos">
-<meta name="twitter:description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room, see the piece placed in it at the correct scale, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers at $299 and $599 a month.">
+<meta name="twitter:description" content="ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room with its measurements, get the catalog pieces that fit and where each one goes, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers from $19 to $199 a month.">
 <meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script>
 (function () {
@@ -922,15 +922,15 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
           <a href="https://modlyai.tech" target="_blank" rel="noopener">Live site &nearr;</a>
           <a href="https://github.com/marcosmodly/modlyai" target="_blank" rel="noopener">Source &nearr;</a>
         </div>
-        <p class="role-line">Sole engineer, designer, and founder · Jan–Aug 2026 · <a href="https://modlyai.tech" target="_blank" rel="noopener">modlyai.tech</a><br>Every line, every design decision, every deploy. No teammates, no reviewers, no QA.</p>
-        <p class="dim" style="max-width:60ch">An embeddable widget that places a shopper's furniture pick into their own room photo at the correct scale, plus the merchant dashboard behind it.</p>
+        <p class="role-line">Sole engineer, designer, and founder · Jan–Oct 2026 · <a href="https://modlyai.tech" target="_blank" rel="noopener">modlyai.tech</a><br>Every line, every design decision, every deploy. No teammates, no reviewers, no QA.</p>
+        <p class="dim" style="max-width:60ch">An embeddable widget that answers a shopper's fit questions from the store's own catalog and recommends pieces that fit a photo of their own room, plus the merchant dashboard behind it.</p>
       </div>
 
       <div class="cs-section reveal">
         <h3>The problem</h3>
         <p>Furniture is one of the worst things to sell online. A shopper can't tell whether a sectional clears their living room, and the retailer eats the return. On made-to-order and custom-upholstery pieces it's worse than a return: there's no restock, and lead times of four to twelve weeks mean a wrong guess is months gone.</p>
         <p>The qualifying signal came out of prospect research: retailers who'd already written a "how to measure your space" guide, or mailed out physical fabric swatch kits, or sold a paid virtual design consultation. Those retailers had already told the world this problem was costing them money, and were paying humans to solve it one shopper at a time.</p>
-        <p>ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room, see the piece placed in it at the correct scale, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers at $299 and $599 a month.</p>
+        <p>ModlyAI is a widget a shopper uses on the product page: upload a photo of your own room with its measurements, get the catalog pieces that fit and where each one goes, change the fabric or finish, send a quote request, all without leaving the page. Sold to independent furniture retailers from $19 to $199 a month.</p>
 
         <figure class="cs-figure reveal">
           <picture>
@@ -964,17 +964,17 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       <div class="cs-section reveal">
         <h3>What I built</h3>
         <p>The widget opens as a chat: a shopper asks a fit question and gets an answer grounded in the store's own catalog, not a generic reply. From there, the Room Planner tab takes an uploaded room photo, reads back style, color, and layout cues from the image itself, and returns catalog matches with a placement position and clearances to all four walls, not just a carousel. The Customizer tab sets color and material on a made-to-order piece — plus a free-text field for anything else the shopper wants — every option priced from the merchant's own catalog data, before it becomes a quote request to the retailer with the exact spec attached.</p>
-        <p>On the merchant side, there's a dashboard: an onboarding checklist that includes uploading the product catalog and installing the widget snippet, an overview with sync and usage stats, widget branding settings with a live preview, and analytics with date-range filtering.</p>
+        <p>On the merchant side, there's a dashboard: an onboarding checklist that includes importing the product catalog (CSV, or a sync from Shopify or WooCommerce) and installing the widget, an overview with sync and usage stats, widget branding settings with a live preview, analytics with date-range filtering, and Paddle billing. The plan decides what the shopper sees: on the $19 Chat plan the widget hides the room planner and customizer, and the chat model is only told about the tools the store's plan includes, so it can't offer one that isn't there.</p>
       </div>
 
       <div class="cs-section reveal">
         <h3>The stack, and why</h3>
         <p><b>Next.js 14 App Router, TypeScript 5.5, React 18</b>: Server Components keep merchant data server-side, one framework covers marketing site, dashboard, and API. <b>InstantDB</b>: chosen for iteration speed as a solo dev, the honest retrospective on that is below. <b>NextAuth 4, JWT strategy</b>: sessions readable in Edge middleware with no database round trip on every request. <b>Paddle</b>: merchant of record, handles VAT and sales tax across the US, UK, and EU, which a solo founder can't do alone. <b>Tailwind 3</b>: consistency without maintaining a design system by hand. <b>Vercel</b>: <code>main</code> auto-deploys, fast, and also why a bad merge is live in ninety seconds. <b>Rollup for the widget</b>: merchants get one script tag, the widget can't assume React exists on their storefront.</p>
         <div class="stat-row">
-          <div class="stat"><b>121</b>commits, Jan–Aug 2026</div>
-          <div class="stat"><b>46,710</b>lines of TS/TSX</div>
-          <div class="stat"><b>61</b>API routes</div>
-          <div class="stat"><b>52</b>React components</div>
+          <div class="stat"><b>143</b>commits, Jan–Oct 2026</div>
+          <div class="stat"><b>51,281</b>lines of TS/TSX</div>
+          <div class="stat"><b>62</b>API routes</div>
+          <div class="stat"><b>54</b>React components</div>
           <div class="stat"><b>660 KB → 144 KB</b>widget build, raw then brotli'd</div>
         </div>
         <p>That 660&nbsp;KB is the raw bundle; Vercel serves it Brotli-compressed at <b>144&nbsp;KB</b> over the wire, and a stronger Brotli pass gets it to <b>114&nbsp;KB</b> (<code>gzip -9</code> lands at 141&nbsp;KB). It ships <code>no-cache</code> today, so a storefront re-fetches it on every page view. On a host page the widget's launcher button paints in about <b>1.1&nbsp;s</b>, almost all of it downloading and parsing that bundle from the CDN, with the config call and React mount another 50-100&nbsp;ms on top.</p>
@@ -1011,8 +1011,22 @@ footer.site { padding: 32px 24px; text-align: center; color: var(--text-dim); fo
       </div>
 
       <div class="cs-section reveal">
+        <h3>The second pass, in October</h3>
+        <p>In October a second review traced every AI and billing path from the shopper's click to the response. The pattern from the dashboard review came back, this time in the shopper-facing half of the product:</p>
+        <ol>
+          <li><b>Room recommendations had been quietly falling back to a mock.</b> The prompt listed products as <code>id:p&#8209;12</code>, the model usually echoed the prefix back, and <code>"id:p&#8209;12"</code> never equals <code>"p&#8209;12"</code>, so matching by id almost never worked. A loose name match rescued some of them. When it rescued none, or OpenAI returned an error, the planner served a rule-based mock analysis in exactly the same format as a real one. The mock is gone: a failure now shows the shopper an error and doesn't count against the store's plan.</li>
+          <li><b>"Get AI Suggestions" posted to an endpoint that never existed.</b> The customizer's button always answered "Couldn't get suggestions." It's a real route now, gated and billed like the rest of the customizer, and any colour or material it suggests has to be one the product actually offers.</li>
+          <li><b>Paid plans counted usage over the store's whole lifetime</b>, so a store that once hit its limit got a 402 forever. Usage now resets each billing period.</li>
+          <li><b>Phone photos broke the room planner.</b> They run 3 to 12&nbsp;MB, up to three go in one request, and Vercel rejects bodies over 4.5&nbsp;MB. The widget now re-encodes each photo in the browser to at most 1600&nbsp;px and 1&nbsp;MB first.</li>
+          <li><b>Large catalogs overflowed the model's context.</b> The planner now sends a ranked 60-item shortlist of pieces that are in stock and physically fit the room; chat sends at most 50 products and is told it's seeing a subset.</li>
+        </ol>
+        <p>The same pass locked the public surface down. Every AI route now goes through one guard: a request naming no store runs as the demo, on the server's own catalog with daily caps; an unknown store gets a 404; a real store keeps its plan limits plus per-minute burst limits, and any catalog sent from the browser is ignored. Store IDs are public, so CSV upload now needs a session scoped to the caller's own store. Quote emails only go to the store's own address. One-time codes burn after five wrong guesses, every dashboard route needs a verified email, and production responses carry HSTS, <code>frame-ancestors</code>, and a CSP without <code>unsafe-eval</code>.</p>
+        <p>And the demo got honest pictures: its 20 products had been sharing six photos, so a leather sofa showed an ivory fabric sectional. Each now has its own. The homepage gained a 57-second narrated explainer, built in code with Remotion from the real widget UI and the demo catalog.</p>
+      </div>
+
+      <div class="cs-section reveal">
         <h3>The result</h3>
-        <p><b>Shipped and live.</b> modlyai.tech is in production on Vercel. The widget installs as a single script tag on Shopify, WooCommerce, or a CSV catalog.</p>
+        <p><b>Shipped and live.</b> modlyai.tech is in production on Vercel. The widget installs with one script tag or a Shopify app embed, over a catalog synced from Shopify or WooCommerce or imported from CSV. Four plans: Chat at $19 a month, Starter at $79, Growth at $199, and custom Scale, after a 14-day trial with no card.</p>
 
         <figure class="cs-figure reveal">
           <picture>
