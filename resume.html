@@ -10,7 +10,7 @@
   Edit the resume here, re-run that script, and commit both files.
 -->
 <title>King Joshua Marcos — Resume</title>
-<meta name="description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems. Read it here or download the PDF.">
+<meta name="description" content="Resume of King Joshua Marcos, an AI engineer building LLM products, evals, and full stack apps. Read it here or download the PDF.">
 <link rel="canonical" href="https://portfolio-ebon-pi-34.vercel.app/resume.html">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -20,13 +20,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://portfolio-ebon-pi-34.vercel.app/resume.html">
 <meta property="og:title" content="Resume — King Joshua Marcos">
-<meta property="og:description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems.">
+<meta property="og:description" content="Resume of King Joshua Marcos, an AI engineer building LLM products, evals, and full stack apps.">
 <meta property="og:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Resume — King Joshua Marcos">
-<meta name="twitter:description" content="Resume of King Joshua Marcos, a full stack developer building AI products, APIs, and data systems.">
+<meta name="twitter:description" content="Resume of King Joshua Marcos, an AI engineer building LLM products, evals, and full stack apps.">
 <meta name="twitter:image" content="https://portfolio-ebon-pi-34.vercel.app/assets/og-image.png">
 <script>
 (function () {
@@ -157,6 +157,8 @@ main { padding: 32px 16px 72px; }
 .resume .r-contact { margin: 0; font-size: 0.88rem; color: var(--text-dim); overflow-wrap: anywhere; }
 .r-contact a { text-decoration: none; border-bottom: 1px solid var(--border); }
 .r-contact a:hover { color: var(--text); border-color: var(--accent); }
+/* keep each contact item whole, so the URL can't split at its hyphens */
+.r-contact .nowrap { white-space: nowrap; }
 .sep { margin: 0 0.1em; opacity: 0.6; }
 
 .resume section { margin-top: 1.9rem; }
@@ -178,9 +180,6 @@ main { padding: 32px 16px 72px; }
 .resume ul { margin: 0; padding-left: 1.25rem; }
 .resume li { margin: 0 0 0.4rem; padding-left: 0.15rem; }
 .resume li::marker { color: var(--text-dim); }
-.resume .cert-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem 0; padding: 0; }
-.resume .cert-list li { margin: 0; padding: 0; }
-.cert-list li:not(:last-child)::after { content: "\2022"; margin: 0 0.7em; color: var(--text-dim); }
 
 /* keeps a hyphenated word whole, so a line can't break inside it (a broken hyphen
    also reads as a missing one to text extraction) */
@@ -217,8 +216,6 @@ main { padding: 32px 16px 72px; }
   .r-name { font-family: inherit; font-size: 17pt; font-weight: 700; letter-spacing: 0; line-height: 1.15; color: #1f3864; margin: 0 0 2pt; }
   .resume .r-headline { color: #666; margin: 0 0 3pt; }
   .resume .r-contact { font-size: 8.5pt; color: #666; overflow-wrap: normal; }
-  /* keep each contact item whole, so the URL can't split at its hyphens */
-  .r-contact .nowrap { white-space: nowrap; }
 
   .resume section { margin-top: 8pt; }
   .resume h2 {
@@ -238,9 +235,10 @@ main { padding: 32px 16px 72px; }
      later layer and text extraction (ATS) would read every bullet after every heading. */
   .entry li { padding-left: 18pt; text-indent: -12pt; margin-bottom: 1.5pt; }
   .entry li::before { content: "\2022"; display: inline-block; width: 12pt; text-indent: 0; }
-  .cert-list li:not(:last-child)::after { color: inherit; margin: 0 0.5em; }
 
   .resume h2, .resume h3 { break-after: avoid; }
+  /* entries are short, so move a whole entry to the next page rather than split its bullets */
+  .entry { break-inside: avoid; }
   .resume li, .resume p { orphans: 2; widows: 2; }
 }
 </style>
@@ -266,41 +264,32 @@ main { padding: 32px 16px 72px; }
 
     <header class="r-head">
       <h1 class="r-name">King Joshua Marcos</h1>
-      <p class="r-headline">Full Stack Developer | AI Products, APIs &amp; Data Systems | Remote</p>
+      <p class="r-headline">AI Engineer | LLM Products, Evals &amp; Full Stack (TypeScript, Next.js) | Remote</p>
       <p class="r-contact">
         <span class="nowrap">Pangasinan, Philippines <span class="sep" aria-hidden="true">|</span></span>
-        <span class="nowrap">Available for Remote Roles <span class="sep" aria-hidden="true">|</span></span>
         <span class="nowrap"><a href="mailto:marcosking1221@gmail.com">marcosking1221@gmail.com</a> <span class="sep" aria-hidden="true">|</span></span>
-        <span class="nowrap print-only">0929 479 1598 <span class="sep" aria-hidden="true">|</span></span>
+        <span class="nowrap print-only">+63 929 479 1598 (WhatsApp) <span class="sep" aria-hidden="true">|</span></span>
         <span class="nowrap"><a href="https://github.com/marcosmodly">github.com/marcosmodly</a> <span class="sep" aria-hidden="true">|</span></span>
-        <span class="nowrap"><a href="https://portfolio-ebon-pi-34.vercel.app/">https://portfolio-ebon-pi-34.vercel.app/</a></span>
+        <span class="nowrap"><a href="https://portfolio-ebon-pi-34.vercel.app/">portfolio-ebon-pi-34.vercel.app</a></span>
       </p>
     </header>
 
     <section aria-labelledby="r-summary">
       <h2 id="r-summary">Professional Summary</h2>
-      <p>Full stack developer who builds and ships AI products solo, from database schema to production deployment. Founded and runs ModlyAI, a live AI furniture platform where shoppers upload a room photo and get matched to catalog pieces that fit their space. Also ships independent projects end to end, including Holdfast, a Telegram bot that turns voice notes into structured reminders, plus other tools spanning vector search, computer vision, and developer tooling. Uses Claude Code daily to prototype and debug, and is comfortable being the only person who understands a system from front end to database.</p>
+      <p>AI engineer who builds and ships LLM products end to end, from database schema to production. Founder and sole developer of ModlyAI, a live widget for furniture retailers with chat grounded in each store's catalog and a room planner that matches a shopper's photo and measurements to pieces that fit. Built an evaluation suite for Holdfast that took extraction accuracy from 24/36 to 36/36 by moving date and commitment logic out of the model into tested code. Uses Claude Code daily and publishes Claude Code tooling, including an open source plugin with 42 GitHub stars.</p>
     </section>
 
     <section aria-labelledby="r-experience">
       <h2 id="r-experience">Experience</h2>
 
       <div class="entry">
-        <h3><span class="e-title">Founder &amp; Developer, ModlyAI</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Remote | 2025 &ndash; Present</span></h3>
+        <h3><span class="e-title">Founder &amp; Developer, ModlyAI (<a href="https://modlyai.tech">modlyai.tech</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Remote | Jan 2026 - Present</span></h3>
         <ul>
-          <li>Built and shipped an AI furniture platform (modlyai.tech) solo, covering front end, back end, database, and hosting on Vercel, taking it from concept to a live product.</li>
-          <li>Own the full technology stack and day-to-day operations, architecture, feature builds, deployment, SOPs, reporting, and CMS/content pipelines, keeping the platform running and shipping without a team.</li>
-          <li>Automated repetitive data workflows with AI-powered tools, cutting manual processing time by about 40 percent.</li>
-          <li>Use Claude Code daily to prototype features and debug issues, shortening the time between an idea and a shipped feature.</li>
-          <li>Wrote SQL queries to extract, validate, and cross-check data across system tables, catching inconsistencies before they reached reporting.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3><span class="e-title">Engineering Department Assistant (Work Immersion), Municipal Government of Urdaneta City</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Urdaneta, Pangasinan | 2020</span></h3>
-        <ul>
-          <li>Assisted licensed engineers and architects during site visits and field inspections, supporting accurate on-site documentation.</li>
-          <li>Encoded and filed technical documents, engineering records, and administrative paperwork, keeping departmental records accurate and easy to retrieve.</li>
+          <li>Built an embeddable widget for furniture retailers: chat grounded in each store's catalog, a room planner that matches a shopper's room photo and measurements to pieces that fit and gives each one a position and clearances to all four walls, and a customizer that turns the chosen finish into a quote request.</li>
+          <li>Took it from first commit to production on Vercel (Next.js, TypeScript, OpenAI API, InstantDB, Paddle), with a merchant dashboard that imports the catalog from CSV, Shopify, or WooCommerce, on plans from $19 to $199 a month.</li>
+          <li>Fixed large catalogs overflowing the model's context: the room planner now retrieves a ranked <span class="nw">60-item</span> shortlist of pieces that are in stock and physically fit the room, and chat sends at most 50 products and tells the model it is seeing a subset.</li>
+          <li>Found and removed a silent fallback that served <span class="nw">rule-based</span> mock room recommendations whenever the model's echoed id prefix broke catalog matching.</li>
+          <li>Put every AI route behind one <span class="nw">server-side</span> guard: demo traffic runs on the server's own catalog with daily caps, real stores keep plan limits plus <span class="nw">per-minute</span> burst limits, and any catalog sent from the browser is ignored.</li>
         </ul>
       </div>
     </section>
@@ -309,26 +298,7 @@ main { padding: 32px 16px 72px; }
       <h2 id="r-projects">Projects</h2>
 
       <div class="entry">
-        <h3><span class="e-title">ModlyAI (<a href="https://modlyai.tech">modlyai.tech</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Live product. Next.js, TypeScript, OpenAI API, InstantDB, Paddle</span></h3>
-        <ul>
-          <li>Built an AI furniture widget for retailers end to end: chat grounded in the store's own catalog, a room planner that matches a shopper's room photo and measurements to pieces that fit, and a customizer that turns the chosen finish into a quote request, sold on plans from $19 to $199 a month.</li>
-          <li>Owned architecture, backend, frontend, and deployment as the sole developer, taking the product from first commit to a live production site.</li>
-          <li>Found and removed a silent fallback that served rule-based mock room recommendations whenever the model's echoed id prefix broke catalog matching, and put every AI route behind one guard with plan, burst, and demo limits.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3><span class="e-title">Marketing Skill (<a href="https://github.com/marcosmodly/marketing-skill">github.com/marcosmodly/marketing-skill</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Installable plugin, 39 GitHub stars. Claude Code Agent Skills, Python, Node, ffmpeg</span></h3>
-        <ul>
-          <li>Built and published an installable, MIT-licensed Claude Code plugin (also runs in OpenAI Codex) of twelve composable skills for competitor research, content, SEO, ads, cold outreach, and community posting on eleven platforms; first release in four days, 39 GitHub stars and 1,241 clones within two weeks.</li>
-          <li>Designed the approval gate into the shared state file itself: drafting skills can only write Planned, Drafted, or Ready for Approval, and only publish-pipeline can write Approved, in the same turn a person has seen the real content and replied, so nothing sends without a live human reply.</li>
-          <li>Built a local video renderer in Node, Playwright, and ffmpeg with 29 templates, a from-scratch music synthesizer, voice-synced word captions, and a QA check that runs on every template in CI, cutting a 12-second render from 76 s to 25 s by rendering frames in parallel.</li>
-          <li>Wrote dependency-free Python hand-off scripts that refuse to run without --dry-run or --confirmed and redact credentials in dry-run output, alongside a Gmail-synced suppression list that permanently blocks re-contact after a reply, bounce, or opt-out.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3><span class="e-title">Holdfast (<a href="https://useholdfast.co">useholdfast.co</a> &middot; <a href="https://github.com/marcosmodly/holdfast">github.com/marcosmodly/holdfast</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Live product. Next.js, TypeScript, Telegram Bot API, OpenAI API</span></h3>
+        <h3><span class="e-title">Holdfast (<a href="https://useholdfast.co">useholdfast.co</a> &middot; <a href="https://github.com/marcosmodly/holdfast">github.com/marcosmodly/holdfast</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Live product. Next.js, TypeScript, Telegram Bot API, <span class="nw">OpenAI API | Aug 2026 - Oct 2026</span></span></h3>
         <ul>
           <li>Built a Telegram bot that transcribes a short voice note after you meet someone and extracts the person, what is happening in their life, and what was promised, resurfacing it as a reminder on the day it matters.</li>
           <li>Built an evaluation suite of twelve test transcripts run across four prompt versions, three trials each, taking extraction accuracy from 24/36 to 36/36 by moving date resolution, commitment verification, and message copy out of the model and into deterministic code, with 23 unit tests covering date handling.</li>
@@ -337,7 +307,25 @@ main { padding: 32px 16px 72px; }
       </div>
 
       <div class="entry">
-        <h3><span class="e-title">Second Brain (<a href="https://github.com/marcosmodly/second-brain-ai">github.com/marcosmodly/second-brain-ai</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, PostgreSQL, pgvector, OpenAI embeddings, JWT auth</span></h3>
+        <h3><span class="e-title">Marketing Skill (<a href="https://github.com/marcosmodly/marketing-skill">github.com/marcosmodly/marketing-skill</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Installable plugin, 42 GitHub stars, 5 forks. Claude Code Agent Skills, Python, Node, <span class="nw">ffmpeg | Sep 2026 - Oct 2026</span></span></h3>
+        <ul>
+          <li>Built and published an installable, <span class="nw">MIT-licensed</span> Claude Code plugin (also runs in OpenAI Codex) of twelve composable skills for competitor research, content, SEO, ads, cold outreach, and community posting on eleven platforms; first release in four days and 1,241 clones in its first two weeks.</li>
+          <li>Designed the approval gate into the shared state file itself: drafting skills can only write Planned, Drafted, or Ready for Approval, and only <span class="nw">publish-pipeline</span> can write Approved, in the same turn a person has seen the real content and replied, so nothing sends without a live human reply.</li>
+          <li>Built a local video renderer in Node, Playwright, and ffmpeg with 29 templates, a <span class="nw">from-scratch</span> music synthesizer, <span class="nw">voice-synced</span> word captions, and a QA check that runs on every template in CI, cutting a <span class="nw">12-second</span> render from 76 s to 25 s by rendering frames in parallel.</li>
+          <li>Wrote <span class="nw">dependency-free</span> Python <span class="nw">hand-off</span> scripts that refuse to run without <span class="nw">--dry-run</span> or <span class="nw">--confirmed</span> and redact credentials in <span class="nw">dry-run</span> output, alongside a <span class="nw">Gmail-synced</span> suppression list that permanently blocks <span class="nw">re-contact</span> after a reply, bounce, or <span class="nw">opt-out</span>.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">skillsmith (<a href="https://github.com/marcosmodly/skillsmith">github.com/marcosmodly/skillsmith</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> TypeScript, Node CLI, Claude API, <span class="nw">npm package | Aug 2026</span></span></h3>
+        <ul>
+          <li>Built and published an open source CLI that turns a description of desired expertise into a real Claude Skill, running a structured interview, drafting the files, and validating the result against written authoring standards, so the output stays consistent instead of a single unchecked LLM pass.</li>
+          <li>Shipped the tool two ways from one codebase, a CLI that calls the Claude API and a native <span class="nw">in-product</span> skill that runs with no API key, backed by 19 unit tests and strict TypeScript, and confirmed it with a real <span class="nw">npm-pack-and-install</span> round trip.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3><span class="e-title">Second Brain (<a href="https://github.com/marcosmodly/second-brain-ai">github.com/marcosmodly/second-brain-ai</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, PostgreSQL, pgvector, OpenAI embeddings, <span class="nw">JWT auth | Aug 2026</span></span></h3>
         <ul>
           <li>Built a personal knowledge base with real semantic search, embedding notes on save and retrieving them by cosine similarity over pgvector, so related notes surface even without shared keywords.</li>
           <li>Built auth (bcrypt + JWT session cookies) and the Postgres schema from scratch instead of a managed auth/DB product, keeping full control over the data model and session security.</li>
@@ -345,60 +333,41 @@ main { padding: 32px 16px 72px; }
       </div>
 
       <div class="entry">
-        <h3><span class="e-title">Screenshot to Website (<a href="https://github.com/marcosmodly/screenshot-to-website">github.com/marcosmodly/screenshot-to-website</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, TypeScript, Claude vision API, Tailwind</span></h3>
+        <h3><span class="e-title">Screenshot to Website (<a href="https://github.com/marcosmodly/screenshot-to-website">github.com/marcosmodly/screenshot-to-website</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Next.js, TypeScript, Claude vision API, <span class="nw">Tailwind | Aug 2026</span></span></h3>
         <ul>
-          <li>Built a tool that converts a UI screenshot into working, responsive HTML and Tailwind, with a live split-pane preview that re-renders as you edit the code, so changes show up instantly with no build step.</li>
-          <li>Verified the sandboxed preview mechanism (iframe srcdoc, script execution) with real headless-browser tests, confirming generated code actually ran safely instead of assuming it worked.</li>
+          <li>Built a tool that converts a UI screenshot into working, responsive HTML and Tailwind, with a live <span class="nw">split-pane</span> preview that <span class="nw">re-renders</span> as you edit the code, so changes show up instantly with no build step.</li>
+          <li>Verified the sandboxed preview mechanism (iframe srcdoc, script execution) with real <span class="nw">headless-browser</span> tests, confirming generated code actually ran safely instead of assuming it worked.</li>
         </ul>
       </div>
 
       <div class="entry">
-        <h3><span class="e-title">skillsmith (<a href="https://github.com/marcosmodly/skillsmith">github.com/marcosmodly/skillsmith</a>)</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> TypeScript, Node CLI, Claude API, npm package</span></h3>
+        <h3><span class="e-title">Grandma's Lighthouse</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Godot 4, <span class="nw">GDScript | Aug 2026 - Sep 2026</span></span></h3>
         <ul>
-          <li>Built and published an open-source CLI that turns a description of desired expertise into a real Claude Skill, running a structured interview, drafting the files, and validating the result against written authoring standards, so the output stays consistent instead of a single unchecked LLM pass.</li>
-          <li>Shipped the tool two ways from one codebase, a CLI that calls the Claude API and a native in-product skill that runs with no API key, backed by 19 unit tests and strict TypeScript, and confirmed it with a real npm-pack-and-install round trip.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3><span class="e-title">Grandma's Lighthouse</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Godot 4, GDScript</span></h3>
-        <ul>
-          <li>Built a five-room puzzle game where the player restores color to a lighthouse, with save and load, room transitions, and audio synthesized entirely in code, shipping with zero external art or sound assets.</li>
-          <li>Wrote a breadth-first solver that proves every room is solvable and free of soft-locks, using it as a design tool to reject bad layouts before building them, so every shipped room is guaranteed completable.</li>
-          <li>Built a palette system that enforces measured contrast between floors, objects, and furniture, keeping every room readable in both the desaturated and restored states.</li>
-          <li>Wrote 19 automated headless checks that catch parse errors, unreachable exits, and unsolvable layouts, keeping broken layouts from ever reaching a shipped build.</li>
-          <li>Directed Claude Code as the implementer across the project and ran external playtests, driving three rounds of difficulty rework based on real player feedback.</li>
+          <li>Directed Claude Code as the implementer on a <span class="nw">five-room</span> puzzle game, and built a <span class="nw">breadth-first</span> solver and 19 headless checks that prove every room is solvable and free of <span class="nw">soft-locks</span> before it ships.</li>
+          <li>Ran external playtests that drove three rounds of difficulty rework based on real player feedback.</li>
         </ul>
       </div>
     </section>
 
     <section aria-labelledby="r-skills">
       <h2 id="r-skills">Technical Skills</h2>
-      <p><strong>Frontend:</strong> Next.js, React, TypeScript, JavaScript, Tailwind, HTML5, CSS3, responsive UI development</p>
-      <p><strong>Backend &amp; Data:</strong> PostgreSQL, pgvector, InstantDB, SQL (schema design, querying, cross-checking production data), JWT/session auth</p>
-      <p><strong>AI &amp; LLM Integration:</strong> Claude API, OpenAI API (embeddings, vision), prompt evaluation suites, moving model output into deterministic code with unit tests</p>
-      <p><strong>Deployment &amp; Tooling:</strong> Vercel, Git/GitHub workflows, Telegram Bot API, REST API design, npm package publishing</p>
+      <p><strong>AI &amp; LLM:</strong> Claude Code, Claude API, OpenAI API (embeddings, vision), LLM evaluation (prompt eval suites with repeated trials), prompt engineering, RAG and semantic search (pgvector embeddings, catalog retrieval), moving model logic into deterministic code with unit tests</p>
+      <p><strong>Languages &amp; Frontend:</strong> TypeScript, JavaScript, Python, Next.js, React, Tailwind, HTML5, CSS3</p>
+      <p><strong>Backend &amp; Data:</strong> Node.js, PostgreSQL, pgvector, InstantDB, SQL schema design, REST API design, <span class="nw">JWT/session</span> auth</p>
+      <p><strong>Tooling &amp; Deployment:</strong> Vercel, Git/GitHub, CI, Playwright, ffmpeg, Telegram Bot API, npm package publishing</p>
+      <p><strong>Other tools:</strong> CAD, Adobe Photoshop, Adobe Premiere Pro</p>
     </section>
 
     <section aria-labelledby="r-education">
       <h2 id="r-education">Education</h2>
       <div class="entry">
-        <h3><span class="e-title">Coursework toward a B.S. in Architecture</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Pangasinan State University | 2021 &ndash; 2025</span></h3>
-        <p>Developed precision, structured problem-solving, and systems thinking through technical drafting and digital documentation. Self-taught in full stack web development and AI systems since.</p>
+        <h3><span class="e-title">Coursework toward a B.S. in Architecture</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> Pangasinan State University | 2021 - 2025</span></h3>
+        <p>Developed precision, structured <span class="nw">problem-solving</span>, and systems thinking through technical drafting and digital documentation. <span class="nw">Self-taught</span> in full stack web development and AI systems since.</p>
       </div>
       <div class="entry">
-        <h3><span class="e-title">Senior High School, STEM Strand</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> ABE International Business College | 2018 &ndash; 2020</span></h3>
+        <h3><span class="e-title">Senior High School, STEM Strand</span> <span class="e-meta"><span class="sep" aria-hidden="true">|</span> ABE International Business College | 2018 - 2020</span></h3>
+        <p>Work immersion (2020), Engineering Department, Municipal Government of Urdaneta City: assisted engineers and architects on site inspections and kept technical records.</p>
       </div>
-    </section>
-
-    <section aria-labelledby="r-certifications">
-      <h2 id="r-certifications">Certifications</h2>
-      <ul class="cert-list">
-        <li>Computer-Aided Design (CAD)</li>
-        <li>Adobe Photoshop</li>
-        <li>Adobe Premiere Pro</li>
-        <li>AI Agent Building Course</li>
-      </ul>
     </section>
 
   </article>
